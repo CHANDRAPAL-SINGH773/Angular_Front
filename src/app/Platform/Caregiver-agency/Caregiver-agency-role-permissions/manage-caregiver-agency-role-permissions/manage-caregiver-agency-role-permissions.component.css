@@ -1,0 +1,34 @@
+.role-wrap table {
+    width: 100%;
+}
+
+.role-wrap table tr {
+    border-bottom: 1px solid #EBECEE;
+}
+
+.role-wrap table th:first-child {
+    width: 40%;
+}
+
+.role-wrap p {
+    margin: 0; 
+}
+
+table th {
+    height: 50px;
+}
+
+table td {
+    height: 65px;
+}
+::ng-deep .role-wrap .form-field .mat-form-field .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+
+@media screen and (max-width: 767px) {
+    .role-wrap table th:first-child {
+        width: auto;
+    }
+}

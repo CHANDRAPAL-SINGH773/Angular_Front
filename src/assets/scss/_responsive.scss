@@ -1,0 +1,199 @@
+
+@import './breakpoints';
+@import './mixin';
+
+
+@media only screen and (min-device-width: $desktop_pro_up) {
+    .sync_modal .modal-dialog{
+        max-width:750px;
+    }
+    .anesthesiologist_modal .modal-dialog{
+        max-width:632px;
+    }
+    .creditcard_modal .modal-dialog{
+        max-width:759px;
+    }
+    .deletepatient_modal .modal-dialog{
+        max-width:759px;
+    }
+}
+
+@media only screen and (min-device-width: $desktop_up) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner,
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner{
+        padding: 100px 50px 50px;
+    }
+}
+@media only screen and (min-device-width: $desktop_large_up) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner,
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner{
+        padding: 130px 80px 80px;
+    }
+    .login{
+        .part_wrapper{
+            .part{
+                &.right_part{
+                    .rightpart_inner{ 
+                        .login_form{
+                            form{
+                                .form_field_wrapper{
+                                    .mat-form-field{
+                                        .mat-form-field-wrapper{
+                                            padding-bottom: 22px;
+                                            .mat-form-field-flex{
+                                                font-size: $font_large;
+                                                font-weight: 500;
+                                                @include formfieldflexlarge;
+                                                .mat-form-field-infix{
+                                                    @include formfieldinfixlarge;
+                                                    .mat-input-element {
+                                                        font-size: $font_large;
+                                                        color: $main_title;
+                                                        caret-color: $bodycolor;
+                                                        &::placeholder{
+                                                            font-weight: 500;
+                                                            font-size: $font_large;
+                                                            line-height: 22px;
+                                                            color: $bodycolor;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .form-btn{
+                                    .btn{
+                                        height: 50px;
+                                        line-height: 50px;
+                                    }
+                                } 
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+// @media only screen and (max-device-width: 1499px) {
+//     .table_wrap .table_inner{
+//         width: 100%;
+//         display: inline-block;
+//         vertical-align: top;
+//         overflow-x: auto;
+//         white-space: nowrap;
+//         cursor: pointer;
+//         &::-webkit-scrollbar{
+//             height: 3px; 
+//         }
+//         &::-webkit-scrollbar-thumb{
+//             background-color: #dddddd; 
+//             border-radius: 20px;
+//         }
+//     }
+// }
+@media only screen and (max-device-width: $desktop_large) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner .middle_text h1{
+        font-size: 34px;
+        line-height: 34px;
+    }
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner form .title_wrapper .form_title{
+        font-size: 36px;
+        line-height: 36px;
+    }
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner form{
+        width: 490px;
+    }
+}
+@media only screen and (max-device-width: 1365px) {
+    .table_wrap .table_inner{
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
+        overflow-x: auto;
+        white-space: nowrap;
+        cursor: pointer;
+        &::-webkit-scrollbar{
+            height: 3px; 
+        }
+        &::-webkit-scrollbar-thumb{
+            background-color: #dddddd; 
+            border-radius: 20px;
+        }
+    }
+}
+@media only screen and (max-device-width: $desktop_medium) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner .middle_text{
+        width: 85%;
+    }
+}
+@media only screen and (max-device-width: $desktop) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner .middle_text{
+        width: 100%;
+    }
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner form {
+        width: 400px;
+    }
+}
+@media only screen and (max-device-width: $tablet) {
+    .login .login_inner .part_wrapper .part.left_part .leftpart_inner .middle_text h1{
+        font-size: 32px;
+        line-height: 32px;
+    }
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner form {
+        width: 300px;
+    }
+    .dashboard_main_content .top_bar{
+        flex-direction: column;
+        align-items: center;    
+    }
+}
+@media only screen and (max-device-width: $large_phone) {
+    .login .login_inner .part_wrapper{
+        flex-direction: column;
+    }
+    .login .login_inner .part_wrapper .part{
+        width: 100%;
+    }
+    .login .login_inner .part_wrapper .part.right_part .rightpart_inner form {
+        width: 100%;
+    }
+
+
+
+    .dashboard_main_content .top_bar{
+        flex-direction: column;
+    }
+    .dashboard_main_content .top_bar .right_part {
+        margin-top: 15px;
+    }
+    .dashboard_main_content .top_bar .right_part .btn{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-device-width: $medium_iphone) {
+    .calender .calender_section .app-calendar .calender_bottom{
+        flex-direction: column;
+    }
+    .calender .calender_section .app-calendar .calender_bottom .right_content{
+        margin-top: 20px;
+    }
+    .calender .calender_section .app-calendar .calender_bottom .left_content .key span{
+        display: block;
+        margin: 10px 10px 0;
+    }
+    .custom_modal.action_modal .modal-footer{
+        flex-wrap: wrap;
+    }
+}
+@media only screen and (max-device-width: $medium_phone) {
+    .table_wrap .pagination .mat-paginator-outer-container .mat-paginator-container{
+        justify-content: center !important;
+    }
+    .table_wrap .pagination .mat-paginator-outer-container .mat-paginator-container .mat-paginator-page-size{
+        margin: 10px 0 0;
+    }
+}

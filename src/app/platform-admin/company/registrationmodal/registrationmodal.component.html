@@ -1,0 +1,165 @@
+<div class="loader" *ngIf="loaderflag"></div>
+<div class="newreg_dialog">
+  <div class="modal-header">
+    <h2 mat-dialog-title>{{formHeading}}</h2>
+    <mat-icon class="close_btn"  mat-button mat-dialog-close>close</mat-icon>
+  </div>
+  <mat-dialog-content>
+     <form [formGroup]="comRegisterForm">
+      <div class="user_image_upload">
+        <input
+          class="ng-hide user_upload_input"
+          id="input-file-id"
+          type="file" (change)="onAttachment($event)" accept="image/*"
+        />
+        <div class="user_upload_block">
+          <span class="user_upload_wrapper">
+            <span class="user_upload_icon"
+              ><img [src]="createImgPath(CompanyImage)"
+              onerror="this.src='../../../../assets/images/profile.png';"
+            /></span>
+          </span>
+          <span class="edit_upload_wrapper">
+            <span class="edit_upload_icon"
+              ><img src="../../../assets/images/edit_profile.svg"
+            /></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form_inner">
+          <div class="form_field_wrapper">
+            <label>Company name</label>
+            <mat-form-field appearance="fill">
+                <input pattern="^[^\s]+(\s+[^\s]+)*$" maxlength="60" type="text"  formControlName="CompanyName" matInput placeholder="Company name" required>
+                <mat-error *ngIf="comRegisterForm.get('CompanyName')?.touched  && comRegisterForm.get('CompanyName')?.hasError">Please enter company name</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>ABN/ACN</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="text" maxlength="70" formControlName="ABN_ACN" matInput placeholder="ABN/ACN">
+              <mat-error *ngIf="comRegisterForm.get('ABN_ACN')?.touched && comRegisterForm.get('ABN_ACN')?.hasError">Please enter ABN/ACN</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Website URL</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="text" maxlength="100" formControlName="WebURL" matInput placeholder="Website URL">
+              <mat-error *ngIf="comRegisterForm.get('WebURL')?.touched && comRegisterForm.get('WebURL')?.invalid">Please enter website url</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Phone Number</label>
+            <mat-form-field appearance="fill">
+              <input type="tel" matInput  placeholder="xxx-xxx-xxxx"
+              mask="(000) 000-0000" formControlName="MobileNumber">
+              <mat-error *ngIf="comRegisterForm.get('MobileNumber')?.touched && comRegisterForm.get('MobileNumber')?.invalid">Please enter valid phone number</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Email</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="email" formControlName="EmailID" maxlength="50" matInput required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email">
+              <mat-error *ngIf="(comRegisterForm.get('EmailID')?.touched || comRegisterForm.get('EmailID')?.dirty) && comRegisterForm.get('EmailID')?.hasError">Please enter email id</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Address Line 1</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" placeholder="Address Line 1" type="text" maxlength="100" matInput formControlName="Address1">
+              <mat-error *ngIf="comRegisterForm.get('Address1')?.touched && comRegisterForm.get('Address1')?.invalid">Please enter address line 1</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Address Line 2</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" placeholder="Address Line 2" type="text" maxlength="100" matInput formControlName="Address2" >
+              <mat-error *ngIf="comRegisterForm.get('Address2')?.touched && comRegisterForm.get('Address2')?.invalid">Please enter address line 2</mat-error>
+            </mat-form-field> 
+          </div>
+           <div class="form_field_wrapper">
+            <label>Select Country</label>
+            <mat-form-field appearance="fill">
+              <mat-select placeholder="Select Country" formControlName="CountryID" (selectionChange)="OnCountryChange($event)" required>
+                <mat-option *ngFor="let country of countries" [value]="country.countryID">
+                  {{country.countryName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="comRegisterForm.get('CountryID')?.touched && comRegisterForm.get('CountryID')?.hasError('required')">Please select country</mat-error>
+                               
+            </mat-form-field>
+          </div>
+          <div class="form_field_wrapper">
+            <label>Select State</label>
+            <mat-form-field appearance="fill">
+              <mat-select placeholder="Select State"  formControlName="StateID">
+                <mat-option *ngFor="let state of states" [value]="state.stateID">
+                  {{state.stateName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="comRegisterForm.get('StateID')?.touched && comRegisterForm.get('StateID')?.hasError('required')">Please select state</mat-error>
+              
+            </mat-form-field>
+          </div>
+          <div class="form_field_wrapper">
+            <label>City</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="text" maxlength="50" matInput placeholder="City" formControlName="City">
+              <mat-error *ngIf="comRegisterForm.get('City')?.touched && comRegisterForm.get('City')?.invalid">Please enter city</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper">
+            <label>Postal Code</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="text" maxlength="10" matInput formControlName="PostalCode"  placeholder="Postal Code" >
+              <mat-error *ngIf="comRegisterForm.get('PostalCode')?.touched && comRegisterForm.get('PostalCode')?.invalid">Please enter postal code</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="form_field_wrapper" *ngIf="!isEdit">
+            <label>User Name</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" type="text" maxlength="30" matInput formControlName="UserName" placeholder="User Name" required>
+              <mat-error *ngIf="comRegisterForm.get('UserName')?.touched && comRegisterForm.get('UserName')?.hasError">Please enter user name</mat-error>
+            </mat-form-field> 
+          </div>
+
+          <div class="form_field_wrapper" *ngIf="!isEdit">
+            <label>Password</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" [type]="showPassword ? 'text' : 'password'" formControlName="Password" minlength="4" maxlength="30" matInput required>
+              <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{showPassword?'visibility_off':'visibility'}}
+              </mat-icon>
+              <mat-error *ngIf="comRegisterForm.get('Password')?.touched && comRegisterForm.get('Password')?.hasError">Please enter password</mat-error>
+            </mat-form-field> 
+          </div>
+
+
+          <div class="form_field_wrapper" *ngIf="!isEdit">
+            <label>Confirm Password</label>
+            <mat-form-field appearance="fill">
+              <input pattern="^[^\s]+(\s+[^\s]+)*$" [type]="showConfirmPassword ? 'text' : 'password'" matInput minlength="4" maxlength="30" formControlName="ConPassword" required>
+              <mat-icon matSuffix (click)="toggleConfirmPasswordVisibility()" (mouseout)="checkIsValidPassword()" (focusout)="checkIsValidPassword()">
+                {{showConfirmPassword?'visibility_off':'visibility'}}
+              </mat-icon>
+              <mat-error *ngIf="comRegisterForm.get('ConPassword')?.touched && comRegisterForm.get('ConPassword')?.hasError">Please enter confirm password</mat-error>
+            </mat-form-field> 
+          </div>
+
+      </div>
+
+     </form>
+  </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
+      <button mat-button class="btn btn-primary" [disabled]="comRegisterForm.invalid" (click)="SignUp()" *ngIf="!isEdit">
+        Submit
+      </button>
+      <button mat-button class="btn btn-primary" [disabled]="comRegisterForm.invalid" (click)="EditCompany()" *ngIf="isEdit">
+        Edit
+      </button>
+    </mat-dialog-actions>
+
+  </div>

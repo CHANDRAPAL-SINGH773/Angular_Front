@@ -1,0 +1,64 @@
+<div class="loader" *ngIf="loader"></div>
+<div class="table_wrap">
+    <div class="table_inner">
+        <table mat-table class="table" [dataSource]="dataSource">
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef>Active</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox [checked]="element.isActive" disabled="true"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef>Name</th >
+                <td mat-cell *matCellDef="let element">{{element.acpPartnerName}}</td >
+            </ng-container>
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef >Email</th >
+                <td mat-cell *matCellDef="let element">{{element.email}}</td >
+            </ng-container>
+
+            <ng-container matColumnDef="Mobile">
+                <th mat-header-cell *matHeaderCellDef >Mobile</th >
+                <td mat-cell *matCellDef="let element">{{element.mobile}}</td >
+            </ng-container>
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef >Type</th>
+                <td mat-cell *matCellDef="let element">{{element.type}}</td >
+            </ng-container>
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef >Status</th >
+                <td mat-cell *matCellDef="let element"
+                    [ngClass]="element == 'Pending' ? 'yellow' : 'red'">{{element.status}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="icon_group">
+                        <mat-icon class="quick_view" (click)="ViewBP(element)">visibility</mat-icon>
+                        <mat-icon class="delete" (click)="DeleteBP(element)">close</mat-icon>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-slide-toggle checked="{{element.companyUser.isActive}}"></mat-slide-toggle>
+                </td >
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <ng-container *ngIf="metaData?.totalRecords==0">
+        <div class="text-center no-record">No record found</div>
+    </ng-container>
+
+    <mat-paginator class="pagination" [length]="metaData['totalRecords']" [pageSizeOptions]="pageSizeList"
+        [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+        showFirstLastButtons></mat-paginator>
+</div>

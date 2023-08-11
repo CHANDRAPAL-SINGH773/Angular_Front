@@ -1,0 +1,155 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader>
+  <img src='../../../../../assets/images/loader.gif' alt=''>
+  Loading...
+</div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageAgencies']" class="current" title="Manage Agency">Manage Agency</a></li>
+    </ul>
+    <div class="right-btn-wrap">
+      <a class="custom-btn border-btn" title="Print"  (click)="Print()"><img src="../../../../assets/images/Printer.svg" alt=""></a>
+      <button class="custom-btn" [disabled]="isDisabled" title="Export CSV" (click)="exportAsXLSX()">Export CSV</button>
+      <!--  -->
+      <a [routerLink]="['/Dashboard/add-edit-agency/0/0']" class="custom-btn m-0" title="Export CSV">Add New Agency</a>
+    </div>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>Manage Agencies</h1>
+      <form class="search-wrap" [formGroup]="agencyform">
+        <input class="form-control me-2" type="search" formControlName="Search" placeholder="Search" aria-label="Search" (keydown)="GetAgencyList()">
+        <!--  -->
+      </form>
+    </div>
+
+    <div class="table-responsive">
+      <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+        matSortDirection="asc">
+
+        <ng-container matColumnDef="logo">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="img-">
+              <img src="../../../../assets/images/marry-baldwin-logo.svg" alt="">
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="agencyName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Agency Name</mat-header-cell>
+          <mat-cell *matCellDef="let element" >{{element.AgencyName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="contactName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.FirstName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>UserName</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.UserName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="contactNo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.PhoneNumber}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Email</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.AgencyEmail}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Address}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="caregiverAssocciate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Caregiver Assocciate </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 0 </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="form-check form-switch">
+              <input class="form-check-input" title="Active / Deactive Agency" [(ngModel)]="element.IsActive" id="{{element.id}}"
+                (click)="changeAgencyStatus(element.AgencyId,element.IsActive)" type="checkbox" role="switch" checked>
+              <label class="custom-control-label" for="{{element.AgencyId}}"></label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="block">
+          <mat-header-cell *matHeaderCellDef> Block </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="form-check form-switch">
+              <input class="form-check-input" title="Block Agency" [(ngModel)]="element.IsBlock" id="block_{{element.id}}"
+                (click)="BlockUnblockAgency(element.AgencyId,element.IsBlock)" type="checkbox" role="switch" checked>
+              <label class="custom-control-label" for="{{element.AgencyId}}"></label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="action-wrap">
+              <a [routerLink]="['/Dashboard/add-edit-agency', element.AgencyId,0]">
+                <img data-toggle="tooltip" data-placement="right" title="Edit Agency" src="../../../../assets/images/edit-icon.svg" alt="icon">
+              </a>
+              <a (click)="deleteAgency(element.AgencyId)" *ngIf="element.IsDeleted != 1">
+                <img src="../../../../assets/images/delete-icon.svg" data-toggle="tooltip" data-placement="right" title="Delete Agency" alt="icon">
+              </a>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+        </ng-container>
+        <div>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+          </mat-footer-row>
+        </div>
+
+      </mat-table>
+      <mat-paginator  style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize"
+       [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)">
+      </mat-paginator>
+
+
+      <!-- <table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+            <div class="example-element-detail" *ngIf="element.addresses?.data.length" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="inner-table" *ngIf="expandedElement">
+                <table #innerTables mat-table #innerSort="matSort" [dataSource]="element.addresses" matSort>
+                  <ng-container matColumnDef="{{innerColumn}}" *ngFor="let innerColumn of innerDisplayedColumns">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element[innerColumn]}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;"></tr>
+                </table>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" [class.example-element-row]="element.addresses?.data.length"
+         [class.example-expanded-row]="expandedElement === element" (click)="toggleRow(element)">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table> -->
+
+    </div>
+  </div>
+</div>

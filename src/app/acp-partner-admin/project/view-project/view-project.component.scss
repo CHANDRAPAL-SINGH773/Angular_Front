@@ -1,0 +1,62 @@
+@import '../../../../assets/scss/variable.scss';
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    /*custom css */
+    display: flex;
+    position: absolute;
+    z-index: 100000;
+    margin-top: 14%;
+    margin-left: 30%;
+  }
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  
+  .view_project{
+      margin: 0 0 30px;
+      .content_item{
+        margin: 0 0 30px;
+          .main_title{
+              margin: 0 0 20px; 
+          }
+          .item_wrapper{
+            display: flex;
+             .item{
+                width: 50%;
+                p{
+                  font-size: $font_medium;
+                  label{
+                    font-size: $font_medium;
+                    margin: 0 5px 0 0;
+                  }
+                  &:last-child{
+                    margin: 0;
+                  }
+                }
+             }
+          }
+      }
+  }
+
+  @media only screen and (max-device-width: $medium_phone) {
+    .view_project .content_item .item_wrapper{
+       flex-direction: column;
+    }
+    .view_project .content_item .item_wrapper .item{
+      width: 100%;
+      margin: 0 0 12px;
+    }
+  }

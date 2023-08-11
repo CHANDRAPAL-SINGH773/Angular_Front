@@ -1,0 +1,207 @@
+<header class="header">
+    <div class="leftIconsCol">
+        <div class="head">
+            <!-- <span>{{ApplicationTitle}}</span> -->
+            <span class="sub" style="color: white;font-size: 22px;">{{ApplicationTitle}}</span>
+        </div>
+     
+        <a class="mobile-menu" onclick="toggleNav()">
+            <!-- <mat-icon>menu</mat-icon> -->
+        </a>
+    </div>
+
+    <div class="rightIconsCol">
+        
+        <div class="link-icons">
+            <div class="dropdown notification doclist">
+                <a class="dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/images/super-admin/summary.svg" alt="">
+                </a>
+                <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <ul>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="../../../../assets/images/list-icon/category.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h5>Category Creation </h5>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="../../../../assets/images/list-icon/docplus.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h5>Dynamic Template </h5>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="../../../../assets/images/list-icon/doc.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h5>Listing of Template </h5>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="../../../../assets/images/list-icon/field.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h5>Custom Fields </h5>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="../../../../assets/images/list-icon/checklist.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h5>Document Checklist </h5>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <a title="Email" [routerLink]="['/super-admin/email-communication']">
+                <img src="assets/images/header/email.svg" alt="">
+                <!-- <div class="mail-count">1</div> -->
+            </a>
+
+            <!-- <div class="dropdown notification">
+                <a class="dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/images/header/bell.svg" alt="">
+                    <div class="noti-count">10</div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <ul>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="assets/images/header/bell.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>Document Missing</h4>
+                                    <p>Contrary to popular belief, Lorem psum is no</p>
+                                    <span>5 Jan 2023 - 03 : 30 AM </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="assets/images/header/bell.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>Document Missing</h4>
+                                    <p>Contrary to popular belief, Lorem psum is no</p>
+                                    <span>5 Jan 2023 - 03 : 30 AM </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="assets/images/header/bell.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>Document Missing</h4>
+                                    <p>Contrary to popular belief, Lorem psum is no</p>
+                                    <span>5 Jan 2023 - 03 : 30 AM </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="assets/images/header/bell.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>Document Missing</h4>
+                                    <p>Contrary to popular belief, Lorem psum is no</p>
+                                    <span>5 Jan 2023 - 03 : 30 AM </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a>
+                                <div class="img-wrap">
+                                    <img src="assets/images/header/bell.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>Document Missing</h4>
+                                    <p>Contrary to popular belief, Lorem psum is no</p>
+                                    <span>5 Jan 2023 - 03 : 30 AM </span>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div> -->
+             <h2>User Profile</h2>
+
+             <div class="user-wrap dropdown">
+                <a class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                     <img [src]="" onerror="this.src='../../assets/images/profile-icon.svg';"  alt=""> 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class="userInfo">
+                        <img [src]="" onerror="this.src='../../assets/images/profile-icon.svg';"  alt="">
+                        <div class="userInfo_text">
+                            <div>
+                                <span>Organization Name</span><br>
+                                <span>User Position</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <ul>
+                        <!-- [routerLink]="['/super-admin/profile',UserID]" -->
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['/super-admin/profile',1]">
+                                <img src="assets/images/header/user.svg" alt="">
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <img src="assets/images/header/setting.svg" alt="">
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"   (click)="resetPassword()">
+                                <img src="assets/images/header/resetPassword.svg" alt="">
+                                <span>Reset Password</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" (click)="onLogout()">
+                                <img src="assets/images/header/logout.svg" alt="">
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+         
+        </div>
+    </div>
+
+</header>

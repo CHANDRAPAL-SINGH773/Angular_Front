@@ -1,0 +1,198 @@
+<div class="loader" *ngIf="loader"></div>
+
+<div class="dashboard dashboard_main_content">
+    <div class="top_bar">
+        <div class="left_part part">
+            <div class="form_field_wrapper">
+                <!-- <label>Name</label> -->
+                <mat-form-field appearance="fill">
+                    <input type="text" matInput name="name" placeholder="Company Name" [(ngModel)]="companyName">
+                </mat-form-field> 
+            </div>
+            <!-- <div class="form_field_wrapper">
+                <label>Email</label>
+                <mat-form-field appearance="fill">
+                    <input type="email" matInput name="email" placeholder="Enter Email">
+                </mat-form-field> 
+            </div> -->
+            <!-- <div class="form_field_wrapper">
+                <label>Select Company</label>
+                <mat-form-field appearance="fill">
+                  <mat-select placeholder="Select State">
+                    <mat-option value="option 1">Option 1</mat-option>
+                    <mat-option value="option 2">Option 2</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div> -->
+
+            <button class="btn btn-primary" (click)="searchCompany()">Search</button>&nbsp;
+            <button class="btn btn-primary"(click)="clearSearch()">Clear</button>
+        </div>
+        <div class="right_part part">
+            <button class="btn btn-light" (click)="newReg()">+ New Registration</button>
+        </div>
+    </div>
+
+    <div class="bottom_bar">
+        <!-- <div class="primary_btn">
+            <button class="btn btn-light">
+                <div class="btn_svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <g filter="url(#filter0_d_19_428)">
+                    <rect x="10" y="6" width="28" height="28" rx="14" fill="#3AB010"/>
+                    </g>
+                    <path d="M17.4546 20.5L21.8195 25L30.5455 16" stroke="white" stroke-opacity="0.99" stroke-width="1.63636" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_d_19_428" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.239216 0 0 0 0 0.223529 0 0 0 0 0.537255 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_19_428"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_19_428" result="shape"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                </div>
+                Completed Request
+            </button>
+            <button class="btn btn-light">
+                <div class="btn_svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <g filter="url(#filter0_d_19_435)">
+                        <rect x="10" y="6" width="28" height="28" rx="14" fill="#E7C512"/>
+                        </g>
+                        <path d="M28.8951 25.096L23 21.5792V14" stroke="white" stroke-width="2.34555" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                        <filter id="filter0_d_19_435" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="4"/>
+                        <feGaussianBlur stdDeviation="5"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0.239216 0 0 0 0 0.223529 0 0 0 0 0.537255 0 0 0 0.05 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_19_435"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_19_435" result="shape"/>
+                        </filter>
+                        </defs>
+                    </svg>
+                </div>
+                Pending Request
+            </button>
+            <button class="btn btn-light">
+                <div class="btn_svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <g filter="url(#filter0_d_19_442)">
+                        <rect x="10" y="6" width="28" height="28" rx="14" fill="#0F6FE0"/>
+                        </g>
+                        <mask id="path-2-inside-1_19_442" fill="white">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.1764 23.0306L18.129 18.492C17.8452 18.3093 17.6457 18.0212 17.5742 17.6913C17.5028 17.3614 17.5653 17.0167 17.7481 16.7329C17.9309 16.4491 18.2189 16.2495 18.5488 16.1781C18.8787 16.1067 19.2235 16.1692 19.5072 16.352L26.5543 20.8904L26.0618 18.6161C25.9969 18.2887 26.0631 17.949 26.2462 17.67C26.4293 17.391 26.7147 17.1951 27.0409 17.1245C27.367 17.0539 27.7079 17.1142 27.99 17.2924C28.2721 17.4707 28.473 17.7526 28.5492 18.0775L29.692 23.3549C29.7634 23.6848 29.701 24.0295 29.5183 24.3133C29.3355 24.597 29.0474 24.7965 28.7176 24.8679L23.4401 26.0106C23.1128 26.0756 22.773 26.0094 22.4941 25.8263C22.2151 25.6431 22.0192 25.3578 21.9485 25.0316C21.8779 24.7054 21.9382 24.3646 22.1165 24.0825C22.2947 23.8003 22.5766 23.5995 22.9015 23.5232L25.1764 23.0306Z"/>
+                        </mask>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.1764 23.0306L18.129 18.492C17.8452 18.3093 17.6457 18.0212 17.5742 17.6913C17.5028 17.3614 17.5653 17.0167 17.7481 16.7329C17.9309 16.4491 18.2189 16.2495 18.5488 16.1781C18.8787 16.1067 19.2235 16.1692 19.5072 16.352L26.5543 20.8904L26.0618 18.6161C25.9969 18.2887 26.0631 17.949 26.2462 17.67C26.4293 17.391 26.7147 17.1951 27.0409 17.1245C27.367 17.0539 27.7079 17.1142 27.99 17.2924C28.2721 17.4707 28.473 17.7526 28.5492 18.0775L29.692 23.3549C29.7634 23.6848 29.701 24.0295 29.5183 24.3133C29.3355 24.597 29.0474 24.7965 28.7176 24.8679L23.4401 26.0106C23.1128 26.0756 22.773 26.0094 22.4941 25.8263C22.2151 25.6431 22.0192 25.3578 21.9485 25.0316C21.8779 24.7054 21.9382 24.3646 22.1165 24.0825C22.2947 23.8003 22.5766 23.5995 22.9015 23.5232L25.1764 23.0306Z" fill="white"/>
+                        <path d="M25.1764 23.0306L25.2822 23.5193L26.4619 23.2639L25.4471 22.6103L25.1764 23.0306ZM17.5742 17.6913L18.0629 17.5855L18.0629 17.5855L17.5742 17.6913ZM18.5488 16.1781L18.6546 16.6668L18.5488 16.1781ZM26.5543 20.8904L26.2835 21.3108L27.2984 21.9643L27.0429 20.7846L26.5543 20.8904ZM26.0618 18.6161L25.5713 18.7134L25.5731 18.7219L26.0618 18.6161ZM27.0409 17.1245L26.935 16.6358L26.935 16.6358L27.0409 17.1245ZM27.99 17.2924L28.2571 16.8697L28.2571 16.8697L27.99 17.2924ZM28.5492 18.0775L29.038 17.9716L29.036 17.9632L28.5492 18.0775ZM29.692 23.3549L29.2033 23.4607L29.2033 23.4608L29.692 23.3549ZM29.5183 24.3133L29.9386 24.5841L29.9387 24.584L29.5183 24.3133ZM28.7176 24.8679L28.6118 24.3792L28.6117 24.3792L28.7176 24.8679ZM23.4401 26.0106L23.5375 26.5012L23.5459 26.4993L23.4401 26.0106ZM22.4941 25.8263L22.7684 25.4083L22.4941 25.8263ZM21.9485 25.0316L21.4599 25.1374L21.4599 25.1374L21.9485 25.0316ZM22.1165 24.0825L22.5392 24.3495L22.1165 24.0825ZM22.9015 23.5232L22.7957 23.0345L22.7872 23.0365L22.9015 23.5232ZM25.4471 22.6103L18.3997 18.0717L17.8583 18.9124L24.9056 23.451L25.4471 22.6103ZM18.3997 18.0717C18.2274 17.9607 18.1063 17.7858 18.0629 17.5855L17.0855 17.7972C17.185 18.2567 17.463 18.6578 17.8583 18.9124L18.3997 18.0717ZM18.0629 17.5855C18.0195 17.3852 18.0575 17.1759 18.1685 17.0036L17.3277 16.4622C17.0732 16.8574 16.986 17.3377 17.0855 17.7972L18.0629 17.5855ZM18.1685 17.0036C18.2794 16.8313 18.4543 16.7101 18.6546 16.6668L18.443 15.6894C17.9835 15.7889 17.5823 16.0669 17.3277 16.4622L18.1685 17.0036ZM18.6546 16.6668C18.8549 16.6234 19.0642 16.6614 19.2365 16.7723L19.778 15.9316C19.3827 15.677 18.9025 15.5899 18.443 15.6894L18.6546 16.6668ZM19.2365 16.7723L26.2835 21.3108L26.825 20.47L19.778 15.9316L19.2365 16.7723ZM27.0429 20.7846L26.5505 18.5103L25.5731 18.7219L26.0656 20.9962L27.0429 20.7846ZM26.5522 18.5188C26.5128 18.32 26.553 18.1138 26.6642 17.9444L25.8282 17.3956C25.5731 17.7842 25.4809 18.2575 25.5714 18.7134L26.5522 18.5188ZM26.6642 17.9444C26.7754 17.775 26.9486 17.6561 27.1467 17.6132L26.935 16.6358C26.4808 16.7342 26.0833 17.0071 25.8282 17.3956L26.6642 17.9444ZM27.1467 17.6132C27.3447 17.5703 27.5516 17.6069 27.7229 17.7151L28.2571 16.8697C27.8641 16.6214 27.3893 16.5375 26.935 16.6358L27.1467 17.6132ZM27.7229 17.7151C27.8942 17.8233 28.0162 17.9945 28.0625 18.1918L29.036 17.9632C28.9298 17.5107 28.65 17.118 28.2571 16.8697L27.7229 17.7151ZM28.0606 18.1833L29.2033 23.4607L30.1806 23.2491L29.0379 17.9717L28.0606 18.1833ZM29.2033 23.4608C29.2467 23.6611 29.2088 23.8704 29.0979 24.0427L29.9387 24.584C30.1932 24.1887 30.2802 23.7085 30.1806 23.249L29.2033 23.4608ZM29.098 24.0425C28.987 24.2148 28.8121 24.3359 28.6118 24.3792L28.8233 25.3566C29.2828 25.2572 29.684 24.9793 29.9386 24.5841L29.098 24.0425ZM28.6117 24.3792L23.3343 25.522L23.5459 26.4993L28.8234 25.3566L28.6117 24.3792ZM23.3428 25.5202C23.1441 25.5596 22.9378 25.5194 22.7684 25.4083L22.2197 26.2442C22.6083 26.4993 23.0815 26.5915 23.5374 26.5011L23.3428 25.5202ZM22.7684 25.4083C22.599 25.2971 22.4801 25.1238 22.4372 24.9258L21.4599 25.1374C21.5582 25.5917 21.8311 25.9892 22.2197 26.2442L22.7684 25.4083ZM22.4372 24.9258C22.3943 24.7278 22.431 24.5208 22.5392 24.3495L21.6938 23.8154C21.4455 24.2084 21.3615 24.6831 21.4599 25.1374L22.4372 24.9258ZM22.5392 24.3495C22.6474 24.1782 22.8186 24.0563 23.0158 24.01L22.7872 23.0365C22.3347 23.1427 21.942 23.4224 21.6938 23.8154L22.5392 24.3495ZM23.0073 24.0119L25.2822 23.5193L25.0705 22.542L22.7957 23.0345L23.0073 24.0119Z" fill="#0F6FE0" mask="url(#path-2-inside-1_19_442)"/>
+                        <defs>
+                        <filter id="filter0_d_19_442" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="4"/>
+                        <feGaussianBlur stdDeviation="5"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0.239216 0 0 0 0 0.223529 0 0 0 0 0.537255 0 0 0 0.05 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_19_442"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_19_442" result="shape"/>
+                        </filter>
+                        </defs>
+                    </svg>
+                </div>
+                Incoming Request
+            </button>
+        </div> -->
+        <div class="table_wrap">
+            <div class="table_inner">
+                <table mat-table class="table" [dataSource]="dataSource">
+                    <ng-container matColumnDef="CompanyName">
+                        <th mat-header-cell *matHeaderCellDef> Company Name </th>
+                        <td mat-cell *matCellDef="let element"> <span>{{element.c_Name}}</span> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="RegDate">
+                        <th mat-header-cell *matHeaderCellDef> Registration Date</th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateOfReg | date: 'dd/MM/yyyy'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="EmailId">
+                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                        <td mat-cell *matCellDef="let element"> <span class="tootip_text" matTooltip="{{element.c_EmailID}}"  matTooltipPosition="right">{{element.c_EmailID}}</span> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Address">
+                        <th mat-header-cell *matHeaderCellDef> Address </th>
+                        <td mat-cell *matCellDef="let element"> <span class="tootip_text" matTooltip="{{element.c_Address1}}, {{element.c_Address2}}"  matTooltipPosition="right">{{element.c_Address1}}, {{element.c_Address2}}</span></td>
+                    </ng-container>
+                    <ng-container matColumnDef="countryID">
+                        <th mat-header-cell *matHeaderCellDef> Country </th>
+                        <td mat-cell *matCellDef="let element"> {{element.countryName}} </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="selectcountry">
+                        <th mat-header-cell *matHeaderCellDef> Select Country </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <div class="form_field_wrapper">
+                                <mat-form-field appearance="fill">
+                                  <mat-select placeholder="Select Slot">
+                                    <mat-option value="option 1">Option 1</mat-option>
+                                    <mat-option value="option 2">Option 2</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                        </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="stateID">
+                        <th mat-header-cell *matHeaderCellDef> State </th>
+                        <td mat-cell *matCellDef="let element"> {{element.stateName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="city">
+                        <th mat-header-cell *matHeaderCellDef> City </th>
+                        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-slide-toggle  checked="{{element.companyUser.isActive}}" (change)="activeDeactive($event,element)"></mat-slide-toggle>
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="icon_group">
+                                <mat-icon class="quick_view"  (click)="viewCompany(element)">visibility</mat-icon>
+                                <mat-icon class="edit" (click)="editCompany(element)">edit</mat-icon>
+                                <mat-icon class="delete" (click)="deleteCompany(element)">close</mat-icon>
+                            </div>
+                        </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <ng-container *ngIf="metaData?.totalRecords==0">
+                <div class="text-center no-record">No record found</div>
+            </ng-container>
+
+            <mat-paginator class="pagination" [length]="metaData['totalRecords']" 
+                [pageSizeOptions]="pageSizeList" [pageIndex]="metaData['currentPage'] - 1" 
+                [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)" showFirstLastButtons>
+            </mat-paginator>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+

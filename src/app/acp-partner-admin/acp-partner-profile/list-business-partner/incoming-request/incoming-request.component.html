@@ -1,0 +1,51 @@
+<div class="loader" *ngIf="loader"></div>
+<div class="table_wrap">
+    <div class="table_inner">
+        <table mat-table class="table" [dataSource]="dataSource">
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.acpPartnerName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Mobile">
+                <th mat-header-cell *matHeaderCellDef>Mobile</th>
+                <td mat-cell *matCellDef="let element">{{element.mobile}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Type">
+                <th  mat-header-cell *matHeaderCellDef>Type</th>
+                <td mat-cell *matCellDef="let element">{{element.type}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <button *ngIf="element.status=='Pending'" mat-button class="success"
+                        (click)="changeStatus('Accept',element)">Approve</button> &nbsp;
+                    <button *ngIf="element.status=='Pending'" mat-button class="danger"
+                        (click)="changeStatus('Reject',element)">Reject</button>&nbsp;
+                    <button *ngIf="element.status!='Pending'" mat-button
+                        [ngClass]="element.status == 'Accept' ? 'green' : 'red'">{{element.status}}</button>&nbsp;
+
+                    <i class="fa fa-eye" (click)="ViewBP(element)"></i>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- <div>
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </div> -->
+        </table>
+    </div>
+    <ng-container *ngIf="metaData?.totalRecords==0">
+        <div class="text-center no-record">No record found</div>
+    </ng-container>
+
+    <mat-paginator class="pagination" [length]="metaData['totalRecords']" [pageSizeOptions]="pageSizeList"
+        [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+        showFirstLastButtons></mat-paginator>
+</div>

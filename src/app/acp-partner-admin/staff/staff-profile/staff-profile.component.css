@@ -1,0 +1,233 @@
+.card-outer-wrapper {
+    width: 100%;
+    padding-top: 5px;
+}
+
+.card-outer {
+    float: left;
+    padding: 10px;
+}
+
+.profile-text {
+    width: 58%;
+}
+
+.change-pass-wrap {
+    width: 42%;
+}
+
+.custom-card {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.custom-card .head-wrap {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-card .head-wrap h5 {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0;
+}
+
+.bg-wrap {
+    background: linear-gradient(90.84deg, #C4D1FF 4.42%, #4BAAFF 81.4%);
+    border-radius: 10px;
+    height: 130px;
+    position: relative;
+}
+
+.custom-card .body-wrap {
+    padding: 20px;
+}
+
+.profile-upload {
+    margin-top: -110px;
+    position: relative;
+}
+
+.profile-upload .img-col {
+    border: 5px solid #FFFFFF;
+    height: 160px;
+    width: 160px;
+}
+
+.profile-text h4 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 0 0 5px;
+}
+
+.edit-btn {
+    background: rgba(2, 136, 96, 0.1);
+    border-radius: 18px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-btn:hover {
+    opacity: 0.6;
+}
+
+.form-body {
+    padding-top: 20px;
+}
+
+.form-body .form-field {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.form-body .form-field mat-label {
+    flex: 1;
+    color: #717680;
+    font-weight: 500;
+}
+
+.form-body .form-field .mat-form-field input {
+    font-weight: 500;
+    color: #2C2B30;
+}
+
+.form-body .form-field .mat-form-field {
+    flex: 1;
+}
+
+::ng-deep form.readable-fields .mat-form-field-outline {
+    /* display: none; */
+}
+
+::ng-deep form.readable-fields .mat-form-field-flex {
+    /* padding: 0; */
+}
+
+::ng-deep form.readable-fields .form-field .mat-form-field .mat-form-field-flex .mat-form-field-infix {
+    /* padding: 0; */
+    padding:  15px 5px 10px !important
+
+}
+
+.change-pass-wrap .head-wrap {
+    margin: 0 20px;
+    padding: 15px 0;
+}
+
+.card-outer.change-pass-wrap p {
+    font-weight: 500;
+    font-size: 16px;
+    color: #717680;
+    line-height: 1.3;
+}
+
+.primary-btn {
+    background: #2953E8;
+    border-radius: 6px;
+    width: 250px;
+    font-weight: 700;
+    border: 2px solid #2953E8;
+    font-size: 17px;
+    color: #fff;
+    padding: 10px;
+    margin-right: auto;
+}
+
+.primary-btn:hover {
+    background: white;
+    color: #2953E8;
+    border: 2px solid #2953E8;
+}
+
+
+
+
+
+
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .custom-card .head-wrap h5 {
+        font-size: 20px;
+    }
+
+    .profile-upload .img-col {
+        width: 140px;
+        height: 140px;
+    }
+
+    .profile-upload {
+        margin-top: -100px;
+    }
+
+    .card-outer.change-pass-wrap p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .card-outer {
+        padding: 6px;
+    }
+
+    .custom-card .head-wrap h5 {
+        font-size: 18px;
+    }
+
+    .custom-card .body-wrap {
+        padding: 15px;
+    }
+
+    .profile-upload {
+        margin-top: -80px;
+    }
+
+    .profile-upload .img-col {
+        width: 110px;
+        height: 110px;
+    }
+
+    .bg-wrap {
+        height: 90px;
+    }
+
+    .profile-text h4 {
+        font-size: 22px;
+    }
+
+    .card-outer.change-pass-wrap p {
+        font-size: 13px;
+    }
+
+    .primary-btn {
+        width: 160px;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .form-body .form-field {
+        margin: 0;
+    }
+
+    .change-pass-wrap .head-wrap {
+        margin: 0 15px;
+    }
+
+    ::ng-deep .form-field .mat-form-field .mat-form-field-flex .mat-form-field-infix {
+        padding: 8px 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 991px) {}
+
+@media screen and (max-width: 767px) {}

@@ -1,0 +1,113 @@
+<div class="common-page-wrapper">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/trash-message']" class="current" title="Trash">Trash</a></li>
+        </ul>
+        <div class="right-btn-wrap">
+            <form class="search-wrap filter">
+                <input class="form-control" type="search" placeholder="Search Payment" aria-label="Search">
+                <div class="filter-icon" (click)="filterCardToggle()">
+                    <img src="../../../../assets/images/filter-icon.svg" alt="">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- filter wrap -->
+    <div class="filter-wrap" *ngIf="filterCard">
+        <form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Keywords</mat-label>
+                        <input type="text" matInput>
+                        <mat-error *ngIf="'PoliceVerification.invalid'">Keywords is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-field calender">
+                      <mat-form-field appearance="fill">
+                        <mat-label>From Date</mat-label>
+                        <input type="date" matInput>
+                        <mat-error *ngIf="'PoliceVerification.invalid'">Keywords is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-field calender">
+                      <mat-form-field appearance="fill">
+                        <mat-label>To Date</mat-label>
+                        <input type="date" matInput>
+                        <mat-error *ngIf="'PoliceVerification.invalid'">Keywords is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+            </div>
+            <button type="submit" class="custom-btn" title="Search Messages">Search Messages</button>
+        </form>
+    </div>
+    <!-- table-cards -->
+    <div class="custom-card">
+        <div class="table-responsive">
+            <mat-table class="table" [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="checkbox">
+                    <mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox></mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-checkbox></mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="sender">
+                    <mat-header-cell *matHeaderCellDef>Sender</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.sender}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="subject">
+                    <mat-header-cell *matHeaderCellDef>Subject</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.subject}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="message">
+                    <mat-header-cell *matHeaderCellDef>Message</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.message}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="datetime">
+                    <mat-header-cell *matHeaderCellDef>Date & Time</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.datetime}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="action-wrap">
+                            <a title="Edit">
+                              <img src="../../../../assets/images/edit-eye.png" alt="icon" class="edit-eye" data-toggle="tooltip" data-placement="right" title="edit/view">
+                            </a>
+                            <a title="Delete">
+                              <img  src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="delete">
+                            </a>
+                          </div>
+                    </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                </ng-container>
+                <div>
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    <mat-footer-row *matFooterRowDef="['noData']">
+                    </mat-footer-row>
+                </div>
+    
+            </mat-table>
+            <!-- <mat-paginator [length]="recordcount" [pageSize]="pagesize" [pageSizeOptions]="pageSizeList"
+                [pageIndex]="pageIndex" (page)="switchPage($event)" [showFirstLastButtons]="true">
+            </mat-paginator> -->
+        </div>
+    </div>
+
+</div>

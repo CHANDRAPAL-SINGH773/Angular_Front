@@ -1,0 +1,139 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper">
+    <h4>Subscription</h4>
+   <div class="subscript-card">
+    
+    <div class="sub-row-wrapper">
+        <div class="sub-left">
+            <div class="top-invo-wrap">
+                <h4>Invoice To</h4>
+                <ul>
+                    <li>{{fullName}} <br /> <a href="useremail"
+                            title="useremail">{{useremail}}</a> </li>
+                    <li><a href="tel:+phone" title="phone">+{{phone}}</a>
+                        <br />{{address}}</li>
+                </ul>
+            </div>
+            <form class="form-wrap" [formGroup]="addUserSubscription">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Name on card</mat-label>
+                                <input type="text" maxlength="50" matInput formControlName="NameOnCard" value="" autocomplete="new-name">
+                                <mat-error *ngIf="'NameOnCard.invalid'">Name on Card is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-field card-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Card Number</mat-label>
+                                <input type="text"  maxlength="16" matInput formControlName="CardNumber" autocomplete="new-name">
+                                <mat-error *ngIf="'CardNumber.invalid'"> Card Number is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>CVV Number</mat-label>
+                                <input type="text" maxlength="3" (keypress)="checkIsNumber($event)" matInput formControlName="CVV"  autocomplete="new-name">
+                                <mat-error *ngIf="'CVV.invalid'"> CVV is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-field">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Expiry Date</mat-label>
+                                        <input type="text" placeholder="04" maxlength="2" (keypress)="checkIsNumber($event)" matInput formControlName="ExpiryMonth"  autocomplete="new-name">
+                                        <mat-error *ngIf="'ExpiryMonth.invalid'"> Expiry month is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-field">
+                                    <mat-form-field appearance="fill">
+                                        <input type="text" placeholder="2025" maxlength="4" (keypress)="checkIsNumber($event)" matInput formControlName="ExpiryYear"  autocomplete="new-name">
+                                        <mat-error *ngIf="'ExpiryYear.invalid'"> Expiry year  is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-wrap">
+                    <button type="submit" class="custom-btn" (click)="payNow()">Pay Now </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="sub-right">  
+         <form  [formGroup]="discountForm">        
+            <ul>
+                <li>
+                    <div class="date-wrap">
+                        <h4>Invoice Date</h4>
+                        <b>{{currentdate}} to {{addedmonthDate}}</b>
+                    </div>
+                    <a class="print custom-btn border-btn" href="#"><img src="../../../../assets/images/Printer.svg"
+                            alt=""></a>
+                </li>
+                <li>
+                    <div class="accordion accordion-flush" id="promoItem">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Have a Promo Code?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#promoItem">
+                                <div class="accordion-body">
+                                    <div class="promo-items">
+                                        <input type="text" maxlength="12" matInput formControlName="DiscountApplied"  autocomplete="new-name">
+                                        <a title="Apply" class="custom-btn border-btn" (click)="checkPromoCode()"> Apply </a>
+                                    </div>
+                                    <p>Direct 10% off for existing customers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <table >
+                        <tr>
+                            <td> <b>Sub Total</b> </td>
+                            <td> <b>${{planAmount | number: '1.2-2'}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Discount</td>
+                            <td><b>${{discountAmount | number: '1.2-2'}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Total Tax</td>
+                            <td><b>${{totalTax | number: '1.2-2'}}</b></td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>Total Amount</td>
+                            <td><b>${{totalAmount | number: '1.2-2'}}</b></td>
+                        </tr>
+                    </table>
+                </li>
+                <li class="pay-amount">
+                    <h4><b>Payable Amount</b></h4>
+                    <h2>${{totalAmount | number: '1.2-2'}}<span> USD</span></h2>
+                </li>
+            </ul>
+        </form>       
+        </div>        
+    </div>
+   </div>
+</div>

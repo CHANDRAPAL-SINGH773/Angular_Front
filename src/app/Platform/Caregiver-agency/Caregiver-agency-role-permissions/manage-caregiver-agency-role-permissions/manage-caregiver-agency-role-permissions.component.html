@@ -1,0 +1,56 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="common-page-wrapper">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap mb-3">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" href="#" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/caregiver-agency-role-permission']" href="#" class="current" title="Manage Clients">Role
+          Permission</a></li>
+    </ul>
+  </div>
+
+  <div class="custom-card">
+    <div class="form-wrapper role-wrap">
+      <form class="edit-profile-form" [formGroup]="rolePermissionForm">
+        <div class="heading-wrap">
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="RoleId" placeholder="Select Roles" (selectionChange)="changeRole()">
+                <mat-option *ngFor=" let roles of rolesList" value="{{roles.Id}}">{{roles.RoleName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted">Role is required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form> 
+        <table>
+          <thead>
+            <tr>
+              <th><b>Module Name</b></th>
+              <th><b>Permission</b></th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of moduleList;index as i">
+              <td>
+                <p class="alignemnet-class">{{item.Name}}</p>
+              </td>
+              <td>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="item.IsActive" id="{{i}}" checked
+                    (change)="addPermissionButton(i,item,$event)">
+                    <label class="custom-control-label" for="{{item.Id}}"></label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+   
+    </div>
+  </div>
+</div>

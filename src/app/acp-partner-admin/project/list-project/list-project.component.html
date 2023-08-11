@@ -1,0 +1,115 @@
+<div class="loader" *ngIf="loader"></div>
+
+<div class="dashboard dashboard_main_content">
+    <div class="top_bar">
+        <div class="left_part part">
+            <div class="form_field_wrapper">       
+                <mat-form-field appearance="fill">
+                    <input type="text" matInput name="name" placeholder="Project Number" [(ngModel)]="search">
+                </mat-form-field> 
+            </div>
+            <div class="form_field_wrapper">
+               <mat-form-field appearance="fill">
+                  <mat-select placeholder="Select Client" [(value)]="selectedClient"  (selectionChange)="SelectedClient($event)">
+                    <ng-container *ngIf="clientList">
+                        <mat-option  *ngFor="let client of clientList" [value]="client.clientID">{{client.firstName}} {{client.lastName}}</mat-option>
+                        <mat-option *ngIf="clientList.length == 0">No client found</mat-option>
+                      </ng-container>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+
+            <button class="btn btn-primary" (click)="SearchProject()">Search</button>&nbsp;
+            <button class="btn btn-primary" (click)="ClearSearch()">Clear</button>
+          </div>
+        <div class="right_part part">
+            <button class="btn btn-light" (click)="AddProject()">+ Add Project</button>
+        </div>
+    </div>
+
+
+    <div class="bottom_bar">
+   
+    <div class="table_wrap">
+        <div class="table_inner">
+            <table mat-table class="table" [dataSource]="dataSource">
+                <ng-container matColumnDef="projectNo">
+                    <th  mat-header-cell *matHeaderCellDef>Project No.</th>
+                    <td mat-cell *matCellDef="let element">{{element.projectNo}}</td>
+                  </ng-container>
+        
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef >Client</th>
+                    <td mat-cell *matCellDef="let element">{{element.clientName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="site">
+                    <th  mat-header-cell *matHeaderCellDef>Site</th>
+                    <td mat-cell *matCellDef="let element">{{element.siteName}}</td>
+                </ng-container>
+               
+                <ng-container matColumnDef="program">
+                    <th mat-header-cell *matHeaderCellDef>Program</th>
+                    <td mat-cell *matCellDef="let element">{{element.programName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Acp_Partner">
+                    <th mat-header-cell *matHeaderCellDef>ACP/Partner</th>
+                    <td mat-cell *matCellDef="let element">{{element.acpPartnerName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef >Status</th>
+                    <td mat-cell *matCellDef="let element" class="success">
+                        <select  (change)="changeStatus($event,element)" >
+                            <option  *ngFor="let s of projectStatus" [value]="s.id" [selected]="element.statusId==s.id">{{s.name}}</option>
+                  
+                        </select>
+
+
+
+                    </td>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td  mat-cell *matCellDef="let element" >
+                          <div class="icon_group">
+                            <mat-icon class="quick_view" (click)="ViewProject(element)">visibility</mat-icon>
+                            <mat-icon class="edit" (click)="EditProject(element)">edit</mat-icon>
+                            <mat-icon class="delete" (click)="DeleteProject(element)">close</mat-icon>
+                        </div>
+                          
+                     
+                    </td>
+                </ng-container>
+       
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <ng-container *ngIf="metaData?.totalRecords==0">
+                <div class="text-center no-record">No record found</div>
+            </ng-container>
+        
+            <mat-paginator  class="pagination" [length]="metaData['totalRecords']" [pageSizeOptions]="pageSizeList"
+        
+            [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+        
+            showFirstLastButtons></mat-paginator>
+        </div>
+ 
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,106 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+  
+<div class="custom-mat-dialog" mat-dialog>
+    <div mat-dialog-title>
+        {{title}}
+        <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+    </div>
+    <mat-dialog-content>
+        <form class="edit-profile-form" [formGroup]="planForm">
+            <div class="row">
+                <!-- <div class="col-md-12">
+                    <div class="toggle-field-wrap">
+                        <div class="form-field">
+                                <label></label>
+                                <mat-checkbox formControlName="IsActive">IsActive</mat-checkbox>
+                            </div>
+                        </div>
+                </div> -->
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Plan Name</mat-label>
+                            <input type="text" maxlength="200" matInput autocomplete="new-name"
+                                formControlName="PlanName">
+                            <mat-error *ngIf="'planName.invalid'">Plan name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Plan Type</mat-label>
+                            <mat-select formControlName="PlanType">
+                                <mat-option *ngFor=" let option of planTypeList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'planType.invalid'">Plan Type is required </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>State</mat-label>
+                            <mat-select formControlName="State">
+                                <mat-option *ngFor=" let option of stateList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'planType.invalid'"> State is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="toggle-field-wrap">
+                        <div class="form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label> Monthly Price </mat-label>
+                                <input type="text" maxlength="5" (keypress)="checkIsNumber($event)" matInput autocomplete="new-name"
+                                    formControlName="MonthlyPlan">
+                                <mat-error *ngIf="'planName.invalid'"> Monthly Price is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" formControlName="IsMonthly" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="toggle-field-wrap">
+                        <div class="form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Annual Price</mat-label>
+                                <input type="text" maxlength="6"  matInput autocomplete="new-name"
+                                    formControlName="AnnualPlan" (keypress)="checkIsNumber($event)">
+                                <mat-error *ngIf="'planName.invalid'">Annual price is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" formControlName="IsYearly" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+                                checked>
+                        </div>
+                    </div>
+                </div>               
+
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="modal-footer">
+            <button type="button" class="custom-btn gray-btn rounded-btn"
+                (click)="dialogRef.close(false)">Cancel</button>
+            <button type="button" class="custom-btn rounded-btn" (click)="saveSubscriptionPlan()">Save</button>
+        </div>
+    </mat-dialog-actions>
+</div>
+<!-- <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div> -->

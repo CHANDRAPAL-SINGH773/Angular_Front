@@ -1,0 +1,283 @@
+<div class="grayChildContainer" *ngIf="IsAcpPartnerPage" [ngClass]="{'loader-bg' : loaderflag}">
+    <div class="innerWrapper">
+        <div class="userAction_row">
+            <!-- <div class="search-input">
+                <input type="text" (keyup)="onKeyUp($event)" placeholder="Search" class="form-control">
+            </div> -->
+            <div class="right-btn-wrap">
+                <!-- <div class="action-btns">
+                    <button class="btn filter-btn" (click)="filltercompanyProfile()" title=" Date Filter"><i
+                            class="fas fa-filter" aria-hidden="true"></i></button>
+                    <button class="btn filter-btn" (click)="convert()" title="Download PDF"><i class="fas fa-file-pdf"
+                            aria-hidden="true"></i></button>
+                </div> -->
+                <!-- <div class="add-filter-btn">
+                    <button class="btn add-btn" id="openModal" data-bs-toggle="modal" (click)="profileCompany()"
+                        data-bs-target="#addAcpPartnerModal">
+                        <img src="assets/images/add.svg" alt="">
+                        <span> Add</span>
+                    </button>
+                </div> -->
+                
+                <!-- Add/ Update ACP  Modal -->
+                
+                    <div class="modal-dialog siteMainModal  modal-lg">
+                        <div class="modal-content">
+                            <!-- <div class="modal-header">
+                                <h5 class="modal-title" id="addAcpPartnerModalLabel">{{Mode}} ACP/Partner</h5>
+                                <button type="button" id="closeModal" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <img src="assets/images/close-gry.svg" alt="">
+                                </button>
+                            </div> -->
+                            <div class="modal-body">
+                                <div class="modalInnerContainer">
+                                    <form [formGroup]="CompanyProfileForm">
+                                        <div class="row">
+                                            <!-- <div class="col-md-12">
+                                                <div class="profile-upload">
+                                                    <div class="img-col">
+                                                    </div>
+                                                    <div class="text">
+                                                        <p>Upload image <span class="text-danger"></span></p>
+                                                        <input class="custom-file-input" type="file" id="ImagePath"
+                                                            (change)="onAttachment($event)" accept="image/*">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <input type="text" matInput formControlName="Name" style="display:none">
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Name <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" style="margin-left: 10px;" matInput
+                                                            formControlName="Name" placeholder="Enter CompanyName"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="80">
+                                                        <mat-error *ngIf="'CompanyName.invalid'">Please enter acpPartner
+                                                            name</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Type <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="Type" style="margin-left: 10px;"
+                                                            placeholder="Enter Type" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off" required maxlength="300">
+                                                        <mat-error *ngIf="'Email.invalid'">Please enter email address</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Email <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="Email" style="margin-left: 10px;"
+                                                            placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off" required maxlength="300">
+                                                        <mat-error *ngIf="'Email.invalid'">Please enter email address</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                             <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Phone Number <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput
+                                                            formControlName="MobileNumber" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off" required>
+                                                        <mat-error *ngIf="'PhoneNo.invalid'">Please enter phone</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Address1 <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="AddressLine1"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'Address1.invalid'">Please enter address</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Address2 <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="AddressLine2"
+                                                            style="margin-left: 10px;" placeholder="Enter address" autocomplete="off"
+                                                            required maxlength="300">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Country <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="Country" style="margin-left: 10px;"
+                                                            placeholder="Country" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off">
+                                                        <mat-error *ngIf="'countryID.invalid'">Please select country</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>State <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- <mat-select formControlName="State" matInput aria-placeholder="Enter state"
+                                                            style="margin-left: 10px;" (selectionChange)="onStateChange($event)"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                                            <mat-option *ngFor="let state of statesList"
+                                                                [value]="state.stateID">{{state.stateName}}</mat-option>
+                                                        </mat-select> -->
+                                                        <input type="text" matInput formControlName="State" style="margin-left: 10px;"
+                                                            placeholder="State" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off">
+                                                        <mat-error *ngIf="'stateID.invalid'">Please select state</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>City <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="City" style="margin-left: 10px;"
+                                                            placeholder="Enter City" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off" maxlength="7" required>
+                                                        <mat-error *ngIf="'Zipcode.invalid'">Please enter city</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                
+                                            
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Post Code<span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="PostCode" style="margin-left: 10px;"
+                                                            placeholder="Enter PostCode" [ngClass]="{ 'is-invalid': submitted  }"
+                                                            autocomplete="off" maxlength="7" required>
+                                                        <mat-error *ngIf="'PostCode.invalid'">Please enter PostCode</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Address1 <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="WebsiteURL"
+                                                            style="margin-left: 10px;" placeholder="WebsiteURL"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'WebsiteURL.invalid'">Please enter WebsiteURL</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>ABN/ACN <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="ABNorACN"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'ABN/ACN.invalid'">Please enter ABN/ACN</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div><div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>Description <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="Description"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'Description.invalid'">Please enter Description</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>OrganizationName <span class="text-danger">*</span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="OrganizationName"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'OrganizationName.invalid'">Please enter OrganizationName</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>OrgDateOfAcredation <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="OrgDateOfAcredation"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'OrgDateOfAcredation.invalid'">Please enter OrgDateOfAcredation</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>AcredationID <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="AcredationID"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'AcredationID.invalid'">Please enter AcredationID</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-field">
+                                                    <mat-label>SchemaAcredationID <span class="text-danger"></span></mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input type="text" matInput formControlName="SchemaAcredationID"
+                                                            style="margin-left: 10px;" placeholder="Enter address"
+                                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                            maxlength="300">
+                                                        <mat-error *ngIf="'SchemaAcredationID.invalid'">Please enter SchemaAcredationID</mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-field">
+                                                <mat-label>Theme <span class="text-danger"></span></mat-label>
+                                                <mat-form-field appearance="outline">
+                                                    <input type="text" matInput formControlName="Theme"
+                                                        style="margin-left: 10px;" placeholder="Theme"
+                                                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                                        maxlength="300">
+                                                    <mat-error *ngIf="'Theme.invalid'">Please enter Theme</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div *ngIf="Mode!=''" class="modal-footer">
+                                <!-- <button type="button" style="width: 15%;" class="btn cancel-btn" data-bs-dismiss="modal">Back</button> -->
+                                <!-- <button type="submit" style="width: 15%;" (click)="onSubmit()"
+                                    class="btn save-btn">{{Mode=="Edit"?"Update":"Add"}}</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+

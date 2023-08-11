@@ -1,0 +1,188 @@
+<div class="loader" *ngIf="loader"></div>
+
+<div class="acp_profile dashboard_main_content">
+
+  <div class="top_bar">
+    <div class="left_part part">
+      <div class="user_image_upload">
+        <input class="ng-hide user_upload_input" type="file" id="ProfieImgUrl" 
+        (change)="onAttachment($event)" accept="image/*">
+        <div class="user_upload_block">
+          <span class="user_upload_wrapper">
+            <span class="user_upload_icon">
+              <img [src]="acpProfileImage" onerror="this.src='../../assets/images/profile-icon.svg';" alt="Profile Image">
+            </span>
+          </span>
+          <span class="edit_upload_wrapper">
+            <span class="edit_upload_icon"
+              ><img src="../../../assets/images/edit_profile.svg"
+            /></span>
+          </span>
+        </div>
+      </div>
+      <div class="column" *ngIf="acp_partnerDetails">
+        <h3 class="name">{{acp_partnerDetails.acpPartnerName}}</h3>
+      </div>
+    </div>
+
+    <div class="right_part part">
+      <div class="column" *ngIf="acp_partnerDetails">
+        <div class="col_item">
+          <div class="company-details">
+            <p>
+              <label>From:</label>{{acp_partnerDetails.companyName}}
+            </p>
+            <p>{{acp_partnerDetails.cAddress1}}</p>
+            <p>{{acp_partnerDetails.cAddress2}}</p>
+          </div>
+        </div>
+        <div class="col_item">
+          <p><label>phone:</label>{{acp_partnerDetails.cMobileNumber}}</p>
+          <p><label>email:</label>{{acp_partnerDetails.cEmailID}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="acp_profile_tab">
+    <mat-tab-group #allTabs (selectedTabChange)="onTabChange($event)" >
+      <mat-tab label="Profile" >
+            <div class="tab_content">
+                <div class="main-wrapper" *ngIf="selectedIndex == 0">
+                  <form [formGroup]="ProfileForm" (ngSubmit)="Save()">
+                      <div class="field-row">
+
+                        <div class="form_field_wrapper">
+                          <label>Username</label>
+                          <mat-form-field appearance="fill">
+                              <input type="text"  maxlength="70" matInput formControlName="Username" required>
+                              <mat-error *ngIf="ProfileForm.get('Username')?.touched && ProfileForm.get('Username')?.hasError('required')">Please enter a username.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>First Name</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="50" matInput formControlName="FirstName" >
+                            <mat-error *ngIf="ProfileForm.get('FirstName')?.touched && ProfileForm.get('FirstName')?.hasError('required')">Please enter first name.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Last Name</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="50" matInput formControlName="LastName">
+                            <mat-error *ngIf="ProfileForm.get('LastName')?.touched && ProfileForm.get('LastName')?.hasError('required')">Please enter last name.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Email</label>
+                          <mat-form-field appearance="fill">
+                            <input type="email" maxlength="50" matInput formControlName="Email"
+                            required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
+                            <mat-error *ngIf="ProfileForm.get('Email')?.touched && ProfileForm.get('Email')?.hasError('required')">Please enter valid email.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+
+                        <div class="form_field_wrapper">
+                          <label>Phone Number</label>
+                          <mat-form-field appearance="fill">
+                            <input type="tel" matInput  placeholder="xxx-xxx-xxxx" formControlName="PhoneNo"
+                            mask="(000) 000-0000" >
+                            <mat-error *ngIf="ProfileForm.get('Phone')?.touched && ProfileForm.get('Phone')?.hasError('required')">Please enter phone number.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Address Line 1</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="100" matInput formControlName="Address1">
+                            <mat-error *ngIf="ProfileForm.get('addressline1')?.touched && ProfileForm.get('addressline1')?.hasError('required')">Please enter address line 1.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Address Line 2</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="100" matInput formControlName="Address2" >
+                            <mat-error *ngIf="ProfileForm.get('addressline2')?.touched && ProfileForm.get('addressline2')?.hasError('required')">Please enter address line 2.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Select Country</label>
+                          <mat-form-field appearance="fill">
+                            <mat-select  formControlName="CountryID"   (selectionChange)="OnCountryChange($event)" placeholder="Select Country">
+                              <mat-option *ngFor="let country of countries" [value]="country.countryID">
+                                {{country.countryName}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="ProfileForm.get('country')?.touched && ProfileForm.get('country')?.hasError('required')">Please select country.</mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Select State</label>
+                          <mat-form-field appearance="fill">
+                            <mat-select  formControlName="StateID">
+                              <mat-option *ngFor="let state of states" [value]="state.stateID">
+                                {{state.stateName}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="ProfileForm.get('state')?.touched && ProfileForm.get('state')?.hasError('required')">Please select state.</mat-error>
+                          </mat-form-field>
+                        </div>
+                         
+                        <div class="form_field_wrapper">
+                          <label>City</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="50" matInput formControlName="City">
+                            <mat-error *ngIf="ProfileForm.get('city')?.touched && ProfileForm.get('city')?.hasError('required')">Please enter city.</mat-error>
+                          </mat-form-field> 
+                        </div>
+
+                        <div class="form_field_wrapper">
+                          <label>Post Code</label>
+                          <mat-form-field appearance="fill">
+                            <input type="text" maxlength="15" matInput formControlName="PostalCode">
+                            <mat-error *ngIf="ProfileForm.get('postcode')?.touched && ProfileForm.get('postcode')?.hasError('required')">Please enter post code.</mat-error>
+                          </mat-form-field> 
+                        </div>
+                        
+                      </div>
+                      <div class="primary_btn">
+                        <Button type ="submit" class="btn btn-primary btn_medium" > Save </Button>
+                      </div>
+                  </form>
+                </div>
+            </div>
+       
+      </mat-tab>
+      <mat-tab label="Documents" >
+        <div class="tab_content">
+          <app-acp-documnet *ngIf="selectedIndex == 1"></app-acp-documnet>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Programs & Activities" >
+        <div class="tab_content">
+          <app-program-activities *ngIf="selectedIndex ==2"></app-program-activities>
+        </div>
+      </mat-tab>
+  
+      <mat-tab label="Change Password">
+        <div class="tab_content">
+          <app-change-password *ngIf="selectedIndex == 3"></app-change-password>
+        </div>
+      </mat-tab>
+  </mat-tab-group>
+  </div>
+
+</div>
+
+
+
+

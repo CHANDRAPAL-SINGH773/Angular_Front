@@ -1,0 +1,440 @@
+
+<div class="loader" *ngIf="loader"></div>
+  <mat-tab-group #allTabs (selectedTabChange)="onTabChange($event)" >
+      <mat-tab label=" Our Staff" >
+            <div class="grayChildContainer">
+                <div class="innerWrapper">
+                    <div class="userAction_row">
+                        <div class="search-input">
+                            <input type="text" placeholder="Search" class="form-control">
+                        </div>
+                        <div class="right-btn-wrap">
+                            <div class="action-btns">
+                                <button class="btn filter-btn" title=" Date Filter"><i class="fas fa-filter"
+                                        aria-hidden="true"></i></button>
+                                <button class="btn filter-btn" title="Download PDF"><i class="fas fa-file-pdf"
+                                        aria-hidden="true"></i></button>
+                            </div>
+                            <div class="add-filter-btn">
+                                <button #AddStaff class="btn btn-primary" id="openModal" (click)="addstafform('Add', StaffModal)" data-bs-toggle="modal"
+                                    data-bs-target="#addAcpPartnerModal">
+                                    <img src="assets/images/add.svg" alt="">
+                                    <span> Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="site-main-table acpPartner-col-width">
+                        <table mat-table class="table" [dataSource]="dataSource" matSort>
+            
+                            <ng-container matColumnDef="name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>  Name</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.firstName}} {{element.lastName}}</mat-cell>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="email">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="mobile">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.phoneNo}}</mat-cell>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="role">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+                                <mat-cell *matCellDef="let element"> <span *ngFor="let role of element.staffRole"> &nbsp;&nbsp;{{role.roleName}}</span></mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="department">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.departmentName}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="status">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.IsActive}} <span *ngIf="element.isActive == 1" class="text-success">Active</span></mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="pendingTraining">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Pending Training</mat-header-cell>
+                                <mat-cell *matCellDef="let element">0</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="action">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <div class="action-wrap">
+                                        <a data-bs-toggle="modal"
+                                            data-bs-target="#addStaffModal" (click)="getdataByStaffId(element.staffId,element.userId); addstafform('Edit',StaffModal)"><img
+                                                src="assets/images/edit.svg" alt="" title="Edit Staff Details"></a>
+                                        <a  (click)="deleteStaff(element.staffId,element.userId)"><img src="assets/images/delete.svg"
+                                                alt="" title="Delete Staff Details"></a>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                            </ng-container>
+                            <div>
+                                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                                </mat-footer-row>
+                            </div>
+                        </table>
+                    </div>
+                    <div class="table-bottom-actions">
+                        <span>Total  <strong>: {{ totalCount }}</strong></span>
+                        <mat-paginator [length]="metaData['totalRecords']" [pageSizeOptions]="pageSizeList"
+                        [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+                        showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            
+            </div>
+            <ng-template #StaffModal>
+                <div class="custom-dialog">
+                    <div class="modal-header">
+                        <h2 mat-dialog-title>{{Mode}} Staff</h2>
+                        <button type="button" id="closeModal" class="close" matDialogClose>
+                            <img src="assets/images/close-gry.svg" alt="">
+                        </button>
+                    </div>
+                    <form [formGroup]="StaffForm">
+                        <div class="row">
+                            <input type="text" matInput formControlName="StaffId" style="display: none;">
+                            <input type="text" matInput formControlName="UserId" style="display: none;">
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>First Name<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="FirstName"
+                                            placeholder="Enter first name" [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" required maxlength="80">
+                                        <mat-error *ngIf="'FirstName.invalid'">Please enter first name </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Last Name<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="LastName"
+                                            placeholder="Enter last name" [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" required maxlength="80">
+                                        <mat-error *ngIf="'LastName.invalid'">Please enter last name </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Email<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="Email" placeholder="Enter email"
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required
+                                            maxlength="300">
+                                        <mat-error *ngIf="'Email.invalid'">Please enter valid email</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Mobile Number<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input  mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="PhoneNo"
+                                            placeholder="Enter Mobile Number" autocomplete="off" required>
+                                        <mat-error *ngIf="'PhoneNo.invalid'">Please enter mobile</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="form-field">
+                                    <mat-label>User Name<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="UserName"
+                                            placeholder="Enter Username " [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" required maxlength="300">
+                                        <mat-error *ngIf="'UserName.invalid'">Please enter username</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6" *ngIf="Mode!='Edit'">
+                                <div class="form-field">
+                                    <mat-label>Password<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input [type]="showPassword ? 'text' : 'password'" matInput
+                                        formControlName="Password" required minlength="8" maxlength="30"
+                                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                        <mat-error *ngIf="'Password.invalid'">Please enter password(max:8)</mat-error>
+                                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                                        {{showPassword ? "visibility_off" : "visibility"}}
+                                    </mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6" *ngIf="Mode!='Edit'">
+                                <div class="form-field">
+                                    <mat-label>Confirm Password<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                            <input [type]="cshowPassword ? 'text' : 'password'" matInput
+                                            formControlName="ConfirmPassword" required minlength="8" maxlength="30"
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                        <mat-error *ngIf="'ConfirmPassword.invalid'">Please enter confirm
+                                            password(max : 8)</mat-error>
+                                            <mat-icon matSuffix (click)="toggleConPasswordVisibility()">
+                                                {{cshowPassword ? "visibility_off" : "visibility"}}
+                                            </mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6" >
+                                <div class="form-field">
+                                    <mat-label>Select Department<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="DepartmentId" matInput
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                            <mat-option *ngFor="let dptList of departmentTypeList" [value]="dptList.departmentId">{{dptList.departmentName}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="'DepartmentId.invalid'">Please select department</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Address Line 1<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="Address1"
+                                            placeholder="Enter address line 1" [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" required maxlength="200">
+                                        <mat-error *ngIf="'Address1.invalid'">Please enter address 1</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Address Line 2<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="Address2"
+                                            placeholder="Enter address line 2" [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" maxlength="7" required maxlength="200">
+                                        <mat-error *ngIf="'Address2.invalid'">Please enter address 2 </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                            <div class="form-field">
+                                <mat-label>Select Country<span class="required">*</span></mat-label>
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="CountryID" (selectionChange)="OnCountryChange($event)">
+                                        <mat-option *ngFor="let country of countries" [value]="country.countryID">
+                                            {{country.countryName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="StaffForm.get('CountryID')?.touched && StaffForm.get('CountryID')?.hasError('required')">Please
+                                        select country.</mat-error>
+                                </mat-form-field>
+                            </div>
+                           </div>
+
+                           <div class="col-6">
+                            <div class="form-field">
+                                <mat-label>Select State<span class="required">*</span></mat-label>
+                                <mat-form-field appearance="outline">
+                        
+                                    <mat-select formControlName="StateID">
+                                        <mat-option *ngFor="let state of states" [value]="state.stateID">
+                                            {{state.stateName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="StaffForm.get('StateID')?.touched && StaffForm.get('StateID')?.hasError('required')">Please
+                                        select state.</mat-error>
+                                </mat-form-field>
+                            </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Enter City<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="City" placeholder="Enter city"
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off" required maxlength="20">
+                                        <mat-error *ngIf="'City.invalid'">Please enter city</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Postal Code<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="text" matInput formControlName="PostalCode"
+                                            placeholder="Enter postal code" [ngClass]="{ 'is-invalid': submitted  }"
+                                            autocomplete="off" required maxlength="7">
+                                        <mat-error *ngIf="'PostalCode.invalid'">Please enter postal code</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Roles<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select multiple formControlName="StaffRole" matInput
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                            <mat-option *ngFor="let roles of userRoleList" [value]="roles.roleID">{{roles.roleName}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="'StaffRole.invalid'">Please select roles</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Program<span class="required">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select multiple formControlName="StaffProgram" matInput
+                                            [ngClass]="{ 'is-invalid': submitted  }" autocomplete="off">
+                                            <mat-option *ngFor="let program of programList" [value]="program.programId">{{program.programName}}</mat-option>
+                                    
+                                        </mat-select>
+                                        <mat-error *ngIf="'StaffProgram.invalid'">Please select program</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+            
+                    <mat-dialog-actions *ngIf="Mode!=''" class="modal-footer">
+                        <button type="button" class="btn close cancel-btn" id="closeModal" matDialogClose
+                            data-bs-dismiss="modal" (click)="SubmitStaff('Add')">Cancel</button>
+                        <button type="submit" (click)="OnSubmitClick()" class="btn save-btn">{{Mode=="Edit"?"Update":"Add"}}</button>
+                    </mat-dialog-actions>
+                </div>
+            </ng-template>
+  
+         
+      </mat-tab>
+      <mat-tab label="Partner Staff" (selectedTabChange)="GetPartnerStaff()">
+        <div class="grayChildContainer">
+            <div class="innerWrapper">
+                <div class="userAction_row">
+                    <div class="search-input">
+                        <input type="text" placeholder="Search" class="form-control">
+                    </div>
+                    <div class="right-btn-wrap">
+                        <form [formGroup]="partnerFilterForm" style="display: flex;">
+                        <div class="add-filter-btn" style="display: none;">
+                            <select class="form-select" aria-label="Default select example" matInput formControlName="SelectedStaffName">
+                                <option selected [value]="0">Select Staff</option>
+                                <option *ngFor="let staff of staffsList" [value]="staff.staffId" >{{staff.firstName}} {{staff.lastName}}</option>
+                            </select>
+                        </div>
+                        
+                        <div class="add-filter-btn" style="display: none;">
+                            <select class="form-select" aria-label="Default select example" matInput formControlName="SelectedRoleId">
+                                <option selected [value]="0">Select Role</option>
+                                <option *ngFor="let roles of userRoleList" [value]="roles.roleID" >{{roles.roleName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="add-filter-btn">
+                            <select class="form-select" aria-label="Default select example" matInput formControlName="SelectedPartnerId">
+                                <option selected [value]="0" >Select Partner</option>
+                                <option *ngFor="let partner of partnerStaffList" [value]="partner.acpPartnerId">{{partner.acpPartnerName}}</option>
+                            </select>
+                        </div>
+                              <button class="btn btn-primary" (click)="GetPartnerStaff()"> 
+                                <img style="color: white;" src="../../../../assets//images/search.svg" alt=""  >
+                                <span> Search</span>
+                              </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="site-main-table acpPartner-col-width">
+                    <table mat-table class="table" [dataSource]="dataSource" matSort>
+        
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>  Name</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.firstName}} {{element.lastName}}</mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="mobile">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.phoneNo}}</mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="role">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> <span *ngFor="let role of element.staffRole"> &nbsp;&nbsp;{{role.roleName}}</span></mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="department">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.departmentName}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.IsActive}} <span *ngIf="element.isActive == 1" class="text-success">Active</span></mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="pendingTraining">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Pending Training</mat-header-cell>
+                            <mat-cell *matCellDef="let element">0</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header style="display: none;">Action</mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="display: none;">
+                                <div class="action-wrap" >
+                                    <a data-bs-toggle="modal"
+                                        data-bs-target="#addStaffModal" (click)="getdataByStaffId(element.staffId,element.userId); addstafform('Edit',StaffModal)"><img
+                                            src="assets/images/edit.svg" alt="" title="Edit Staff Details"></a>
+                                    <a  (click)="deleteStaff(element.staffId,element.userId)"><img src="assets/images/delete.svg"
+                                            alt="" title="Delete Staff Details"></a>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="noData">
+                            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                        </ng-container>
+                        <div>
+                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                            </mat-footer-row>
+                        </div>
+                    </table>
+                </div>
+               
+                <!-- <div class="table-bottom-actions">
+                    <mat-paginator style-paginator
+                    [length]="totalCount"
+                    showFirstLastButtons
+                    [pageSize]="Search.PageSize"
+                    [pageSizeOptions]="[5, 10, 25, 50]"
+                    (page)="nextPage($event)">
+                    </mat-paginator>
+                </div> -->
+                
+        <div class="table-bottom-actions">
+            <span>Total  <strong>: {{ totalCount }}</strong></span>
+            <mat-paginator [length]="metaData['totalRecords']" [pageSizeOptions]="pageSizeList"
+            [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+            showFirstLastButtons></mat-paginator>
+        </div>
+            </div>
+        
+        </div>
+      </mat-tab>
+
+  
+
+  </mat-tab-group>

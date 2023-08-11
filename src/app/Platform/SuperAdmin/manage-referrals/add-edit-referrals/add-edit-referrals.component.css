@@ -1,0 +1,268 @@
+.tab-content {
+    width: calc(100% - 350px);
+}
+
+.nav-pills {
+    width: 350px;
+    border-right: 1px solid #EBECEE;
+    height: 100vh;
+}
+
+.form-page h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+.form-wrapper {
+    padding: 30px;
+}
+
+.nav-pills .nav-link {
+    background: transparent !important;
+    font-weight: 400;
+    font-size: 18px;
+    color: #0071BC !important;
+    opacity: 0.9;
+    border-bottom: 1px solid #EBECEE;
+    height: 65px;
+    text-align: left;
+    padding: 0 20px;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-pills .nav-link mat-icon {
+    color: #000;
+}
+
+.nav-pills .nav-link.active {
+    opacity: 1;
+    font-weight: 700;
+}
+
+/* arrow btn style start */
+.icon-wrap img {
+    width: 20px !important;
+}
+
+.icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: #3A7DCB;
+    border-radius: 50%;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+}
+
+.btn-wrap {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-wrap .custom-btn {
+    width: 250px;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.custom-btn.prev {
+    padding-left: 25px;
+}
+
+.custom-btn.next {
+    padding-right: 25px;
+}
+
+.custom-btn:hover .icon-wrap {
+    background: #424242;
+}
+
+.btn-wrap button.prev .icon-wrap {
+    right: auto;
+    left: 8px;
+}
+
+/* arrow btn style ends */
+
+/* upload image style start */
+.edit-image {
+    text-align: center;
+    padding: 40px 0 25px;
+    border-bottom: 1px solid #EBECEE;
+    width: 100%;
+}
+
+.edit-image .circle {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1px solid #EBECEE;
+    margin: 0 auto;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.edit-image .circle img {
+    width: 100%;
+}
+
+.upload-block input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.upload-block {
+    margin-top: 20px;
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: center;
+}
+
+.remove-wrap {
+    padding: 7px 10px;
+    background: #FFFFFF;
+    border: 1px solid #0071BC;
+    border-radius: 5px 0px 0px 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.upload-btn {
+    padding: 7px 10px;
+    background: #0071BC;
+    display: inline-block;
+    border-radius: 0px 5px 5px 0px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    width: 130px;
+    line-height: 1.6;
+}
+
+.upload-btn:hover {
+    opacity: 0.8;
+    color: #fff;
+}
+
+.remove-wrap:hover {
+    opacity: 0.6;
+}
+
+/* upload image style ends */
+.edit-profile-form .fade:not(.show) {
+    display: none;
+    visibility: hidden;
+}
+
+.edit-profile-form .fade {
+    transition: unset;
+}
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .btn-wrap .custom-btn {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .icon-wrap {
+        width: 34px;
+        height: 34px;
+        right: 4px;
+    }
+
+    .icon-wrap img {
+        width: 16px !important;
+    }
+
+    .btn-wrap .custom-btn {
+        width: 140px;
+    }
+
+    .nav-pills .nav-link {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    .form-page h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+    .btn-wrap button.prev .icon-wrap {
+        left: 4px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .nav-pills {
+        width: 200px;
+    }
+
+    .tab-content {
+        width: calc(100% - 200px);
+    }
+
+    .edit-image .circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .nav-pills .nav-link {
+        padding: 0 15px;
+    }
+
+    .upload-btn {
+        width: 100px;
+    }
+
+    .remove-wrap {
+        padding: 7px 5px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .custom-form-wrapper {
+        display: block !important;
+    }
+
+    .nav-pills {
+        width: 100%;
+        height: auto;
+    }
+
+    .tab-content {
+        width: 100%;
+    }
+
+    .form-wrapper {
+        padding: 30px 15px;
+    }
+}

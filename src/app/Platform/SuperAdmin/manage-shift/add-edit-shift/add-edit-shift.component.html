@@ -1,0 +1,363 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="common-page-wrapper form-page">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" href="#" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a   class="current" title="Create New Shift">{{title}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>{{title}}</h1>
+    </div>
+
+    <form class="edit-profile-form" [formGroup]="addUserShiftform">
+      <div class="custom-form-wrapper d-flex align-items-start">
+        <div class="form-wrapper">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-field">
+                <mat-checkbox formControlName="IsHighPriority">Higher Priority</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Template</mat-label>
+                  <mat-select  (selectionChange)="GetTemplateData($event)" formControlName="ShiftTemplate"  placeholder="" 
+                   [ngClass]="{ 'is-invalid': submitted  }">
+                  <mat-option (select)="(option.Id)" *ngFor=" let option of ShiftTemplateList" [value]="option.Id">
+                    {{option.Label}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="'ShiftTemplate.invalid'">Select template</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                    <mat-label>Patient Name</mat-label>
+                    <input type="text"  [matAutocomplete]="auto" (keyup)="searchPatientByName()" maxlength="25"  matInput formControlName="PatientName" [ngClass]="{ 'is-invalid': submitted  }"
+                      autocomplete="new-name">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor=" let option of PatientList" [value]="option.FirstName +' '+ option.LastName"
+                        (onSelectionChange)="PatientValue(option.PatientId)">
+                          {{option.FirstName}} {{option.LastName}} ({{option.DOB | date}})
+                        </mat-option>
+                      </mat-autocomplete>
+                  <mat-error *ngIf="'PatientName.invalid'">Patient name is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Title</mat-label>
+                  <input type="text" matInput formControlName="Title" [ngClass]="{ 'is-invalid': submitted }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'Title.invalid'">Title is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Shift Type</mat-label>
+                  <mat-select formControlName="ShiftType" placeholder="Shift Type"
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor=" let option of shiftTypeList" value="{{option.Id}}">
+                      {{option.Label}}
+                    </mat-option>                 
+                  </mat-select>
+                  <mat-error *ngIf="'ShiftType.invalid'">Shift Type is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Gender Preference</mat-label>
+                  <mat-select formControlName="Gender"  placeholder=""
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor="let option of GenderList" [value]="option.Id">{{option.Label}}</mat-option>
+                  </mat-select>
+               <mat-error *ngIf="'CaregiverGender.invalid'">Select Gender</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Agency</mat-label>
+                  <mat-select formControlName="AssignTo" placeholder=""
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor="let option of assignedList" value="{{option.Id}}">{{option.Label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Qualification / Position</mat-label>
+                  <mat-select formControlName="Qualification" multiple placeholder=""
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor=" let option of qualificationList" value="{{option.Id}}">
+                      {{option.Label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Break Time</mat-label>
+                  <input type="text" matInput maxlength="6" formControlName="BreakTime" [ngClass]="{ 'is-invalid': submitted  }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'BreakTime.invalid'">Enter break time</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Description</mat-label>
+                  <input type="text" matInput formControlName="Description" [ngClass]="{ 'is-invalid': submitted  }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'Description.invalid'">Description is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+                <div class="col-md-12">
+                  <div class="form-field date-calender">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Shift Date <span style="color: red;">*</span></mat-label>
+                      <mat-chip-list #chipList aria-label="Choose a date" (click)="picker.open()">
+                        <mat-chip *ngFor="let value of dateModel" [selectable]="false"[removable]="true" (removed)="remove(value)"> {{ value | date :'MM/dd/yyyy' }}
+                          <img matChipRemove *ngIf="true" src="../../../../../assets/images/remove.png" alt="Close">
+                        </mat-chip>
+                        <input [value]="resetModel" matInput [matDatepicker]="picker" placeholder="Choose a date" [min]="minDate" (dateChange)="dateChanged($event)"
+                        [matChipInputFor]="chipList" hidden formControlName="ShiftDate" />
+                       </mat-chip-list>
+                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="'ShiftDate.invalid'">Shift Date is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Start Time <span style="color: red;">*</span></mat-label>
+                  <input matInput [ngxMatTimepicker]="timepicker"  [format]="12" [required]="required" readonly
+                    formControlName="ShiftStartTime" />
+                  <mat-icon matSuffix  (click)="timepicker.open()"> schedule </mat-icon>
+                  <mat-error *ngIf="'ShiftStartTime.invalid'">Start Time is required</mat-error>
+                </mat-form-field>
+                <ngx-mat-timepicker (timeSet)="CheckStartEndTime($event,'Start')" #timepicker></ngx-mat-timepicker>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>End Time <span style="color: red;">*</span></mat-label>
+                  <input matInput [ngxMatTimepicker]="timepicker1" [format]="12" [required]="required" readonly
+                    formControlName="ShiftEndTime" />
+                  <mat-icon matSuffix (click)="timepicker1.open()"> schedule </mat-icon>  
+                  <mat-error *ngIf="'ShiftEndTime.invalid'">End Time is required</mat-error>              
+                </mat-form-field>                
+                <ngx-mat-timepicker (timeSet)="CheckStartEndTime($event,'End')" #timepicker1></ngx-mat-timepicker>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Shift Pay</mat-label>
+                  <mat-select formControlName="ShiftPay" placeholder="Shift Pay"
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor=" let option of shiftPayList" value="{{option.Id}}">
+                      {{option.Label}}
+                    </mat-option>                   
+                  </mat-select>
+                  <mat-error *ngIf="'ShiftPay.invalid'">Shift Pay is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Rate of Pay</mat-label>
+                  <mat-select formControlName="RatePay" placeholder="Rate of Pay"
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor=" let option of ratePayList" value="{{option.Id}}">
+                      {{option.Label}}
+                    </mat-option>                  
+                  </mat-select>
+                  <mat-error *ngIf="'RatePay.invalid'">Rate of Pay is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3" style="display:none">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Shift Repeat</mat-label>
+                  <mat-select formControlName="ShiftRepeat" placeholder="Shift Repeat"
+                    [ngClass]="{ 'is-invalid': submitted  }">
+                    <mat-option *ngFor=" let option of shiftRepeatList" value="{{option.Id}}">
+                      {{option.Label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+               <!-- changes added -->
+                        <div class="col-md-3">
+                          <div class="form-field">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Smoker</mat-label>
+                              <mat-select matInput formControlName="Smoker" [ngClass]="{ 'is-invalid': submitted  }">
+                                <mat-option [value]="1">Yes</mat-option>
+                                <mat-option [value]="2">No</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="'Smoker.invalid'">Smoker</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-field">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Primary Diagnosis</mat-label>
+                              <mat-select matInput formControlName="Diagnosis" [ngClass]="{ 'is-invalid': submitted  }"
+                                autocomplete="new-name">
+                                <mat-option *ngFor=" let list of DiagnosisList" [value]="list.Id">{{list.Label}}
+                                </mat-option>                               
+                              </mat-select>
+                              <mat-error *ngIf="'Diagnosis.invalid'">Primary Diagnosis is required</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-field">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Skills</mat-label>
+                              <mat-select multiple matInput formControlName="Skills" [ngClass]="{ 'is-invalid': submitted  }"
+                                autocomplete="new-name">
+                                <mat-option *ngFor=" let list of SkillList" value="{{list.Id}}">{{list.Label}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="'Skills.invalid'">Skills is required</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-field">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Pets</mat-label>
+                              <mat-select  matInput formControlName="Pets" [ngClass]="{ 'is-invalid': submitted  }"
+                                autocomplete="new-name">
+                                <mat-option *ngFor=" let list of PetsList" [value]="list.Id">{{list.Label}}
+                                </mat-option>
+                              </mat-select>                             
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <!-- changes end here -->
+
+            <div class="col-md-3">
+              <div class="form-field location-flag">
+                <mat-form-field appearance="fill">
+                  <mat-label>Shift Location</mat-label>
+                  <input type="text" matInput  formControlName="Country" value ="USA" [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name" readonly>
+                  <mat-select formControlName="ShiftLocation" placeholder="Shift Location"
+                  [ngClass]="{ 'is-invalid': submitted  }">
+                  <mat-option *ngFor=" let option of shiftLocationList" value="{{option.Id}}">
+                    {{option.Label}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="'Country.invalid'">Shift Location is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>City</mat-label>
+                  <input type="text" maxlength="50" matInput formControlName="City" [ngClass]="{ 'is-invalid': submitted }"
+                    autocomplete="new-password">
+                    <mat-error *ngIf="'City.invalid'">City is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Zip Code</mat-label>
+                  <input type="text" maxlength="10" matInput formControlName="ZipCode" [ngClass]="{ 'is-invalid': submitted  }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'ZipCode.invalid'">Zip Code is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Shift Address</mat-label>
+                  <input type="text" maxlength="250" matInput formControlName="Address" [ngClass]="{ 'is-invalid': submitted  }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'Address.invalid'">Address is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>Notes</mat-label>
+                  <input type="text" matInput formControlName="Notes" [ngClass]="{ 'is-invalid': submitted  }"
+                    autocomplete="new-name">
+                    <mat-error *ngIf="'Notes.invalid'">Notes is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+          <div class="btn-wrap" style="float:right">
+            <Button class="custom-btn" (click)="saveUserShift()" *ngIf="buttonflag"> Save </Button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

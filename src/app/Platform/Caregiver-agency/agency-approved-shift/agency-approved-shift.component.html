@@ -1,0 +1,101 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+      <ul class="custom-breadcrumbs">
+        <li><a [routerLink]="['/Dashboard/CaregiverAgencyDashboard/0']" href="#" class="main-base" title="Dashboard">Dashboard</a></li>
+        <li><a [routerLink]="['/Dashboard/Agency-Open-shift']" href="#" class="current" title="Open Shifts">Approved Shifts</a></li>
+      </ul>
+      <div class="right-btn-wrap">
+        <a class="custom-btn border-btn" title="Print" (click)="Print()" ><img src="../../../../assets/images/Printer.svg" alt=""></a>
+        <button class="custom-btn" [disabled]="isDisabled" (click)="exportAsXLSX()" title="Export CSV">Export CSV</button>
+        <!-- <a  [routerLink]="['/Dashboard/add-edit-agencyshift/0/0']" class="custom-btn m-0" href="#" title="Add New Shift">Add New Shift</a> -->
+      </div>
+    </div>
+  
+    <!-- table cards -->
+    <div class="custom-card">
+      <div class="heading-wrap">
+        <h1>{{title}}</h1>
+        <form class="search-wrap" [formGroup]="releaseShiftForm">
+          <input class="form-control me-2" type="search" formControlName="Search" placeholder="Search" aria-label="Search" (keydown)="GetCaregiverAgencyShiftList('searching')">
+        </form>
+      </div>
+  
+      <div class="table-responsive">
+        <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">     
+          <ng-container matColumnDef="shiftNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Shift No.</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.ShiftNo}}</mat-cell>
+          </ng-container> 
+          <ng-container matColumnDef="releasedate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Release Date</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.CreatedOn | date}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="patientname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+            <!-- <a *ngIf="userId==element.UserId" [routerLink]="['/Dashboard/add-edit-PatientFamily', element.PatientId,0]" >
+                {{element.Patient}}</a> -->
+              </mat-cell> 
+          </ng-container>
+          <ng-container matColumnDef="shifttype">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="practiceClass"> Shift Type </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="practiceClass"> {{element.ShiftType }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="startdate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="practiceClass"> {{element.ShiftStartDate | date : 'MM/dd/yyyy'}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="enddate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> End Time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ShiftEndDate | date : 'MM/dd/yyyy'}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="shifttime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Shift Time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ShiftTime}} </mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="priority">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+            <mat-cell *matCellDef="let element"> Regular</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Duration </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Duration}} hrs </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                 <div class="action-wrap">
+                  <mat-icon title="Assign to Caregiver" (click)="SendInvite(element.ShiftId,element.ShiftStartDate)" style="cursor: pointer;color:#306EB7;" data-toggle="tooltip" data-placement="right" >send</mat-icon>
+                  </div>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+          </ng-container>
+          <div>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+              </mat-footer-row>
+        </div>
+        </mat-table>
+        <mat-paginator style-paginator [length]="recordcount" [pageSize]="pagesize"
+          [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>

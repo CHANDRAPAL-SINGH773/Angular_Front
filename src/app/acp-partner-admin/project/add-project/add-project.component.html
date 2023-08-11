@@ -1,0 +1,310 @@
+<div class="loader" *ngIf="loader"></div>
+<div  class="addproject_dialog">
+            <div class="modal-header">
+                <h2 mat-dialog-title>{{FormHeading}}</h2>
+                <mat-icon class="close_btn"  mat-button mat-dialog-close (click)="closeDialog('close')">close</mat-icon>
+            </div>
+                    <!-- <form [formGroup]="ProjectForm">
+                        <div class="row">
+
+                            <div class="col-4">
+                                <div class="form-field">
+
+                                    <mat-form-field>
+                                        <input type="text" style="margin-left: 10px;" matInput
+                                        formControlName="ProjectNo" placeholder="Enter Project Number">
+                                        <mat-error *ngIf="ProjectForm.get('ProjectNo')?.touched && ProjectForm.get('ProjectNo')?.hasError('required')">Please enter project number</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="form-field">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Client" formControlName="Client" (selectionChange)="SelectedClient($event)">                                                                               
+                                            <ng-container *ngIf="clientList">
+                                                <mat-option  *ngFor="let client of clientList" [value]="client.clientID">{{client.firstName}} {{client.lastName}}</mat-option>
+                                                <mat-option *ngIf="clientList.length == 0">No client found</mat-option>
+                                              </ng-container>
+                                        </mat-select>
+                                        <mat-error *ngIf="ProjectForm.get('Client')?.touched && ProjectForm.get('Client')?.hasError('required')">Please select client</mat-error>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-4">
+                                <div class="form-field">
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Client Site" formControlName="ClientSite" >                                                                               
+                                          <ng-container *ngIf="clientSite">
+                                            <mat-option   *ngFor="let site of clientSite" [value]="site.cSiteId">{{site.address1}}-{{site.address2}}:{{site.city}}</mat-option>
+                                                <mat-option *ngIf="clientSite.length == 0">No site found</mat-option>
+                                          </ng-container>
+                                        </mat-select>
+                                        <mat-error *ngIf="ProjectForm.get('ClientSite')?.touched && ProjectForm.get('ClientSite')?.hasError('required')">Please select client site</mat-error>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-12" *ngIf="userType==18">
+                                <div class="form-field">
+
+                                    <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                        <mat-radio-button *ngIf="mp.id==3 || mp.id==4" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12" *ngIf="userType==17">
+                                <div class="form-field">
+                                   <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                        <mat-radio-button *ngIf="mp.id==1 || mp.id==2" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-4" *ngIf="ownManPoer">
+                                <div class="form-field">
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Business Partner" formControlName="BusinessPartner" (selectionChange)="onBpSelection($event)">                                                                               
+                                          <ng-container >
+                                            <mat-option  *ngFor="let bp of ApprovedBPList" [value]="bp.acpPartnerId">{{bp.acpPartnerName}}</mat-option>
+                                            <mat-option disabled="true" *ngIf="ApprovedBPList.length == 0">No business partner found</mat-option>
+                                          </ng-container>
+                                        </mat-select>
+                                        <mat-error *ngIf="ProjectForm.get('BusinessPartner')?.touched && ProjectForm.get('BusinessPartner')?.hasError('required')">Please select business partner</mat-error>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4" *ngIf="ownManPoer">
+                                <div class="form-field">
+                                   
+                                    <mat-form-field >
+                                        <mat-select formControlName="BusinessCategory" placeholder="Select Category" multiple>
+                                            <mat-option  *ngFor="let cat of programActivitylist.categories" [value]="cat.categoryId">{{cat.categoryName}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="'BusinessActivity.invalid'">Please select Activities</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-4" *ngIf="ownManPoer">
+                                <div class="form-field">
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Program" formControlName="SelectProgram"  multiple>
+                                          <mat-option *ngFor="let pa of programActivitylist.programs" [value]="pa.programId">{{pa.programName}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-field">
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Assessor/Installer" formControlName="Assessor_Installer" multiple (selectionChange)="SelectedInsAssor($event)">                                                                               
+                                          <ng-container *ngIf="staffList">
+                                            <mat-option *ngFor="let s of staffList" [value]="s.staffId">{{s.firstName}} {{s.lastName}}</mat-option>
+                                            <mat-option disabled="true" *ngIf="staffList.length==0">No staff found</mat-option>
+                                          </ng-container>
+                                        </mat-select>
+                                        <mat-error *ngIf="ProjectForm.get('Assessor_Installer')?.touched && ProjectForm.get('Assessor_Installer')?.hasError('required')">Please select assessor/installer</mat-error>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="col-12" *ngIf="installationType">
+                                <div class="form-field">
+                                    <mat-label>Select Installation<span class="text-danger">*</span></mat-label><br>
+                                   <mat-radio-group formControlName="installationType"  aria-label="Select an option" *ngFor="let ins of installationType ; let j = index;">
+                                        <mat-radio-button  value={{ins.id}} (change)="typeChange(ins)">{{ins.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                          </div>
+                
+
+                        
+                        </div>
+
+                    </form> -->
+
+
+                    <mat-dialog-content>
+                        <form [formGroup]="ProjectForm">
+                         <!-- <div class="user_image_upload">
+                           <input
+                             class="ng-hide user_upload_input"
+                             id="input-file-id"
+                             type="file"
+                           />
+                           <div class="user_upload_block">
+                             <span class="user_upload_wrapper">
+                               <span class="user_upload_icon"
+                                 ><img
+                                   src="../../../../assets/images/profile.png"
+                               /></span>
+                             </span>
+                             <span class="edit_upload_wrapper">
+                               <span class="edit_upload_icon"
+                                 ><img src="../../../assets/images/edit_profile.svg"
+                               /></span>
+                             </span>
+                           </div>
+                         </div> -->
+                   
+                         <div class="form_inner">
+                             <div class="form_field_wrapper">
+                               <label>Enter Project Number</label>
+                               <mat-form-field appearance="fill">
+                                <input type="text" style="margin-left: 10px;" matInput
+                                formControlName="ProjectNo" placeholder="Enter Project Number">
+                                <mat-error *ngIf="ProjectForm.get('ProjectNo')?.touched && ProjectForm.get('ProjectNo')?.hasError('required')">Please enter project number</mat-error>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper">
+                               <label>Select Client</label>
+                               <mat-form-field appearance="fill">
+                                <mat-select placeholder="Select Client" formControlName="Client" (selectionChange)="SelectedClient($event)">                                                                               
+                                    <ng-container *ngIf="clientList">
+                                        <mat-option  *ngFor="let client of clientList" [value]="client.clientID">{{client.firstName}} {{client.lastName}}</mat-option>
+                                        <mat-option *ngIf="clientList.length == 0">No client found</mat-option>
+                                      </ng-container>
+                                </mat-select>
+                                <mat-error *ngIf="ProjectForm.get('Client')?.touched && ProjectForm.get('Client')?.hasError('required')">Please select client</mat-error>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper">
+                               <label>Select Client Site</label>
+                               <mat-form-field appearance="fill">
+                                <mat-select placeholder="Select Client Site" formControlName="ClientSite" >                                                                               
+                                    <ng-container *ngIf="clientSite">
+                                      <mat-option   *ngFor="let site of clientSite" [value]="site.cSiteId">{{site.address1}}-{{site.address2}}:{{site.city}}</mat-option>
+                                          <mat-option *ngIf="clientSite.length == 0">No site found</mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                  <mat-error *ngIf="ProjectForm.get('ClientSite')?.touched && ProjectForm.get('ClientSite')?.hasError('required')">Please select client site</mat-error>
+                               </mat-form-field> 
+                             </div>
+                             <!-- <div class="form_field_wrapper" *ngIf="userType==18">
+
+                               <mat-form-field appearance="fill">
+                                <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                    <mat-radio-button *ngIf="mp.id==3 || mp.id==4" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                            </mat-radio-group>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper" *ngIf="userType==17">
+     
+                               <mat-form-field appearance="fill">
+                                <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                    <mat-radio-button *ngIf="mp.id==1 || mp.id==2" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                            </mat-radio-group>
+                               </mat-form-field> 
+                             </div> -->
+
+                             <div  *ngIf="userType==18">
+                                <div class="form_field_wrapper">
+
+                                    <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                        <mat-radio-button *ngIf="mp.id==3 || mp.id==4" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                            </div>
+
+
+                            <div  *ngIf="userType==17">
+                                <div class="form_field_wrapper">
+                                   <mat-radio-group formControlName="ManPower"  aria-label="Select an option" *ngFor="let mp of Manpower ; let j = index;">
+                                        <mat-radio-button *ngIf="mp.id==1 || mp.id==2" value={{mp.id}} (change)="ChangeManower(mp)">{{mp.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                            </div><br>
+
+
+
+                             <div class="form_field_wrapper" *ngIf="ownManPoer">
+                               <label>Select Business Partner</label>
+                               <mat-form-field appearance="fill">
+                                <mat-select placeholder="Select Business Partner" formControlName="BusinessPartner" (selectionChange)="onBpSelection($event)">                                                                               
+                                    <ng-container >
+                                      <mat-option  *ngFor="let bp of ApprovedBPList" [value]="bp.acpPartnerId">{{bp.acpPartnerName}}</mat-option>
+                                      <mat-option disabled="true" *ngIf="ApprovedBPList.length == 0">No business partner found</mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                  <mat-error *ngIf="ProjectForm.get('BusinessPartner')?.touched && ProjectForm.get('BusinessPartner')?.hasError('required')">Please select business partner</mat-error>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper" *ngIf="ownManPoer">
+                               <label>Select Category</label>
+                               <mat-form-field appearance="fill">
+                                <mat-select formControlName="BusinessCategory" placeholder="Select Category" multiple>
+                                    <mat-option  *ngFor="let cat of programActivitylist.categories" [value]="cat.categoryId">{{cat.categoryName}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="'BusinessActivity.invalid'">Please select Activities</mat-error>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper" *ngIf="ownManPoer">
+                               <label>Select Program</label>
+                               <mat-form-field appearance="fill">
+                                <mat-select placeholder="Select Program" formControlName="SelectProgram"  multiple>
+                                    <mat-option *ngFor="let pa of programActivitylist.programs" [value]="pa.programId">{{pa.programName}}</mat-option>
+                                  </mat-select>
+                               </mat-form-field> 
+                             </div>
+                             <div class="form_field_wrapper">
+                               <label>Select Assessor/Installer</label>
+                               <mat-form-field appearance="fill">
+                                 <mat-select placeholder="Select Assessor/Installer" formControlName="Assessor_Installer" multiple (selectionChange)="SelectedInsAssor($event)">                                                                               
+                                    <ng-container *ngIf="staffList">
+                                      <mat-option *ngFor="let s of staffList" [value]="s.staffId">{{s.firstName}} {{s.lastName}}</mat-option>
+                                      <mat-option disabled="true" *ngIf="staffList.length==0">No staff found</mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                  <mat-error *ngIf="ProjectForm.get('Assessor_Installer')?.touched && ProjectForm.get('Assessor_Installer')?.hasError('required')">Please select assessor/installer</mat-error>
+                               </mat-form-field>
+                             </div>
+                             <!-- <div class="form_field_wrapper" *ngIf="installationType">
+                               <label>Select Installation</label>
+                               <mat-form-field appearance="fill">
+                                <mat-radio-group formControlName="installationType"  aria-label="Select an option" *ngFor="let ins of installationType ; let j = index;">
+                                <mat-radio-button  value={{ins.id}} (change)="typeChange(ins)">{{ins.name}}</mat-radio-button>&nbsp;&nbsp;
+                            </mat-radio-group>
+                               </mat-form-field>
+                             </div> -->
+                             <div  *ngIf="installationType">
+                                <div class="form_field_wrapper">
+                                    <mat-label>Select Installation<span class="text-danger">*</span></mat-label><br>
+                                   <mat-radio-group formControlName="installationType"  aria-label="Select an option" *ngFor="let ins of installationType ; let j = index;">
+                                        <mat-radio-button  value={{ins.id}} (change)="typeChange(ins)">{{ins.name}}</mat-radio-button>&nbsp;&nbsp;
+                                </mat-radio-group>
+                                </div>
+                          </div>
+
+                   
+                         </div>
+                   
+                        </form>
+                     </mat-dialog-content>
+
+    
+            <mat-dialog-actions>
+                <button mat-button mat-dialog-close class="btn btn-secondary" (click)="closeDialog('close')">Cancel</button>
+                <button mat-button class="btn btn-primary" (click)="addProject()"> {{ButtonHeading}}</button>
+              </mat-dialog-actions>
+</div>

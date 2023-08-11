@@ -1,0 +1,55 @@
+<div class="loader" *ngIf="loader"></div>
+
+
+<div class="dashboard_main_content buisnesspartner_detail">
+    
+<div class="buisnesspartner_inner" *ngIf="businessPartnerDetail">
+
+    <h2 class="main_title">Business Partner</h2>
+
+    <div class="column_wrapper">
+        <div class="column">
+            <div class="company_details">
+                <label>From:</label>
+                {{businessPartnerDetail.acpPartnerName}}
+            </div>
+            <p>{{businessPartnerDetail.address1}}</p>
+            <p>{{businessPartnerDetail.address2}}</p>
+            <p><label>Phone:</label> {{businessPartnerDetail.mobile}}</p>
+            <p><label>Email:</label> {{businessPartnerDetail.email}}</p>
+        </div>
+
+        <div class="column">
+            <h2 class="column_title">Program</h2>
+            <div class="column_item" *ngFor="let p of businessPartnerDetail.program">
+                 <p>{{p.programName}}</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <h2 class="column_title">Activities</h2>
+            <div class="column_item" *ngFor="let a of businessPartnerDetail.activities">
+                 <p>{{a.activityName}}</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <h2 class="column_title">Comment</h2>
+            <div class="column_item" *ngFor="let a of businessPartnerDetail.activities">
+                 <p>{{businessPartnerDetail.comments}}</p>
+            </div>
+        </div>
+
+        <div class="column document">
+            <h2 class="column_title">Documents</h2>
+            <div class="column_item" *ngFor="let d of businessPartnerDetail.documents">
+                 <label>{{d.filename}}</label>
+                 <button class="btn" (click)="downloadfile(d)"><i class="fa fa-download"></i> Download</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+

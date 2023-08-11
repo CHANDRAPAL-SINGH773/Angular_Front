@@ -1,0 +1,127 @@
+.custom-card.compose-msg {
+    padding: 20px 30px;
+}
+
+.compose-msg .form-footer {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.compose-msg .btn-wrap {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+}
+
+.compose-msg .btn-wrap .custom-btn {
+    border-radius: 20px;
+    margin: 0 !important;
+    margin-left: 10px !important;
+    width: 160px;
+}
+.form-footer a {
+    cursor: pointer;
+}
+
+.form-footer .attach-icon {
+    margin-right: 35px;
+}
+
+.form-footer a:hover {
+    opacity: 0.6;
+}
+
+.form-field label {
+    margin-bottom: 15px;
+}
+::ng-deep .form-field .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 12px 12px 9px;
+}
+
+.msg-cc-wrap {
+    display: flex;
+    display: -ms-flexbox;
+}
+.form-field.cc-text {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.msg-cc-wrap .form-field:first-child {
+    width: 100%;
+}
+
+.form-field.cc-text label {
+    margin: 0;
+    padding-top: 12px;
+}
+::ng-deep .compose-msg .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: #EBECEE;
+}
+::ng-deep .form-field .mat-form-field-appearance-outline .mat-form-field-infix {
+    min-height: 53px;
+    display: flex;
+}
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .compose-msg .btn-wrap .custom-btn {
+        width: 120px;
+    }
+    a.attach-icon img {
+        width: 28px;
+    }
+    
+    a.delet-icon img {
+        width: 20px;
+    }
+
+}
+
+@media screen and (max-width: 1400px) {
+    a.attach-icon img {
+        width: 26px;
+    }
+    
+    a.delet-icon img {
+        width: 18px;
+    }
+    .form-footer .attach-icon {
+        margin-right: 25px;
+    }
+    
+    .form-field label {
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .custom-card.compose-msg {
+        padding: 20px;
+    }
+    .form-field.cc-text {
+        position: absolute;
+        right: 0;
+        top: -8px;
+    }
+    
+    .msg-cc-wrap {
+        position: relative;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .compose-msg .form-footer {
+        display: block;
+    }
+    
+    .compose-msg .btn-wrap {
+        margin-top: 15px;
+    }
+}

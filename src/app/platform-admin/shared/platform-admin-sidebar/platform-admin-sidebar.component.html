@@ -1,0 +1,44 @@
+
+<div class="sidebar_main">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="close text-reset d-lg-none d-md-block" data-bs-dismiss="offcanvas" aria-label="Close">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+      		<div class="inner_sidebar">
+				<a class="header_logo" [routerLink]="['/company/dashboard']">
+					<img src="assets/images/sidebar_logo.png" alt="Logo" title="Logo">
+				</a>
+				<div class="menu_list" id="sidebar">
+					<ul class="menu_list_main">
+						<li class="nav-item">
+							<a class="nav-link" routerLinkActive="active"    [routerLink]="['/PlatformAdmin/company/companylist']">
+								<div class="menu_list_block">
+								<div class="sidebar_icon">
+									<img class="icon" src="../../../../assets/images/sidebaricon/Dashboad (Gray).svg" alt=""> 
+									<img class="icon_hover" src="../../../../assets/images/sidebaricon/Dashboard (white).svg" alt=""> 
+								</div>
+								<span>Company</span>
+								</div>
+							</a>
+						</li>
+						<!-- <li class="nav-item">
+							<a class="nav-link"  [routerLink]="['/']">
+								<div class="menu_list_block">
+								<div class="sidebar_icon">
+									<img class="icon" src="../../../../assets/images/sidebaricon/sidebaricon2.svg" alt=""> 
+									<img class="icon_hover" src="../../../../assets/images/sidebaricon/sidebaricon2_hover.svg" alt=""> 
+								</div>
+								<span>Staff</span>
+								</div>
+							</a>
+						</li> -->
+					</ul>
+				</div>
+            </div>
+      </div>
+	</div>
+</div>
+          

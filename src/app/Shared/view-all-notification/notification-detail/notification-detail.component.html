@@ -1,0 +1,36 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="custom-mat-dialog" mat-dialog>
+    <div mat-dialog-title>
+        {{title}}       
+        <div class="right-btn-wrap">
+             &nbsp;&nbsp;
+            <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-md-12">
+              <ul class="reviews-block">
+                <li *ngFor=" let element of notificationData">
+                    <!-- <div class="img-wrap">
+                        <img src="../../../../../assets/images/avtar-img.svg" alt="">
+                    </div> -->
+                    <div class="text-wrap">
+                        <h4>Recieved from :</h4><h3>{{element.ReceivedFrom}}</h3>
+                        <span class="date">{{element.NotificationDate | date: 'MMM dd,yyyy hh:mm a'}}</span>
+                        <p>
+                        <b>{{element.NotificationType}}</b>
+                        <br/>
+                        {{element.NotificationText}}<small *ngIf="element.Message!=''">{{element.Message}}</small>      
+                        </p>
+                    </div>
+                 </li>
+               </ul>
+            </div>
+        </div>
+    </mat-dialog-content>
+</div>

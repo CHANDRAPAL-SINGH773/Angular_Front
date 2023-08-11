@@ -1,0 +1,103 @@
+<div class="custom-mat-dialog" mat-dialog>
+    <div mat-dialog-title>
+        {{title}}
+        <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+    </div>
+    <mat-dialog-content>
+        <form class="edit-profile-form" [formGroup]="discountCodeForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Code Name</mat-label>
+                            <input type="text" maxlength="200" matInput autocomplete="new-name"
+                                formControlName="CodeName">
+                            <mat-error *ngIf="'CodeName.invalid'">Code name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Discount Type</mat-label>
+                            <mat-select formControlName="DiscountType">
+                                <mat-option *ngFor=" let option of discountTypeList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'DiscountType.invalid'">Discount Type is required </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>State</mat-label>
+                            <mat-select formControlName="States" multiple>
+                                <mat-option *ngFor=" let option of stateList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'States.invalid'"> State is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Value</mat-label>
+                            <input type="text" maxlength="8" matInput autocomplete="new-name"
+                                formControlName="Value">
+                            <mat-error *ngIf="'CodeName.invalid'">Value is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Limit</mat-label>
+                            <input type="text" maxlength="8" matInput autocomplete="new-name"
+                                formControlName="Limit">
+                            <mat-error *ngIf="'CodeName.invalid'">Limit is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Start Time</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="StartTime">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Start Time</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="EndTime">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+              
+
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="modal-footer">
+            <button type="button" class="custom-btn gray-btn rounded-btn"
+                (click)="dialogRef.close(false)">Cancel</button>
+            <button type="button" class="custom-btn rounded-btn" (click)="saveDiscountCode()">Save</button>
+        </div>
+    </mat-dialog-actions>
+</div>
+<!-- <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div> -->

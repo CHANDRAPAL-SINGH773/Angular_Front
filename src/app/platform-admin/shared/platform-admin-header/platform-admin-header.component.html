@@ -1,0 +1,175 @@
+<header class="header">
+
+    <button class="d-md-block d-lg-none menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><mat-icon>menu</mat-icon></button>
+
+    <div class="header_logo d-lg-none">
+        <img class="img-flui" src="../../../../assets/images/logo.png" alt="logo">
+    </div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="navbar-inner container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="header-left-content">
+                <h2>Business Partners</h2>
+              </div>
+                <div class="header-right-content">
+                    <div class="notification common_content">
+                        <div
+                          class="user_inner"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                        <mat-icon>notifications_none</mat-icon>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li class="head text-light">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12 col-12 head_inner">
+                                <span>Notifications (3)</span>
+                                <a href="#">Mark read all</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+            
+                          <li class="footer text-center">
+                            <a href="#">View All</a>
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div class="user common_content">
+                        <div
+                          class="user_inner"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                        <h3 class="user_name">Jenny Wilson</h3>
+                        <div class="profile_img">
+                            <img src="../../../../assets/images/profile.png" />
+                          </div>
+                        </div>
+
+                        <ul
+                          class="profile dropdown-menu"
+                          aria-labelledby="dropdownMenuButton1"
+                        >
+                          <li>
+                            <a class="dropdown-item" (click)="resetPassword()">
+                                <mat-icon>lock_open</mat-icon>
+                                <span class="item_text"> Reset Password</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" (click)="onLogout()">
+                              <mat-icon>logout</mat-icon>
+                              <span class="item_text">Logout</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+
+
+<!-- <div class="link-icons">
+    <div class="dropdown notification doclist">
+       
+
+        <h2>User Profile</h2>
+        <div class="user-wrap dropdown">
+            <a class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/images/frazteclogo.png" onerror="this.src='assets/images/frazteclogo.png';"  alt=""> 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <div class="userInfo">
+                    <img src="assets/images/frazteclogo.png" onerror="this.src='assets/images/frazteclogo.png';"  alt="">
+                    <div class="userInfo_text">
+                        <span>Fraztec Application</span><br>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <a class="dropdown-item"   (click)="resetPassword()">
+                            <img src="assets/images/setting.svg" alt="">
+                            <span>Reset Password</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" (click)="onLogout()">
+                            <img src="assets/images/logout.svg" alt="">
+                            
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->

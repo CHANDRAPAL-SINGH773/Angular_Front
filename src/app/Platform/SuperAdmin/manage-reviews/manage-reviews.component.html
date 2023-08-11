@@ -1,0 +1,78 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader>
+    <img src='../../../../../assets/images/loader.gif' alt=''>
+    Loading...
+  </div>
+  <div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap mb-3">
+      <ul class="custom-breadcrumbs">
+        <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+        <li><a [routerLink]="['/Dashboard/manage-review']" class="current" title="Manage Reviews">Manage
+            Reviews</a></li>
+      </ul>
+    </div>
+  
+    <!-- table cards -->
+    <div class="custom-card">
+      <div class="table-responsive">
+        <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+          <!-- <ng-container matColumnDef="checkbox">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox></mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-checkbox></mat-checkbox>
+            </mat-cell>
+          </ng-container> -->
+          <ng-container matColumnDef="dateTime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.CreatedOn | date}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Comment | slice:0:18}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="ratings">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Ratings</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.RatingStar}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="message">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Review</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Comment}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="action-wrap">
+                <!-- approved -->
+               <a class="icon-circle green" title="Approved" *ngIf="element.Status == 0"><mat-icon>done</mat-icon> Approved </a> 
+                <!-- both -->
+                <div class="inner-btn-wrap" *ngIf="element.Status == 1" >
+                  <a class="custom-btn green" title="Approve" (click)="ApproveDisapproveReview(element.Id, 'Approve')"> Approve </a>
+                  <a class="custom-btn red" title="Disapprove" (click)="ApproveDisapproveReview(element.Id, 'disapprove')"> Disapprove </a>
+                </div>
+                <!-- Disapproved -->
+                <a class="icon-circle red" title="Disapproved"  *ngIf="element.Status == 2"><mat-icon>close</mat-icon> Disapproved </a>
+              </div>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+          </ng-container>
+          <div>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+              </mat-footer-row>
+        </div>
+  
+        </mat-table>
+        <mat-paginator style-paginator  [length]="recordcount" [pageSize]="pagesize"
+        [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+      </mat-paginator>
+  
+      </div>
+    </div>
+  
+  </div>

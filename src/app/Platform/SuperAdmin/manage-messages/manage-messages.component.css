@@ -1,0 +1,124 @@
+.mat-column-checkbox {
+    max-width: 80px;
+}
+
+.mat-column-message {
+    min-width: 600px;
+}
+
+.mat-table mat-row:nth-child(odd) mat-cell {
+    background: transparent;
+}
+
+table td, .mat-table .mat-cell {
+    height: auto;
+    min-height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+form.search-wrap.filter input {
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+form.search-wrap.filter {
+    position: relative;
+}
+
+form.search-wrap.filter .filter-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    border-left: 1px solid #E8E8E8;
+    cursor: pointer;
+}
+
+form.search-wrap.filter .filter-icon img {
+    padding: 2px 5px;
+}
+
+/* top field card */
+.filter-wrap {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 25px 30px 10px;
+}
+
+.filter-wrap form {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+}
+
+.filter-wrap .custom-btn {
+    border-radius: 5px;
+    margin: 0;
+    padding: 15px;
+    margin-left: 40px;
+    width: 250px;
+    height: auto;
+}
+
+.filter-wrap  .row {
+    width: 100%;
+}
+.mat-column-subject a {
+    text-decoration: none;
+    color: #414453;
+}
+.mat-table .mat-header-cell {
+    border-top: 0;
+}
+
+
+
+
+
+
+/*responsive start */
+@media screen and (max-width: 1600px) {
+    .filter-wrap {
+        padding: 15px 20px 5px;
+    }
+    
+    .filter-wrap .custom-btn {
+        width: 200px;
+        padding: 10px;
+    }
+    .mat-column-message {
+        min-width: 550px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .mat-column-message {
+        min-width: 450px;
+    }
+    .mat-column-checkbox {
+        max-width: 60px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+.mat-column-message {
+    min-width: 300px;
+}
+
+.mat-column-checkbox {
+    max-width: 50px;
+}
+}
+
+@media screen and (max-width: 767px) {
+    .filter-wrap form {
+        display: block;
+    }
+
+    .filter-wrap .custom-btn {
+        margin: 0;
+    }
+}

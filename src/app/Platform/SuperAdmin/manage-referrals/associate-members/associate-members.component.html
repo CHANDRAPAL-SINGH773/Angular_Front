@@ -1,0 +1,95 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="custom-mat-dialog" mat-dialog>
+    <div mat-dialog-title>
+        {{title}}       
+        <div class="right-btn-wrap">
+            <a class="custom-btn" title="Export CSV" (click)="exportAsXLSX()">Export CSV</a>
+             &nbsp;&nbsp;
+            <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+        </div>
+    </div>
+    <mat-dialog-content>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+                          matSortDirection="asc">
+                  
+                          <ng-container matColumnDef="associateName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Associate Name</mat-header-cell>
+                            <mat-cell *matCellDef="let element" >{{element.AssociateName}}</mat-cell>
+                          </ng-container>
+                  
+                          <ng-container matColumnDef="contactNo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.ContactNumber}}</mat-cell>
+                          </ng-container>
+                  
+                          <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.Email}} </mat-cell>
+                          </ng-container>
+                  
+                          <ng-container matColumnDef="address">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.Address}} </mat-cell>
+                          </ng-container>
+                  
+                          <ng-container matColumnDef="associatewith">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Agency Associate with</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.AssociatedWith}} </mat-cell>
+                          </ng-container>
+                  
+                          <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef> Active </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" [(ngModel)]="element.IsActive" id="{{element.Id}}"
+                                        type="checkbox" role="switch" checked (click)="ActiveDeactiveAssociate(element.AssociateId,element.IsActive)">
+                                    <label class="custom-control-label" for="{{element.Id}}"></label>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                  
+                          <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="action-wrap">
+                                    <!-- <a [routerLink]="['/Dashboard/referral-add-edit-associate', element.AssociateId,0]">
+                                        <img src="../../../../assets/images/edit-icon.svg" alt="icon">
+                                    </a> -->
+                                    <a (click)="deleteAssociate(element.AssociateId)" title="Delete">
+                                        <img src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Delete">
+                                    </a>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                  
+                          <ng-container matColumnDef="noData">
+                            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                          </ng-container>
+                          <div>
+                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                            </mat-footer-row>
+                          </div>
+                  
+                        </mat-table>
+                        <mat-paginator style-paginator  [length]="recordcount" [pageSize]="pagesize" 
+                          [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+                        </mat-paginator>
+                  
+                  
+                     </div>
+
+                </div>            
+            </div>
+
+    </mat-dialog-content>
+</div>

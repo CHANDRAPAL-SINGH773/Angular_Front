@@ -1,0 +1,295 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper">
+    <div class="bread-btn-wrap" *ngIf="userType==1">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/subscription']" class="current"
+                    title="Payment Logs">Payment Logs</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="custom-card">
+    <h4 *ngIf="userType!=1">Subscription</h4>
+    <div class="sub-plan-list" *ngIf="planloglist">
+        <div class="row top-cards" *ngIf="userType!=1">
+            <div class="col-md-4">
+                <div class="custom-card cancel">
+                    <div class="plan-text">
+                        <div class="left">
+                            <span>Monthly</span> Plan
+                            <p>12 days Remaining</p>
+                        </div>
+                        <div class="right">
+                            <h4><sup>$ </sup>{{monthlyPlanAmount}}<sup> /month</sup></h4>
+                        </div>
+                    </div>
+                    <a class="custom-btn" title="Cancel Subscription" (click)="CancelSubscription()">
+                        Cancel Subscription
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="custom-card upgrade">
+                    <div class="plan-text">
+                        <div class="left">
+                            <span>Annual</span> Plan
+                            <p>365 Days</p>
+                        </div>
+                        <div class="right">
+                            <h4><sup>$ </sup>{{annualPlanAmount}}<sup> /Annual</sup></h4>                           
+                        </div>                     
+                    </div>
+                    <a class="custom-btn" title="Upgrade Plan" (click)="UpgradePlan()">Upgrade Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="custom-card pay">
+                    <div class="plan-text">
+                        <div class="left">
+                            Next Payment
+                            <p>on {{subscribedTo}} </p>
+                        </div>
+                        <div class="right">
+                            <h4><sup>$ </sup>{{monthlyPlanAmount}}</h4>
+                        </div>
+                    </div>
+                    <a [routerLink]="['/Dashboard/payment']" class="custom-btn border-btn" title="Pay Now">Pay Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- table-cards -->
+        <div class="custom-card">
+            <div class="heading-wrap">
+                <h1>Payment Logs</h1>
+            </div>
+            <div class="table-responsive">
+                <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+                    <ng-container matColumnDef="orderno">
+                        <mat-header-cell *matHeaderCellDef>Order No.</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.OrderNo}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="paymentdatetime">
+                        <mat-header-cell *matHeaderCellDef>Payment Date & Time</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.PaymentDate | date : 'MM/dd/yyyy hh:mm'}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+                        <mat-cell *matCellDef="let element">${{element.Amount | number: '1.2-2'}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="discountgiven">
+                        <mat-header-cell *matHeaderCellDef>Discount Given</mat-header-cell>
+                        <mat-cell *matCellDef="let element">${{element.DiscountAmount | number: '1.2-2'}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="plantype">
+                        <mat-header-cell *matHeaderCellDef> Plan Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.PlanType}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                        <mat-cell *matCellDef="let element"><span [ngClass]="{'green': element.Status == 'Success', 'red' : element.Status == 'Failed' }">{{element.Status}}</span> </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <div class="action-wrap">
+                                <a class="download-icon" (click)="DownloadFile(element.LogId,element.OrderNo)">
+                                    <img src="../../../../assets/images/download-icon.svg" alt="Download" data-toggle="tooltip" data-placement="right" title="download file">
+                                </a>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="noData">
+                        <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                      </ng-container>
+                      <div>
+                          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                          <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                          </mat-footer-row>
+                    </div>
+                    </mat-table>
+                    <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize" 
+                    [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)">
+                    </mat-paginator>
+            </div>
+        </div>
+    </div>
+   </div>
+   <div class="fade" style="position:absolute">
+    <div class="payment-body" id="print-section">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;" align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                        style="background: #fff; max-width: 600px; margin:40px auto;border-collapse:collapse; "
+                        align="center">
+                        <!-------Header---------->
+                        <thead border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td colspan="2" height="100"
+                                    style="background-color: #0071BC; text-align: center; padding: 20px 20px 20px 20px;">
+                                    <a href="#" style="display: inline-block;">
+                                        <img style="width:150px; border-radius: 5px;" src="../../../../assets/images/logo.jpg" alt="Logo">
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr style="text-align: center;">
+                                <td style="width: 20%; padding: 30px 20px 10px;">
+                                        <img style="width:45px; border-radius: 5px;" src="../../../../assets/images/tick.jpg" alt="Tick">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;  width: 80%;  padding: 0 30px 40px; border-bottom: 1px solid #CBD1DD;">
+                                    <h4 style="font-weight: 600; font-size: 17px; color: #061237;margin: 0 0 8px;">Payment Confirmed</h4>
+                                    <p style="font-weight: 400; font-size: 15px; color: #061237;
+                                    padding: 0; margin: 0;  line-height: 1.4;">Your one time payment has been confirmed, you will receive a new email with order number information </p>
+                                </td>
+                            </tr>
+                        </thead>
+                        <!-------/Header---------->
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="content" style="background: #ffffff; padding:10px 20px;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                        style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="border-bottom: 1px solid #CBD1DD; padding: 10px 0 6px; font-weight: 400;
+                                                font-size: 15px;
+                                                color: #061237;">
+                                                   <b>Order Number:</b> {{orderNo}} <br/>
+                                                   <p style="font-weight: 400; line-height: 1.3;
+                                                   font-size: 14px;
+                                                   color: #000000;
+                                                   opacity: 0.5;
+                                                   margin: 0;
+                                                   padding-top: 15px;">Product Details</p>
+                                                </td>
+                                                <td style="border-bottom: 1px solid #CBD1DD; padding: 10px 0 6px; font-weight: 400; font-size: 14px; color: #061237; text-align: right;">
+                                                    <b>Date: </b>{{paymentDate}}<br/>
+                                                    <p style="font-weight: 400; line-height: 1.3; text-align: right;
+                                                    font-size: 14px;color: #000000; opacity: 0.5; margin: 0;
+                                                    padding-top: 15px;">Price</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="border-bottom: 1px solid #CBD1DD; padding: 10px 0; font-weight: 400; line-height: 1.3;font-size: 14px;color: #061237;">Monthly membership fee <br/> QTY: 1 </td>
+                                                <td style="border-bottom: 1px solid #CBD1DD; padding: 10px 0; line-height: 1.3; text-align: right;">$${{totalAmount | number: '1.2-2'}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="border-bottom: 1px solid #CBD1DD;  padding: 10px 0; font-weight: 400; line-height: 1.3; text-align: right;
+                                                font-size: 14px;
+                                                color: #061237;">
+                                                   <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                   style="border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding: 5px 0;">Discount</td>
+                                                            <td style="padding: 5px 0;">${{discountAmount | number: '1.2-2'}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding: 5px 0;">Gross Payment</td>
+                                                            <td style="padding: 5px 0;">${{amount | number: '1.2-2'}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding: 5px 0;">Taxes</td>
+                                                            <td style="padding: 5px 0;">0.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding: 5px 0;"> <b> Payment Received </b></td>
+                                                            <td style="padding: 5px 0;"> <b> ${{totalAmount | number: '1.2-2'}} </b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                   </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style=" padding: 10px 0; font-weight: 400;
+                                                font-size: 13px; line-height: 1.3;
+                                                color: #0c1a42;">
+                                                    <b style="font-size: 14px;">Bill To</b><br/>
+                                                    {{fullName}} <br/>
+                                                    {{address}}
+                                                </td>
+                                                <td style="padding: 10px 0; font-weight: 400;
+                                                font-size: 13px; line-height: 1.3;
+                                                color: #0c1a42; text-align: right;">
+                                                    {{useremail}} <br>
+                                                    +1{{phone}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-------Footer---------->
+                            <tr>
+                                <td colspan="2" style="background:#142A44;">
+                                    <p style="color: #fff; text-align: center; font-size: 13px;">
+                                        © 2023 Fraztec Application
+                                    </p>
+                                </td>
+                            </tr>
+                            <!-------/Footer---------->
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+   </div>
+    <!-- <div class="payment-body" id="print-section" >
+        <ul>
+            <li><b>Order Number:</b>{{orderNo}}</li>
+            <li><b>Date:</b> {{paymentDate}}</li>
+            <li class="border-bottom"><span>Product Details</span></li>
+            <li class="border-bottom"><span>Price</span></li>
+            <li>Monthly membership fee <br /> QTY: 1 </li>
+            <li>${{totalAmount | number: '1.2-2'}}</li>
+            <li class="table-wrap"></li>
+            <li class="table-wrap">
+                <table>
+                    <tr>
+                        <td>Discount</td>
+                        <td>${{discountAmount | number: '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gross Payment</td>
+                        <td>${{amount | number: '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Taxes</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Payment Received</b> </td>
+                        <td> <b>${{totalAmount | number: '1.2-2'}}</b> </td>
+                    </tr>
+                </table>
+            </li>
+            <li class="bill-address">
+                <b>Bill To</b> <br />
+               {{fullName}} <br />
+                {{address}}
+            </li>
+            <li class="bill-address">
+                <a href="mailto:useremail" title="useremail">{{useremail}}</a><br />
+                <a href="tell:+phone" title="+phone">+{{phone}}</a>
+            </li>
+        </ul>
+       </div> -->
+    </div>
+</div>
+

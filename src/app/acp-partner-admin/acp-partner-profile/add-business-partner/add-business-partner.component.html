@@ -1,0 +1,175 @@
+<div class="loader" *ngIf="loader"></div>
+<div class="newBusinessPartner_dialog">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 mat-dialog-title>Add Business Partner</h2>
+            <mat-icon class="close_btn" mat-button mat-dialog-close (click)="closeDialog('close')">close</mat-icon>
+        </div>
+    </div>
+    <!-- <div class="modal-body">
+                <div class="modalInnerContainer">
+                    <form [formGroup]="BusinessPartnerForm">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Select Business Partner<span class="text-danger">*</span></mat-label>
+                                    <mat-form-field>
+                                        <mat-select placeholder="Business Partner" formControlName="BusinessPartner" (selectionChange)="onSelectionChange($event)">                                                                               
+                                          <ng-container *ngFor="let topping of businessPartnerList">
+                                            <mat-option [value]="topping.c_ID" *ngIf="topping.c_ID !=acpPartnerId">{{topping.acpPartnerName}}</mat-option>
+                                          </ng-container>
+                                        </mat-select>
+                                        <mat-error *ngIf="BusinessPartnerForm.get('BusinessPartner')?.touched && BusinessPartnerForm.get('BusinessPartner')?.hasError('required')">Please select business partner</mat-error>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Select Activities <span class="text-danger">*</span></mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="BusinessActivity" placeholder="Activities" *ngIf="programActivitylist">
+                                            <mat-option value="1">Activity</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="'BusinessActivity.invalid'">Please select Activities</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Select Program<span class="text-danger">*</span></mat-label>
+                                    <mat-form-field>
+                                        <mat-select placeholder="Program" formControlName="SelectProgram" *ngIf="programActivitylist" multiple>
+                                          <mat-option *ngFor="let pa of programActivitylist.programs" [value]="pa.programId" >{{pa.programName}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-field">
+                                    <mat-label>Comment</mat-label>
+                                    <mat-form-field>
+                                        <input type="text" style="margin-left: 10px;" matInput
+                                        formControlName="Comment" placeholder="Comment"                                     >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="col-sm-6">
+                                    <div class="col-sm-12 pd-0">
+                                        <div class="uplaod_pic">
+                                            <label class="browse">
+                                              <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                                              <input style="display: none;" type="file" (change)="handleImageChange($event)" accept=".jpg,.JPG,.png,.PNG,.jpeg,.JPEG,.doc,.DOC,.docx,.DOCX,.pdf,.PDF,.xls,.XLS,.xlsx,.XLSX">
+                                            </label>
+                                          </div>
+                                          
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <span>
+                                     <p *ngFor="let file of fileList;let i=index;">
+                                        {{file.fileName}}
+                                        <button type="button" title="Delete" class="tbactionbtn" (click)="removeFile(i)">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                          </button>
+                                     </p> 
+                                    
+                                  </span>
+                                  </div>
+
+                            </div>
+                           
+
+                        
+                        </div>
+
+                    </form>
+                </div>
+            </div> -->
+
+
+    <mat-dialog-content>
+        <form [formGroup]="BusinessPartnerForm">
+            <div class="form_inner">
+                <div class="form_field_wrapper">
+                    <label>Select Business Partner</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select placeholder="Business Partner" formControlName="BusinessPartner"
+                            (selectionChange)="onSelectionChange($event)">
+                            <ng-container *ngFor="let topping of businessPartnerList">
+                                <mat-option [value]="topping.c_ID"
+                                    *ngIf="topping.c_ID !=acpPartnerId">{{topping.acpPartnerName}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="BusinessPartnerForm.get('BusinessPartner')?.touched && BusinessPartnerForm.get('BusinessPartner')?.hasError('required')">Please
+                            select business partner</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form_field_wrapper">
+                    <label>Select Activities</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select formControlName="BusinessActivity" placeholder="Activities"
+                            *ngIf="programActivitylist">
+                            <mat-option value="1">Activity</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="'BusinessActivity.invalid'">Please select Activities</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form_field_wrapper">
+                    <label>Select Program</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select placeholder="Program" formControlName="SelectProgram" *ngIf="programActivitylist"
+                            multiple>
+                            <mat-option *ngFor="let pa of programActivitylist.programs"
+                                [value]="pa.programId">{{pa.programName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form_field_wrapper">
+                    <label>Comment</label>
+                    <mat-form-field appearance="fill">
+
+                        <input type="text" matInput formControlName="Comment" placeholder="Comment">
+
+                    </mat-form-field>
+                </div>
+
+                <div class="uplaod_pic">
+                    <label class="browse">
+                        <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                        <input style="display: none;" type="file" (change)="handleImageChange($event)"
+                            accept=".jpg,.JPG,.png,.PNG,.jpeg,.JPEG,.doc,.DOC,.docx,.DOCX,.pdf,.PDF,.xls,.XLS,.xlsx,.XLSX">
+                    </label>
+                </div>
+                <div class="col-sm-6">
+                    <span>
+                        <p *ngFor="let file of fileList;let i=index;">
+                            {{file.fileName}}
+                            <button type="button" title="Delete" class="tbactionbtn" (click)="removeFile(i)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </p>
+
+                    </span>
+                </div>
+
+            </div>
+
+        </form>
+    </mat-dialog-content>
+
+
+
+
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close class="btn btn-secondary" (click)="closeDialog('close')">Cancel</button>
+        <button mat-button class="btn btn-primary" (click)="onSubmit()"> Submit </button>
+    </mat-dialog-actions>
+
+</div>

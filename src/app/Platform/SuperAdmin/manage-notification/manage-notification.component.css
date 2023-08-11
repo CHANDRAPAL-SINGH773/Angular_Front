@@ -1,0 +1,61 @@
+.mat-column-checkbox {
+    max-width: 80px;
+}
+
+.mat-column-message {
+    min-width: 600px;
+}
+
+.mat-table mat-row:nth-child(odd) mat-cell {
+    background: transparent;
+}
+
+table td,
+.mat-table .mat-cell {
+    height: auto;
+    min-height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.mat-column-subject a {
+    text-decoration: none;
+    color: #414453;
+}
+.mat-table .mat-header-cell {
+    border-top: 0;
+}
+
+
+
+
+
+/*responsive start */
+@media screen and (max-width: 1600px) {
+    .mat-column-message {
+        min-width: 550px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .mat-column-message {
+        min-width: 450px;
+    }
+    .mat-column-checkbox {
+        max-width: 60px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .mat-column-message {
+        min-width: 300px;
+    }
+
+    .mat-column-checkbox {
+        max-width: 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+}

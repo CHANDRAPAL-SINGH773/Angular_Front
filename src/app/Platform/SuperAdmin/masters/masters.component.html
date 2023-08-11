@@ -1,0 +1,40 @@
+<div class="common-page-wrapper">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap mb-3">
+      <ul class="custom-breadcrumbs">
+        <li><a [routerLink]="['/Dashboard']" href="#" class="main-base" title="Dashboard">Dashboard</a></li>
+        <li><a [routerLink]="['/Dashboard/All-masters-List']" href="#" class="current" title="Manage Masters">
+            Masters</a></li>
+      </ul>
+    </div>
+  
+    <div class="custom-card"> 
+      <div class="form-wrapper role-wrap">
+        <form class="edit-profile-form" [formGroup]="masters">
+          <div class="heading-wrap">
+          </div>
+        </form>
+          <table>
+            <thead>
+              <tr>
+                <th><b>Name</b></th>
+                <th><b>Action</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of masterList" >
+                <td>
+                  <p class="alignemnet-class">{{item.MasterTypeName}}</p>
+                </td>
+                <td>
+                  <a [routerLink]="['/Dashboard/Sub-Masters-List',item.MasterValue]">
+                  <img class="edit-eye" src="../../../../assets/images/edit-eye.png" alt="icon" data-toggle="tooltip" data-placement="right" title="Edit/View"></a>
+                </td>
+              </tr>
+              <tr >
+            </tbody>
+          </table>
+      </div>
+  
+    </div>
+  </div>

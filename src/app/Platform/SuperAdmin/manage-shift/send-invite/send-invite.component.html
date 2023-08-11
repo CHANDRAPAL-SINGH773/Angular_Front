@@ -1,0 +1,56 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+  
+<div class="custom-mat-dialog" mat-dialog>
+    <div mat-dialog-title>
+        {{title}}
+        <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+    </div>
+    <mat-dialog-content>
+        <form class="edit-profile-form" [formGroup]="planForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-icon class="orange">info</mat-icon> 
+                    <span class="orange">&nbsp;&nbsp;{{fileTypeMessage}}</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- <span class="orange">#{{fileSizeMessage}}</span> -->
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Agency</mat-label>
+                            <mat-select formControlName="AgencyId">
+                                <mat-option *ngFor=" let option of agencyList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'AgencyId.invalid'">Plan Type is required </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Caregiver</mat-label>
+                            <mat-select formControlName="CaregiverId">
+                                <mat-option *ngFor=" let option of caregiverList" value="{{option.Id}}">{{option.Label}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="'CaregiverId.invalid'"> State is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>            
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="modal-footer">
+            <button type="button" class="custom-btn gray-btn rounded-btn"
+                (click)="dialogRef.close(false)">Cancel</button>
+            <button type="button" class="custom-btn rounded-btn" (click)="SendInvite()">Send</button>
+        </div>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,179 @@
+<!-- Add/ Update Client List -->
+
+<!-- <div class="loader" *ngIf="loader"></div> -->
+<div class="addclient_dialog">
+    <div class="modal-header">
+        <h2 mat-dialog-title>{{FormHeading}}</h2>
+        <mat-icon class="close_btn"  mat-button mat-dialog-close (click)="closeDialog('close')">close</mat-icon>
+    </div>
+    <mat-dialog-content>
+          <form [formGroup]="ClientForm">
+            <div class="row">
+              <input type="text" matInput formControlName="ClientId" style="display: none" />
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>First Name</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="FirstName" placeholder="Enter first name"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="80" />
+                    <mat-error *ngIf="'FirstName.invalid' && submitted">Please enter first name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Last Name</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="LastName" placeholder="Enter last name"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="80" />
+                    <mat-error *ngIf="'LastName.invalid' && submitted">Please enter last name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Email</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="email" matInput formControlName="Email" placeholder="Enter email" autocomplete="off"
+                      required maxlength="30" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+                    <mat-error
+                      *ngIf="ClientForm.get('Email')?.invalid && ClientForm.get('Email')?.touched && ClientForm.get('Email')?.hasError('required') ">Please
+                      Enter Valid Email.</mat-error>
+
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Mobile Number</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="tel" matInput formControlName="PhoneNo" mask="(000) 000-0000"
+                      placeholder="(xxx) xxx-xxxx" autocomplete="off" required />
+                    <mat-error *ngIf="'PhoneNo.invalid'">Please enter mobile</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Type <span class="text-danger">*</span></mat-label>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="Type" matInput [ngClass]="{ 'is-invalid': submitted }"
+                      autocomplete="off">
+                      <mat-option value="1">Residential</mat-option>
+                      <mat-option value="2">Small Business</mat-option>
+                      <mat-option value="3">Large Business</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="'BusinessActivity.invalid'">Please select BusinessActivity type</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Enter ABN/ACN</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="ABN_ACN" placeholder="Enter  ABN_ACN"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="80" />
+                    <mat-error *ngIf="'LastName.invalid'">Please enter ABN_ACN
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Address Line 1</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="Address1" placeholder="Enter address line 1"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="50" />
+                    <mat-error *ngIf="'Address1.invalid'">Please enter Address1</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Address Line 2</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="Address2" placeholder="Enter address line 2"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" maxlength="50" required />
+                    <mat-error *ngIf="'Address2.invalid'">Please enter Address 2
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Select Country</mat-label>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="CountryID" (selectionChange)="OnCountryChange($event)">
+                      <mat-option *ngFor="let country of countries" [value]="country.countryID">
+                        {{ country.countryName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                        ClientForm.get('CountryID')?.touched &&
+                        ClientForm.get('CountryID')?.hasError('required')
+                      ">Please select country.</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Select State</mat-label>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="StateID">
+                      <mat-option *ngFor="let state of states" [value]="state.stateID">
+                        {{ state.stateName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                        ClientForm.get('StateID')?.touched &&
+                        ClientForm.get('StateID')?.hasError('required')
+                      ">Please select state.</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Enter City</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="City" placeholder="Enter city"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="20" />
+                    <mat-error *ngIf="'City.invalid'">Please enter city</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-field">
+                  <mat-label>Postal Code</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input type="text" matInput formControlName="PostalCode" placeholder="Enter postal code"
+                      [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required maxlength="10" />
+                    <mat-error *ngIf="'PostalCode.invalid'">Please enter postal code</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-dialog-content>
+        
+      
+      <!-- <div *ngIf="Mode != ''" class="modal-footer">
+        <button type="button" class="btn cancel-btn" data-bs-dismiss="modal" id="closeModal" #addClientListModal>
+          Cancel
+        </button>
+        <button type="submit" class="btn save-btn" (click)="OnSubmitClick()">
+          {{ Mode == "Edit" ? "Update" : "Add" }}
+        </button>
+      </div> -->
+
+      <mat-dialog-actions>
+        <button mat-button mat-dialog-close class="btn btn-secondary" (click)="closeDialog('close')">Cancel</button>
+        <button mat-button class="btn btn-primary" (click)="OnSubmitClick()" *ngIf="!mode"> {{ButtonHeading}}</button>
+      </mat-dialog-actions>
+</div>      

@@ -1,0 +1,683 @@
+/* common style for all dialog */
+.custom-mat-dialog .mat-dialog-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #F1F1FD;
+    margin: 0;
+}
+
+.custom-mat-dialog  .btn-close {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid #323232;
+    padding: 0;
+    background-size: 10px;
+    opacity: 1;
+    margin-right: 0px;
+}
+
+.custom-mat-dialog .btn-close:hover {
+    opacity: 0.6;
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    overflow: inherit;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.custom-mat-dialog .mat-dialog-content {
+    padding: 10px 20px 0;
+    margin: 0;
+    max-height: unset;
+}
+
+.custom-mat-dialog .mat-dialog-actions {
+    min-height: auto;
+    margin-bottom: 0;
+    justify-content: flex-end;
+    padding: 0 20px 20px;
+}
+
+.custom-mat-dialog .modal-footer {
+    display: flex;
+}
+
+.custom-mat-dialog .mat-dialog-actions button {
+    width: 120px;
+}
+
+.custom-mat-dialog .mat-dialog-actions button:first-child {
+    margin-right: 10px !important;
+}
+
+/* end common style */
+
+/* inner style */
+.toggle-field-wrap {
+    position: relative;
+}
+
+.toggle-field-wrap .form-check.form-switch {
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+
+/*responsive start */
+@media screen and (max-width: 1600px) {
+}
+
+@media screen and (max-width: 1400px) {
+    .toggle-field-wrap .form-check.form-switch {
+        top: 16px;
+    }
+}
+
+.common-dash-wrapper {
+    padding-top: 20px;
+}
+
+.common-dash-wrapper h4 {
+    font-weight: 500;
+    font-size: 18px;
+    color: #000000;
+}
+
+.custom-card {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+    height: 100%;
+    margin-bottom: 0px;
+}
+
+.card-wrapper .col-md-4 {
+    margin-bottom: 0px;
+}
+
+.custom-card p {
+    font-weight: 500;
+    font-size: 16px;
+    color: #7C7B80;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.custom-card p b {
+    display: block;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.custom-card h1 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.custom-card .text-wrap {
+    padding-right: 10px;
+}
+
+
+
+/* table style */
+table {
+    margin: 0;
+    min-width: 850px;
+}
+
+table th {
+    font-weight: 400;
+    font-size: 16px;
+    color: #7D8089;
+    height: 50px;
+}
+
+table td {
+    height: 60px;
+}
+
+.table-card-wrapper .custom-card {
+    display: block;
+    padding: 0;
+}
+
+table .img-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+table .img-wrap img {
+    width: 100% !important;
+}
+
+.head-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+}
+
+.head-wrap h2 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+}
+
+.head-wrap a {
+    font-weight: 400;
+    font-size: 18px;
+    color: #0071BC;
+    text-decoration: none;
+}
+
+.head-wrap a:hover {
+    opacity: 0.6;
+}
+
+.table-card-wrapper {
+    padding-bottom: 30px;
+}
+
+.custom-btn.fullside {
+    opacity: 1 !important;
+    width: 370px;
+    border-radius: 25px;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.custom-btn img {
+    width: 23px;
+    margin-right: 10px;
+}
+
+/* table style ends */
+.light-blue {
+    background: #F0F9FB;
+}
+
+.light-gray {
+    background: #F4F6FA;
+}
+
+/* sidebar style start */
+.card-side-wrapper {
+    display: flex;
+    display: -ms-flexbox;
+}
+
+.card-side-wrapper .card-wrapper {
+    width: calc(100% - 370px);
+}
+
+.date-sidebar {
+    width: 370px;
+    margin-left: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.team-card {
+    background: #F0F9FB;
+    border-radius: 10px;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    margin: 18px;
+    padding: 10px 15px;
+}
+
+.team-card .img-wrap {
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-card p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 14px;
+    color: #414453;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.team-card .text-wrap {
+    width: calc(100% - 70px);
+}
+
+.team-card p a {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 14px;
+    color: #414453;
+    text-decoration: none;
+}
+
+.team-card p mat-icon {
+    margin-right: 10px;
+}
+
+/* sidebar style ends */
+
+/* rating tabs style start */
+.top-review {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #EBECEE;
+}
+
+.top-review .custom-btn {
+    width: auto;
+}
+
+.review-wrap {
+    padding: 25px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.reviews-block .star {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+}
+
+.review-wrap .star mat-icon {
+    color: #DEDEDE;
+    border-radius: 1px;
+}
+
+.review-wrap .star mat-icon.yellow {
+    color: #FFE600 !important;
+}
+
+.top-review h3 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 0;
+}
+
+.rating-wrap .star mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+}
+
+.top-review p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #00001D;
+    opacity: 0.5;
+}
+
+.total-entry-wrap {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #EBECEE;
+}
+
+ul.reviews-block {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 500px;
+    overflow-y: auto;
+}
+
+ul.reviews-block li {
+    padding: 30px 0 20px;
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: space-between;
+    border-bottom: 1px solid #EBECEE;
+}
+
+.total-entry-wrap .count {
+    background: #FFFFFF;
+    border: 1px solid #EDEEF0;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin: 0 4px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.total-entry-wrap {
+    font-weight: 500;
+    font-size: 14px;
+    color: #192E49;
+}
+
+.total-entry-wrap select {
+    background: #FFFFFF;
+    border: 1px solid #EDEEF0;
+    border-radius: 4px;
+    width: 145px;
+    height: 30px;
+    padding: 0 8px;
+}
+
+.reviews-block .img-wrap {
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.reviews-block .img-wrap img {
+    width: 100%;
+}
+
+.reviews-block .text-wrap h4 {
+    font-weight: 700;
+    font-size: 16px;
+    color: #192E49;
+    margin: 0;
+}
+
+.reviews-block .text-wrap span {
+    font-weight: 400;
+    font-size: 14px;
+    color: #192E49;
+}
+
+.reviews-block .rating-wrap .total {
+    background: #0071BC;
+    border-radius: 4px;
+    color: #fff;
+    padding: 0px 6px;
+    margin-right: 8px;
+}
+
+.reviews-block .rating-wrap {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.reviews-block .text-wrap p {
+    color: #192E49;
+    margin: 0;
+}
+
+ul.reviews-block li:last-child {
+    border: 0;
+}
+
+::ng-deep .page-top .mat-form-field .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 140px;
+}
+
+::ng-deep .page-top .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px 0 10px;
+}
+
+::ng-deep .page-top .mat-form-field-appearance-outline mat-select {
+    padding: 0 4px 0 8px;
+}
+
+/* rating ends */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .common-dash-wrapper h4 {
+        font-size: 16px;
+    }
+
+    .custom-card p {
+        font-size: 16px;
+    }
+
+    .custom-card h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .custom-card p b {
+        margin-bottom: 5px;
+    }
+
+    .custom-card .text-wrap p {
+        font-size: 14px;
+    }
+
+    .conut-text {
+        font-size: 16px;
+    }
+
+    .img-wrap img {
+        width: 50px;
+    }
+
+    .head-wrap h2 {
+        font-size: 20px;
+    }
+
+    .head-wrap {
+        padding: 15px 20px;
+    }
+
+    .head-wrap a {
+        font-size: 16px;
+    }
+
+    table th {
+        font-size: 14px;
+    }
+
+    .date-sidebar {
+        width: 350px;
+    }
+
+    .card-side-wrapper .card-wrapper {
+        width: calc(100% - 350px);
+    }
+
+    .custom-btn.fullside {
+        width: 330px;
+    }
+
+    .reviews-block .text-wrap span {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .common-dash-wrapper h4 {
+        font-size: 15px;
+    }
+
+    .custom-card p {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .head-wrap h2 {
+        font-size: 18px;
+    }
+
+    .head-wrap a {
+        font-size: 14px;
+    }
+
+    .custom-btn img {
+        width: 20px;
+        margin-right: 6px;
+    }
+
+    .custom-btn.fullside {
+        width: 285px;
+        padding: 10px;
+    }
+
+    .custom-card h1 {
+        font-size: 22px;
+    }
+
+    .card-wrapper .col-md-4 {
+        padding: 0 8px;
+    }
+
+    .date-sidebar {
+        width: 300px;
+        margin-left: 15px;
+    }
+
+    .card-side-wrapper .card-wrapper {
+        width: calc(100% - 300px);
+    }
+
+    .card-wrapper .row:first-child {
+        margin: 0 -8px;
+    }
+
+    .custom-card {
+        padding: 12px;
+    }
+
+    .card-wrapper .col-md-4 {
+        margin-bottom: 15px;
+    }
+
+    .team-card p mat-icon {
+        margin-right: 6px;
+        font-size: 18px;
+        height: auto;
+        width: auto;
+    }
+
+    .team-card p,
+    .team-card p a {
+        font-size: 13px;
+    }
+
+    .team-card {
+        padding: 10px;
+        margin: 12px;
+    }
+
+    ul.reviews-block {
+        height: 400px;
+    }
+
+    ul.reviews-block li {
+        padding: 20px 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .custom-card h1 {
+        font-size: 18px;
+    }
+
+    .custom-card .text-wrap p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .custom-card p b {
+        margin-bottom: 0;
+    }
+
+    .img-wrap img {
+        width: 30px;
+    }
+
+    .custom-card {
+        padding: 10px;
+    }
+
+}
+
+@media screen and (max-width: 991px) {
+    .card-side-wrapper {
+        display: block;
+    }
+
+    .card-side-wrapper .card-wrapper {
+        width: 100%;
+    }
+
+    .date-sidebar {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .custom-btn.fullside {
+        width: auto;
+        padding: 8px 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .custom-card {
+        margin-bottom: 20px;
+    }
+
+    .total-entry-wrap {
+        display: block;
+    }
+
+    .total-entry-wrap .right {
+        margin-top: 10px;
+    }
+
+    ul.reviews-block {
+        height: 600px;
+    }
+}

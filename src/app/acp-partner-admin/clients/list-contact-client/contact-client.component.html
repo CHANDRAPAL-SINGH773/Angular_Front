@@ -1,0 +1,83 @@
+<div class="grayChildContainer">
+    <!-- <div class="innerWrapper"> -->
+    <div class="userAction_row">
+        <div class="search-input">
+            <!-- <input type="text" placeholder="Search" class="form-control" /> -->
+        </div>
+        <div class="right-btn-wrap">
+            <!-- <div class="action-btns">
+                    <button class="btn filter-btn" title=" Date Filter"><i class="fas fa-filter"
+                            aria-hidden="true"></i></button>
+                    <button class="btn filter-btn" title="Download PDF"><i class="fas fa-file-pdf"
+                            aria-hidden="true"></i></button>
+                </div> -->
+            <div class="add-filter-btn">
+                <button class="btn add-btn" id="openModal" data-bs-toggle="modal" (click)="AddMode()"
+                    data-bs-target="#addContactClientModal">
+                    <img src="assets/images/add.svg" alt="" />
+                    <span>Add Client Contact</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="bottom_bar"> -->
+    <div class="table_wrap">
+        <div class="table_inner">
+            <table mat-table class="table" [dataSource]="dataSource">
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef>Contact Name</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.contactName }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef>Site</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.address1 + ", " + element.address2 }}
+                    </td>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef >Action</th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                        <div class="icon_group">
+                            <mat-icon class="quick_view"(click)="view(element)" >visibility</mat-icon>
+                            <mat-icon class="edit" (click)="EditMode(element)">edit</mat-icon>
+                            <mat-icon class="delete" (click)="delete(element)">close</mat-icon>
+                            
+                        </div>   
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                </ng-container> -->
+                <div>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    <!-- <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                    <!-- <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide"> -->
+                    <!-- </mat-footer-row> -->
+                </div>
+            </table>
+        </div>
+        <ng-container *ngIf="metaData?.totalRecords==0">
+            <div class="text-center no-record">No record found</div>
+        </ng-container>
+        <!-- <mat-paginator class="pagination" [length]="totalCount" showFirstLastButtons [pageSize]="Search.PageSize"
+            [pageSizeOptions]="[5, 10, 25, 50]" (page)="nextPage($event)">
+        </mat-paginator> -->
+
+        <mat-paginator  class="pagination" [length]="totalCount" [pageSizeOptions]="pageSizeList"
+        
+            [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+        
+            showFirstLastButtons></mat-paginator>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+</div>

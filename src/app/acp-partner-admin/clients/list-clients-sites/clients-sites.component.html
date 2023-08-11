@@ -1,0 +1,91 @@
+<div class="loader" *ngIf="loader"></div>
+
+<div class="client_list dashboard_main_content">
+
+<div class="grayChildContainer">
+    <div class="innerWrapper">
+        <div class="userAction_row">
+            <div class="search-input">
+                <div class="form-field">
+                    <mat-label>Client</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select matInput [ngClass]="{ 'is-invalid': submitted  }"
+                            (valueChange)="getClientListById($event)" [(ngModel)]="search" autocomplete="off">
+                            <mat-option [value]="0">All</mat-option>
+                            <mat-option *ngFor="let client of clientList" [value]="client.clientID">
+                                {{client.firstName+' '+client.lastName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="'client.invalid'">Please enter Client name </mat-error>
+                    </mat-form-field>
+                    <!-- <button type="reset" class="btn btn-primary" (click)="ResetList()">Reset</button> -->
+                </div>
+            </div>
+            <div class="right-btn-wrap">
+                <div class="add-filter-btn">
+                    <button class="btn add-btn" id="openModal" data-bs-toggle="modal" (click)="AddMode()"
+                        data-bs-target="#addClientSiteModal">
+                        <img src="assets/images/add.svg" alt="">
+                        <span>Add Client Site</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="site-main-table acpPartner-col-width">
+            <div class="table_wrap">
+                <div class="table_inner">
+                    <table mat-table class="table" [dataSource]="dataSource" matSort>
+
+                        <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef >Type</th>
+                            <td mat-cell *matCellDef="let element">{{element.type==1?'Residential':'Business'}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="address">
+                            <th mat-header-cell *matHeaderCellDef >Address</th>
+                            <td mat-cell *matCellDef="let element">{{element.address1 +' '+ element.address2}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="state">
+                            <th mat-header-cell *matHeaderCellDef >State</th>
+                            <td mat-cell *matCellDef="let element">{{element.stateName}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef >Action</th>
+                            <td mat-cell *matCellDef="let element">
+                                
+                                <div class="icon_group">
+                                    <mat-icon class="quick_view"(click)="view(element)" >visibility</mat-icon>
+                                    <mat-icon class="edit" (click)="EditMode(element)">edit</mat-icon>
+                                    <mat-icon class="delete" (click)="delete(element)">close</mat-icon>
+                                    
+                                </div>   
+                            </td>
+                        </ng-container>
+
+                        <!-- <ng-container matColumnDef="noData">
+                            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                        </ng-container> -->
+                        <div>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </div>
+                    </table>
+                    </div>
+               
+   
+
+            <!-- <mat-paginator class="pagination" style-paginator [length]="totalCount" showFirstLastButtons [pageSize]="Search.PageSize"
+                [pageSizeOptions]="[5,10,25,50]" (page)="nextPage($event)">
+            </mat-paginator> -->
+
+            <mat-paginator  class="pagination" [length]="totalCount" [pageSizeOptions]="pageSizeList"
+        
+            [pageIndex]="metaData['currentPage'] - 1" [pageSize]="metaData['pageSize']" (page)="onPageOrSortChange($event)"
+        
+            showFirstLastButtons></mat-paginator>
+    </div>
+ </div>
+</div>
+</div>
+ </div>
+

@@ -1,0 +1,70 @@
+export class CommonSuccessMessages {
+  public static readonly UserAlreadyExist ="User already exist in database";
+    public static readonly RecordSavedSuccessfully = "Record saved successfully.";
+    public static readonly LoginSuccess = "Logged in successfully.";
+    public static readonly SuccessResetPassword = "You have successfully reset the password.";
+    public static readonly PaymentSuccessful = "Payment successfully done";
+    public static readonly PasswordResetLink =
+      "The password reset link has been sent to your e-mail.";
+    public static readonly PasswordUpdateSuccess ="Password updated successfully.";
+    public static readonly DataSavedSuccess = "Data saved successfully.";
+    public static readonly DataUpdatedSuccess = "Data updated successfully.";
+    public static readonly UserLockedSuccess = "User locked out successfully.";
+    public static readonly RoleAssignSuccess = "Role assigned successfully.";
+    public static readonly ChildCreateSuccess = "Child created successFully.";
+    public static readonly SiblingCreateSuccess = "Sibling created successFully.";
+    public static readonly UpdateRecord = "Record updated successfully";
+    public static readonly SuccessRecord ="Record save successfully";
+    public static readonly AgencyAdded = "Agency added successfully!"
+    public static readonly AgencyUpdated = "Agency updated successfully!"
+    public static readonly AgencyDeleted = "Agency deleted successfully!"
+    public static readonly ReferralAdded = "Referral added successfully!"
+    public static readonly ReferralUpdated = "Referral updated successfully!"
+    public static readonly ReferralDeleted = "Referral deleted successfully!"
+
+    
+    public static readonly RoleDeleted = "Role deleted successfully!"
+
+    public static readonly CaregtiverAdminAdded = "Caregiver admin details added successfully"
+    public static readonly CaregiverBasicDetailAdded = "Caregiver added successfully!"
+    public static readonly SaveCaregiverAdminWarn = "Please save admin details first"
+    public static readonly AddcaregiverQualification = "Caregiver qualification  details add successfully!"
+    public static readonly UpdatecaregiverQualification = "Caregiver qualification  details update successfully!"
+    public static readonly SaveCaregiverWarn = "Please save caregiver details first."
+    public static readonly fillallMendatoryfields = "Please fill all mendatory fields."
+    public static readonly CaregiverExperinceAdded = "Caregiver experince added successfully!"
+    public static readonly CaregtiverAdminUpdated = "Caregiver admin details Update successfully"
+    public static readonly CaregiverBasicDetailUpdated = "Caregiver updated successfully!"
+    public static readonly CaregiverSkillAdded = "Caregiver skill added successfully!" 
+    public static readonly CaregiverSkillUpdated = "Caregiver skill updated successfully!" 
+    public static readonly NewSkillAdded = "Skill added successfully!" 
+    public static readonly PatientAdded = "Patient added successfully!" 
+    public static readonly PatientUpdated = "Patient updated successfully!" 
+    public static readonly TemplateAdded = "Template added successfully!" 
+    public static readonly NotificationSent ="Notification sent successfully!"
+    public static readonly AddPatientdetailsFirst ="Please add patient family details first!"
+    public static readonly PatientSkillAdded = "Patient family skill added successfully!" 
+    public static readonly TemplateUpdated = "Template updated successfully!" 
+    public static readonly MasterUpdated = "Master updated successfully!" 
+    public static readonly Shiftstatuschange= "Shift status update successfully!"
+    public static readonly SkillsAdded = "Skills added successfully!"
+    public static readonly InviteSend = "Invite send successfully!";
+    public static readonly CaregiverQualificationdeleted = "Caregiver qualification deleted successfully!"
+    public static readonly CaregiverExperinceUpdated = "Caregiver experince updated successfully!"
+    public static readonly caregiverrating = "Caregiver rating added successfully!"
+    public static readonly newDepartment = "Department added successfully!";
+    public static readonly newemployee = "Employee added successfully!";
+    public static readonly newqualification = "Qualification added successfully!";
+    public static readonly newdiagnosis = "Diagnosis added successfully!";
+    public static readonly staffAdded = "Staff added successfully!"
+    public static readonly staffUpdated = "Staff updated successfully!"
+    public static readonly Ratingwarning = "Your rating & comments are under review. it will be approved by our admin team before it's published."
+    public static readonly ReviewUpdate = "Review status updated successfully!"
+    public static readonly CaregiverAssigned = "Caregiver assigned successfully!";
+    public static readonly ShiftAccepted = "Shift Accepted successfully!";
+    public static readonly ShiftCompleted = "Shift completed successfully!";
+    public static readonly ShiftRejected = "Shift Rejected successfully!";
+    public static readonly DocumentAdded = "Document added successfully!";
+    public static readonly InboxMessageSent = "Message send successfully!";
+    public static readonly statusChanged = "Status changed successfully!";
+  }

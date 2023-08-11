@@ -1,0 +1,42 @@
+<div class="loader" *ngIf="loader"></div>
+<div class="programactivity_tab">
+  <mat-tab-group #allTabs *ngIf="programActivitylist" (selectedIndexChange)="proChange($event)" [(selectedIndex)]="selectedIndex">
+      <mat-tab  *ngFor="let p of programActivitylist.programs ; let j = index;" label = {{p.programName}} >
+          <div class="content_item">
+          <h3>Categories</h3>
+          <form>
+            <mat-radio-group aria-label="Select an option" *ngFor="let c of programActivitylist.categories ; let j = index;">
+              <mat-radio-button [checked]="c.isChecked" value={{c.categoryId}} (change)="catChange(c)" >{{c.categoryName}}</mat-radio-button>
+            </mat-radio-group>
+            </form>
+          </div>
+          <div class="content_item">
+            <h3>Type</h3>
+            <form>
+              <mat-radio-group aria-label="Select an option" *ngFor="let t of programActivitylist.programsType ; let j = index;">
+                <mat-radio-button [checked]="t.isChecked" value={{t.typeId}}  (change)="typeChange(t)"  >{{t.typeName}}</mat-radio-button>
+
+              </mat-radio-group>
+              </form>
+              
+            </div>
+
+            <div class="content_item">
+              <h3>Activities</h3>
+              <table class="table" *ngFor="let a of programActivitylist.activitiesModel; let j = index;">
+                <tbody >
+                  <tr>
+                    <td>{{a.activityName}}</td>
+                    <td style="width: 5%"><input type="checkbox" [checked]="a.isChecked" value={{a.activityId}} (change)="actChange(a)"></td>
+                  </tr>
+                  </tbody>
+              </table>
+              <div class="d-flex justify-content-sm-end"> 
+                  <button type="button" class="btn btn-secondary">Cancel</button> &nbsp; &nbsp;
+                  <button type="button" class="btn btn-primary" (click)="save()" >Save</button>
+              </div>
+            
+              </div>
+      </mat-tab>
+  </mat-tab-group>
+</div>

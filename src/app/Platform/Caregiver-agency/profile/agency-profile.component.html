@@ -1,0 +1,198 @@
+<div class="common-page-wrapper form-page">
+
+    <!-- table cards -->
+    <div class="custom-card">
+      <div class="heading-wrap">
+        <h1>My Profile</h1>
+      </div>
+      
+      <div class="custom-form-wrapper d-flex align-items-start">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <!-- profile image -->
+          <div class="edit-image">
+            <div class="circle">
+              <img id="blah" class="profile-pic" [src]="imageSrc || '../../../../../assets/images/profile-holder.png'"
+                alt="your image" />
+            </div>
+            <div class="upload-block">
+              <a (click)="resetFileUploader()" class="remove-wrap">
+                <img src="../../../../../assets/images/delete-red.svg" alt="">
+              </a>
+              <a class="upload-btn" title="Browse"> Browse
+                <input class="file-upload" type="file" #file name="file"
+                  accept="image/png,image/jpeg," (change)="onAttachment($event)" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" id="v-pills-tabContent">
+          <form class="edit-profile-form" [formGroup]="addAgencyform">
+            <div class="tab-pane fade show active" id="v-pills-one" role="tabpanel" aria-labelledby="v-pills-one-tab">
+              <div class="form-wrapper">           
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Agency Name</mat-label>
+                        <input type="text" maxlength="30" matInput formControlName="BusinessName" [ngClass]="{ 'is-invalid': submitted }"
+                          autocomplete="new-name">
+                          <mat-error *ngIf="'BusinessName.invalid'">Agency name is required</mat-error>
+                      </mat-form-field>                  
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Agency Email</mat-label>
+                        <input type="text" maxlength="50"  required matInput formControlName="AgencyEmail" [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name" ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" >
+                      <mat-error *ngIf="'AgencyEmail.invalid'">Enter valid email  address</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Agency Business Address</mat-label>
+                        <input  required type="text" maxlength="250" matInput formControlName="AgencyBusinessAddress"
+                          [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                          <mat-error *ngIf="'AgencyBusinessAddress.invalid'">Agency business address is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div> 
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="AgencyCountry" matInput [ngClass]="{ 'is-invalid': submitted  }">
+                          <mat-option *ngFor=" let list of countryList" [value]="list.CountryId">{{list.CountryName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="'AgencyCountry.invalid'">Country is required</mat-error> 
+                      </mat-form-field>
+                    </div>
+                  </div>
+     
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>State</mat-label>
+                        <mat-select formControlName="AgencyState" matInput [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name">
+                          <mat-option *ngFor=" let list of stateList" [value]="list.StateId">{{list.StateName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="'AgencyState.invalid'">State is required</mat-error>
+                      </mat-form-field>                   
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>City</mat-label>
+                        <input type="text" matInput maxlength="25" formControlName="AgencyCity" [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name">
+                      <mat-error *ngIf="'AgencyCity.invalid'">City is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Zip</mat-label>
+                        <input type="text" maxlength="6" minlength="3" matInput formControlName="AgencyZIPCode"
+                          [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                          <mat-error *ngIf="'AgencyZIPCode.invalid'">ZipCode is required</mat-error>
+                      </mat-form-field>
+                   
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Agency Phone Number</mat-label>
+                        <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="AgencyPhone" [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name">
+                       <mat-error *ngIf="'AgencyPhone.invalid'">Phone number is required</mat-error> 
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">&nbsp;</div>
+
+
+                  <div class="col-md-4">                    
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Contact Person First Name</mat-label>
+                        <input type="text"  maxlength="50" formControlName="AgencyPersonFirstName" matInput
+                          [ngClass]="{ 'is-invalid': submitted }">
+                      <mat-error *ngIf="'AgencyPersonFirstName.invalid'">Contact person first name is required</mat-error> 
+                      </mat-form-field>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Contact Person Last Name</mat-label>
+                        <input type="text" maxlength="50" formControlName="AgencyPersonLastName" matInput
+                          [ngClass]="{ 'is-invalid': submitted }">
+                      <mat-error *ngIf="'AgencyPersonLastName.invalid'">Contact person last name is required</mat-error>  
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Conatct Person Email</mat-label>
+                        <input type="text" maxlength="100"  required matInput formControlName="AgencyPersonEmail" [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name" ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" >
+                      <mat-error *ngIf="'AgencyPersonEmail.invalid'">Enter valid email  address</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Conatct Person Phone</mat-label>
+                        <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="AgencyPersonPhone" [ngClass]="{ 'is-invalid': submitted  }"
+                          autocomplete="new-name">
+                       <mat-error *ngIf="'AgencyPhone.invalid'">Contact Person Phone is required</mat-error> 
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Contact person Address</mat-label>
+                        <input  required type="text" maxlength="250" matInput formControlName="AgencyPersonAddress"
+                          [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                          <mat-error *ngIf="'AgencyPersonAddress.invalid'">Contact Person Address is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div> 
+  
+
+  
+                </div>
+                <div class="btn-wrap justify-content-end">
+                    <Button class="custom-btn" *ngIf="Addbuttonflag" (click)="saveAgency()"> Save </Button>
+                    <Button class="custom-btn" *ngIf="UpdateButtonflag" (click)="UpdateAgency()"> Update </Button>
+                </div>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  </div>

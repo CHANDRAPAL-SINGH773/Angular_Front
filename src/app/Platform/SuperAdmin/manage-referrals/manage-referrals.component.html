@@ -1,0 +1,110 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageReferrals']" class="current" title="Manage Referral">Manage Referrals</a>
+      </li>
+    </ul>
+    <div class="right-btn-wrap">
+      <a class="custom-btn border-btn" title="Print" (click)="Print()"  data-toggle="tooltip" data-placement="right"><img src="../../../../assets/images/Printer.svg" alt=""></a>
+      <button class="custom-btn" [disabled]="isDisabled" (click)="exportAsXLSX()" title="Export CSV">Export CSV</button>
+      <a [routerLink]="['/Dashboard/add-edit-referrals/0/0']" class="custom-btn m-0"  title="Export CSV">Add New
+        Referral</a>
+    </div>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>{{title}}</h1>
+      <form class="search-wrap" [formGroup]="Referralform">
+        <input class="form-control me-2" type="search" formControlName="Search" placeholder="Search" aria-label="Search" (keydown)="GetReferralList('searching')">
+      </form>
+    </div>
+
+    <div class="table-responsive">
+
+     <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">       
+        <ng-container matColumnDef="logo">
+          <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+          <div class="img-">
+            <img src="../../../../assets/images/marry-baldwin-logo.svg" alt="">
+          </div>
+        </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="BuisnessName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.BuisnessName}}</mat-cell>
+       </ng-container>
+       <ng-container matColumnDef="CPFirstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.ContactName}}</mat-cell>
+         </ng-container>
+        <ng-container matColumnDef="UserName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.UserName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="BuisnessContactNo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.BuisnessContactNo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="BuisnessEmail">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Email}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="BuisnessAddress">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Address</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.BuisnessAddress}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="AssociateMember">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Associate Members</mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <a class="link" (click)="OpenPopup(element.ReferralId,element.UserId)">
+              {{element.MemberCount}}
+           </a> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">    
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Active / Deactive Referral" [(ngModel)]="element.IsActive" id="{{element.id}}"  (click)="changeReferralStatus(element.ReferralId,element.IsActive)" type="checkbox" role="switch"  checked>
+            <label class="custom-control-label" for="{{element.ReferralId}}"></label>
+          </div> 
+        </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="block">
+          <mat-header-cell *matHeaderCellDef> Block </mat-header-cell>
+          <mat-cell *matCellDef="let element">   
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Block Referral" [(ngModel)]="element.IsBlock" id="block_{{element.id}}" (click)="BlockUnblockReferral(element.ReferralId,element.IsBlock)" type="checkbox" role="switch" checked>
+            <label class="custom-control-label" for="{{element.ReferralId}}"></label>
+          </div> </mat-cell>
+         </ng-container>
+
+             <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+          </ng-container>
+          <div>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+              </mat-footer-row>
+        </div>
+        </mat-table>
+       <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize"
+        [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+      </mat-paginator>
+            
+    </div>
+    
+  </div>
+
+</div>

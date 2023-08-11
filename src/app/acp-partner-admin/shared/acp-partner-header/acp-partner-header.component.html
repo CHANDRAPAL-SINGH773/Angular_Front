@@ -1,0 +1,269 @@
+<!-- <header class="header">
+    <div class="leftIconsCol">
+        <div class="head">
+
+            <span class="sub" style="color: white;font-size: 22px;">{{ApplicationTitle}}</span>
+        </div>
+     
+        <a class="mobile-menu" onclick="toggleNav()">
+
+        </a>
+    </div>
+
+    <div class="rightIconsCol">
+        
+        <div class="link-icons">
+            <div class="dropdown notification doclist">
+                <a class="dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/images/super-admin/summary.svg" alt="">
+                </a>
+           
+            </div>
+
+         
+<h2>{{UserProfile}}</h2>
+<div class="user-wrap dropdown">
+    <a class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+         <img [src]="" onerror="this.src='../../assets/images/profile-icon.svg';"  alt=""> 
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="userInfo">
+            <img [src]="" onerror="this.src='../../assets/images/profile-icon.svg';"  alt="">
+            <div class="userInfo_text">
+                <div>
+                    <span>Organization Name</span><br>
+                    <span>User Position</span>
+                </div>
+                
+            </div>
+        </div>
+        <ul>
+
+            <li>
+                <a class="dropdown-item" [routerLink]="['Profile/myprofile']">
+                    <img src="assets/images/header/user.svg" alt="">
+                    <span>Profile</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" [routerLink]="['AcpPartner/companyprofile']">
+                    <img src="assets/images/header/user.svg" alt="">
+                    <span>Company Profile</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" [routerLink]="['AcpPartner/partnerList']">
+                    <img src="assets/images/header/user.svg" alt="">
+                    <span>Business Partners</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <img src="assets/images/header/setting.svg" alt="">
+                    <span>Settings</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#" (click)="onLogout()">
+                    <img src="assets/images/header/logout.svg" alt="">
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </div>
+
+</header> -->
+
+<header class="header">
+
+    <button class="d-md-block d-lg-none menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><mat-icon>menu</mat-icon></button>
+
+    <div class="header_logo d-lg-none">
+        <img class="img-flui" src="../../../../assets/images/logo.png" alt="logo">
+    </div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="navbar-inner container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="header-left-content">
+                <h2>{{ApplicationTitle}}</h2>
+              </div>
+                <div class="header-right-content">
+                    <div class="notification common_content">
+                        <div
+                          class="user_inner"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                        <mat-icon>notifications_none</mat-icon>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li class="head text-light">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12 col-12 head_inner">
+                                <span>Notifications (3)</span>
+                                <a href="#">Mark read all</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="notification-box">
+                            <div class="row">
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <img
+                                  src="../../../../assets/images/profile.png"
+                                  class="w-75 rounded-circle"
+                                />
+                              </div>
+                              <div class="col-lg-9 col-sm-8 col-8">
+                                <strong class="notify_title">David John</strong>
+                                <div class="notify_desc">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                </div>
+                                <small class="notify_time">27.11.2015, 15:00</small>
+                              </div>
+                            </div>
+                          </li>
+            
+                          <li class="footer text-center">
+                            <a href="#">View All</a>
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div class="user common_content">
+                        <div
+                          class="user_inner"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                        <h3 class="user_name">{{UserProfile}}</h3>
+                        <div class="profile_img">
+                            <img src="../../../../assets/images/profile.png" />
+                          </div>
+                        </div>
+
+                        <ul
+                          class="profile dropdown-menu"
+                          aria-labelledby="dropdownMenuButton1"
+                        >
+
+
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['Profile/myprofile']">
+                                <div class="item_icon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                                </div>
+                                <span class="item_text">Profile</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['AcpPartner/companyprofile']">
+                              <div class="item_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                  <path d="M1 22H23" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M19.78 22.0098V17.5498" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M19.8001 10.8901C18.5801 10.8901 17.6001 11.8701 17.6001 13.0901V15.3601C17.6001 16.5801 18.5801 17.5601 19.8001 17.5601C21.0201 17.5601 22.0001 16.5801 22.0001 15.3601V13.0901C22.0001 11.8701 21.0201 10.8901 19.8001 10.8901Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M2.1001 21.9998V6.02979C2.1001 4.01979 3.10015 3.00977 5.09015 3.00977H11.3201C13.3101 3.00977 14.3001 4.01979 14.3001 6.02979V21.9998" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M5.80005 8.25H10.7501" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M5.80005 12H10.7501" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M8.25 22V18.25" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                              </div>
+                                <span class="item_text">Company Profile</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['AcpPartner/partnerList']">
+                              <div class="item_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                  <path d="M9.16006 10.87C9.06006 10.86 8.94006 10.86 8.83006 10.87C6.45006 10.79 4.56006 8.84 4.56006 6.44C4.56006 3.99 6.54006 2 9.00006 2C11.4501 2 13.4401 3.99 13.4401 6.44C13.4301 8.84 11.5401 10.79 9.16006 10.87Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M16.41 4C18.35 4 19.91 5.57 19.91 7.5C19.91 9.39 18.41 10.93 16.54 11C16.46 10.99 16.37 10.99 16.28 11" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M4.15997 14.56C1.73997 16.18 1.73997 18.82 4.15997 20.43C6.90997 22.27 11.42 22.27 14.17 20.43C16.59 18.81 16.59 16.17 14.17 14.56C11.43 12.73 6.91997 12.73 4.15997 14.56Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M18.3401 20C19.0601 19.85 19.7401 19.56 20.3001 19.13C21.8601 17.96 21.8601 16.03 20.3001 14.86C19.7501 14.44 19.0801 14.16 18.3701 14" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                              </div>
+                                <span class="item_text">Business Partners</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item">
+                              <div class="item_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                  <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M2 12.8799V11.1199C2 10.0799 2.85 9.21994 3.9 9.21994C5.71 9.21994 6.45 7.93994 5.54 6.36994C5.02 5.46994 5.33 4.29994 6.24 3.77994L7.97 2.78994C8.76 2.31994 9.78 2.59994 10.25 3.38994L10.36 3.57994C11.26 5.14994 12.74 5.14994 13.65 3.57994L13.76 3.38994C14.23 2.59994 15.25 2.31994 16.04 2.78994L17.77 3.77994C18.68 4.29994 18.99 5.46994 18.47 6.36994C17.56 7.93994 18.3 9.21994 20.11 9.21994C21.15 9.21994 22.01 10.0699 22.01 11.1199V12.8799C22.01 13.9199 21.16 14.7799 20.11 14.7799C18.3 14.7799 17.56 16.0599 18.47 17.6299C18.99 18.5399 18.68 19.6999 17.77 20.2199L16.04 21.2099C15.25 21.6799 14.23 21.3999 13.76 20.6099L13.65 20.4199C12.75 18.8499 11.27 18.8499 10.36 20.4199L10.25 20.6099C9.78 21.3999 8.76 21.6799 7.97 21.2099L6.24 20.2199C5.33 19.6999 5.02 18.5299 5.54 17.6299C6.45 16.0599 5.71 14.7799 3.9 14.7799C2.85 14.7799 2 13.9199 2 12.8799Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                              </div>
+                                <span class="item_text">Settings</span>
+                            </a>
+                        </li>
+                          <li>
+                            <a class="dropdown-item" (click)="onLogout()">
+                              <mat-icon>logout</mat-icon>
+                              <span class="item_text">Logout</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </nav>
+
+</header>

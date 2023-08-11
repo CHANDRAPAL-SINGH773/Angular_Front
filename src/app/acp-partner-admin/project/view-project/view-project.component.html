@@ -1,0 +1,81 @@
+<div class="loader" *ngIf="loader"></div>
+
+
+
+<div class="dashboard_main_content view_project">
+    <div class="view_project_inner">
+
+         <div class="content_item" *ngIf="projectList">
+            <h2 class="main_title">Project Detail</h2>
+            <div class="item_wrapper">
+                <div class="item">
+                    <p><label>Project Number:</label>{{projectList.projectNo}}</p>
+                    <p> <label>Date:</label>{{projectList.createddate |date:'MM/dd/yyyy'}}</p>
+                    <p> <label>Program:</label>  {{projectList.programName}} ({{projectList.categoryName}})</p>
+                    <p> <label>Installation Type:</label> {{ getInstallationType(projectList.installationType) }}</p>
+                </div>
+                <div class="item">
+                    <p> <label>Client Name:</label> {{projectList.clientName}}</p>
+                    <p> <label>Contact:</label> {{projectList.clientNumber}}</p>
+                    <p> <label>Site:</label> {{projectList.siteAddress1}} {{projectList.siteAddress2}}</p>
+                    <p> <label>Status:</label> {{ getStatus(projectList.statusId)}}</p>
+                </div>
+            </div>
+         </div>
+
+         <div class="content_item">
+            <h2 class="main_title">ACP/Partner</h2>
+            <div class="item_wrapper" *ngIf="projectList">
+                <div class="item">
+                    <p> <label>ACP/Partner:</label> {{projectList.acpPartnerName}}</p>
+                </div>
+            </div>
+         </div>
+
+         <div class="content_item">
+            <h2 class="main_title">Assessor(s)/Installer(s)</h2>
+
+            <div class="table_wrap">
+                <div class="table_inner" *ngIf="dataSource.data">
+                    <table mat-table class="table" [dataSource]="dataSource" >
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name </th>
+                            <td mat-cell *matCellDef="let element"> <span>{{element.staffName}}</span> </td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="role">
+                            <th mat-header-cell *matHeaderCellDef>Role(s) </th>
+                            <td mat-cell *matCellDef="let element"> <span>{{element.roles}}</span> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="training">
+                            <th mat-header-cell *matHeaderCellDef>Training </th>
+                            <td mat-cell *matCellDef="let element"> <span><i class="fa fa-check" aria-hidden="true"></i></span> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                                <div class="icon_group">
+                                    <mat-icon class="delete" (click)="DeleteStaff(element)">delete</mat-icon>
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+                    </table>
+                    <!-- <ng-container *ngIf="metaData?.totalRecords==0">
+                        <div class="text-center no-record">No record found</div>
+                    </ng-container>            -->
+                </div>
+            </div>
+         </div>
+
+
+    </div>
+</div>
+
+
+

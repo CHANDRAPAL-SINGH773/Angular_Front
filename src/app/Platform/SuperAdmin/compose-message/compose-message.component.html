@@ -1,0 +1,118 @@
+<div class="common-page-wrapper">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+        <ul class="custom-breadcrumbs mb-3">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/compose-message']" class="current" title="Compose Message">Compose Message</a></li>
+        </ul>
+    </div>
+
+    <div class="custom-card compose-msg">
+        <form [formGroup]="composeMailForm">
+            <input type="text" formControlName="AttachecdDocs" matInput  style="display: none;">
+          
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-field">
+                      <mat-checkbox formControlName="IsHighPriority">Higher Priority</mat-checkbox>
+                    </div>
+                  </div>
+                <div class="col-md-12">
+                    <div class="form-field mail-common from-chip">
+                        <label>Message From</label>
+                        <mat-form-field appearance="outline">
+                            <mat-chip-list #chipList>
+                                <mat-chip *ngFor="let m of mailfroms">
+                                  <div class="img-icon">
+                                    <img src="../../../../assets/images/profile-holder.png" alt="">
+                                  </div>
+                                  <h4>Caregiver Agency</h4>
+                                   <a href="mailto:{{m.presentMailId}}" title="{{m.presentMailId}}">{{m.presentMailId}}</a> 
+                                </mat-chip>
+                                <input [matChipInputFor]="chipList"
+                                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                       [matChipInputAddOnBlur]="addOnBlur"
+                                       (matChipInputTokenEnd)="addFrom($event)">
+                               
+                              </mat-chip-list>
+                            <!-- <input type="text" matInput>
+                            <mat-error *ngIf="'PoliceVerification.invalid'">This field is required</mat-error> -->
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="msg-cc-wrap">
+                        <div class="form-field mail-common to-chip">
+                            <label> Message To </label>
+                            <mat-form-field appearance="outline">
+                                <mat-chip-list #msgtolist>
+                                    <mat-chip *ngFor="let m of mailtos" (removed)="removeMail(m)">
+                                        <div class="img-icon">
+                                            <img src="../../../../assets/images/profile-holder.png" alt="">
+                                          </div>
+                                          <h4>{{m.toName}}</h4>
+                                           <a href="mailto:{{m.toMailId}}" title="{{m.toMailId}}">{{m.tomails}}</a> 
+                                           
+                                      <button matChipRemove>
+                                        <mat-icon>close</mat-icon>
+                                      </button>
+                                    </mat-chip>
+                                    <input [matChipInputFor]="msgtolist" formControlName="MessageTo" matInput
+                                           [matChipInputSeparatorKeyCodes]="keysMailToCodes"
+                                           [matChipInputAddOnBlur]="addOnBlur"
+                                           (matChipInputTokenEnd)="addTo($event)"  [matAutocomplete]="auto" (keyup)="searchUserByEmail()">
+                                           <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor=" let option of UsersList" [value]="option.UserId" (onSelectionChange)="addMailinMsgto(option.Email,option.UserId, option.FirstName)">
+                                            {{option.Email}}
+                                            </mat-option>
+                                           </mat-autocomplete>
+                                  </mat-chip-list>
+                                <!-- <input type="text" matInput>
+                                <mat-error *ngIf="'PoliceVerification.invalid'">This field is required</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field cc-text">
+                            <label>CC &nbsp; BCC</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-field">
+                        <label>Subject</label>
+                        <mat-form-field appearance="outline">
+                            <input type="text" formControlName="Subject" matInput >
+                            <mat-error *ngIf="'PoliceVerification.invalid'">This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-field editor-outer">
+                        <label> Your Message </label>
+                        <angular-editor [(ngModel)]="htmlContent" matInput  formControlName="Message" [config]="editorConfig"></angular-editor>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <div class="left-wrap">
+                    <a class="attach-icon" title="Attachment Icon" >
+                        <input class="file-upload" type="file" #file name="file" accept=".pdf,.doc,.docx"
+                        (change)="onDocumentsAttachment($event)" />
+                        <!-- <img src="../../../../assets/images/attachment.png" alt=""> -->
+                    </a>
+                    <a class="delet-icon" title="Delete Icon">
+                        <img src="../../../../assets/images/delete.png" alt="">
+                    </a>
+                    <!-- <a style="margin-left:30px">{{fileNameObj}}</a>
+                    <a style="margin-left:10px; color: red;">X</a> -->
+                </div>
+                <div class="btn-wrap">
+                    <button type="submit" class="custom-btn gray-btn rounded-btn" title="Cancel">Cancel</button>
+                    <!-- <button type="submit" class="custom-btn border-btn rounded-btn" title="Save Draft">Save Draft</button> -->
+                    <button type="submit" class="custom-btn rounded-btn" title="Send" (click)="compose()">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

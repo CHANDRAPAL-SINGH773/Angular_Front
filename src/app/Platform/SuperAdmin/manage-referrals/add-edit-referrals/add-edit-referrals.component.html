@@ -1,0 +1,393 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+</div>
+
+<div class="common-page-wrapper form-page">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageReferrals']" class="current" title="Manage Referral">Manage Referrals</a></li>
+    </ul>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>Add New Referral</h1>
+    </div>
+    
+    <div class="custom-form-wrapper d-flex align-items-start">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <!-- profile image -->
+        <div class="edit-image">
+          <div class="circle">
+            <img id="blah" class="profile-pic" [src]="imageSrc || '../../../../../assets/images/profile-holder.png'"
+              alt="your image" />
+          </div>
+          <div class="upload-block">
+            <a (click)="resetFileUploader()" class="remove-wrap">
+              <img src="../../../../../assets/images/delete-red.svg" alt="">
+            </a>
+            <a class="upload-btn" title="Browse"> Browse
+              <input class="file-upload" type="file" #file name="file"
+                accept="image/png,image/gif,image/jpeg" (change)="onAttachment($event)" />
+              <!-- <input type="text" class="form-control" formControlName="Logo" style="display: none;">
+              <input type="text" class="form-control" formControlName="ReferralId" style="display: none;">
+              <input type="text" class="form-control" formControlName="UserId" style="display: none;"> -->
+            </a>
+          </div>
+        </div>
+
+        <button class="nav-link active" id="v-pills-one-tab" data-bs-toggle="pill" data-bs-target="#v-pills-one"
+          type="button" role="tab" aria-controls="v-pills-one" aria-selected="true">Referral Details <mat-icon>
+            keyboard_arrow_right</mat-icon></button>
+        <button class="nav-link" id="v-pills-two-tab" data-bs-toggle="pill" data-bs-target="#v-pills-two" type="button"
+          role="tab" aria-controls="v-pills-two" aria-selected="false">Admin Details <mat-icon>keyboard_arrow_right
+          </mat-icon></button>
+      </div>
+      <div class="tab-content" id="v-pills-tabContent">
+        <form class="edit-profile-form" [formGroup]="addReferralform">
+          <div class="tab-pane fade show active" id="v-pills-one" role="tabpanel" aria-labelledby="v-pills-one-tab">
+            <div class="form-wrapper">
+              <h2> Referral Details</h2>
+              <div class="row">
+                <!-- <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                    <mat-label>Select Client</mat-label>
+                    <select formControlName="SelectedClient" [ngClass]="{ 'is-invalid': submitted}">
+                      <option value="2"> client 1 </option>
+                    </select>
+                  </div>
+                </div> -->
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Buisness Name</mat-label>
+                      <input type="text" maxlength="30" matInput formControlName="BuisnessName" [ngClass]="{ 'is-invalid': submitted }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'BusinessName.invalid'">Buisness name is required</mat-error>
+                    </mat-form-field>
+                  
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Contact Person First Name</mat-label>
+                      <input type="text"  maxlength="20" formControlName="CPFirstName" matInput
+                        [ngClass]="{ 'is-invalid': submitted }">
+                    <mat-error *ngIf="'CPFirstName.invalid'">Contact person first name is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Contact Person Last Name</mat-label>
+                      <input type="text" maxlength="20" formControlName="CPLastName" matInput
+                        [ngClass]="{ 'is-invalid': submitted }">
+                    <mat-error *ngIf="'CPLastName.invalid'">Contact person last name is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Buisness Email</mat-label>
+                      <input type="text" maxlength="50"  required matInput formControlName="BuisnessEmail" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name" ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" >
+                    <mat-error *ngIf="'BuisnessEmail.invalid'">Enter valid email  address</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field"  [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Buisness Phone Number</mat-label>
+                      <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="BuisnessContactNo" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                    <mat-error *ngIf="'BuisnessContactNo.invalid'">Phone number is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field"  [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Alternate Buisness Phone Number</mat-label>
+                      <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="AlternateBuisnessContactNo" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                    </mat-form-field>
+                  </div>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Business Address</mat-label>
+                      <input  required type="text" maxlength="150" matInput formControlName="BuisnessAddress"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                        <mat-error *ngIf="'BuisnessAddress.invalid'">business address is required</mat-error>
+                    </mat-form-field>
+                    <!-- <div *ngIf="submitted " class="invalid-feedback">
+                      <div>Referral Business Address is required</div>
+                    </div> -->
+                  </div>
+                </div> 
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Country</mat-label>
+                      <mat-select formControlName="ReferralCountry" matInput [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of countryList" [value]="list.CountryId">{{list.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'ReferralCountry.invalid'">Country is required</mat-error>
+
+                    </mat-form-field>
+
+                    <!-- <label>Country</label>
+                    <select formControlName="Country" placeholder="Country" [ngClass]="{ 'is-invalid': submitted  }">
+                      <option value="2">India</option>
+                      <option value="3">USA</option>
+                    </select> -->
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>State</mat-label>
+                      <mat-select formControlName="ReferralState" matInput [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-option *ngFor=" let list of stateList" [value]="list.StateId">{{list.StateName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'ReferralState.invalid'">State is required</mat-error>
+                    </mat-form-field>
+                    <!-- <select formControlName="State" [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <option value="1">Uttarakhand</option>
+                      <option value="2">Punjab</option>
+                    </select> -->
+                  
+                  </div>
+                </div>
+              <!-- </div> -->
+              <!-- <div class="row"> -->
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>City</mat-label>
+                      <input type="text" matInput maxlength="25" formControlName="ReferralCity" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                    <mat-error *ngIf="'ReferralCity.invalid'">City is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Zip</mat-label>
+                      <input type="text" maxlength="6" minlength="3" matInput formControlName="ReferralZipCode"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                        <mat-error *ngIf="'ReferralZipCode.invalid'">ZipCode is required</mat-error>
+                    </mat-form-field>
+                 
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-wrap justify-content-end">
+                <button class="custom-btn next" (click)="nextPreviousButtonWorking('next')" >
+                 <p>Next</p>  
+                  <div class="icon-wrap">
+                    <img src="../../../../assets/images/right-arrow.svg" alt="">
+                  </div>
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-two" role="tabpanel" aria-labelledby="v-pills-two-tab">
+            <div class="form-wrapper">
+              <h2>Admin Details</h2>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>First Name</mat-label>
+                      <input type="text" maxlength="20" matInput formControlName="FirstName" [ngClass]="{ 'is-invalid': submitted }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'FirstName.invalid'">First name  is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Last Name</mat-label>
+                      <input type="text" maxlength="20" matInput formControlName="LastName" [ngClass]="{ 'is-invalid': submitted }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'LastName.invalid'">Last name is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Email Address</mat-label>
+                      <input type="text" maxlength="50" matInput formControlName="Email" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'Email.invalid'">Email address is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Phone Number</mat-label>
+                      <input mask="(000) 000-0000" placeholder="xxx-xxx-xxxx" type="tel" matInput formControlName="Phone" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'Phone.invalid'">Phone number is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Address</mat-label>
+                      <input type="text" maxlength="150" matInput formControlName="Address" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'Address.invalid'">Address is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Country</mat-label>
+                      <mat-select formControlName="Country" placeholder="Country"
+                        [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of countryList" [value]="list.CountryId">{{list.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Country.invalid'">Country is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>State</mat-label>
+                      <mat-select formControlName="State" placeholder="State" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of stateList" [value]="list.StateId">{{list.StateName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'State.invalid'">State is required</mat-error>
+                    </mat-form-field>
+                 
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>City</mat-label>
+                      <input type="text" maxlength="15" matInput formControlName="City" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'City.invalid'">City is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Zip</mat-label>
+                      <input type="text" maxlength="6" minlength="3" matInput formControlName="ZIPCode" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'ZIPCode.invalid'">ZipCode is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>User Name</mat-label>
+                      <input type="text" maxlength="30" matInput formControlName="UserName" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-error *ngIf="'UserName.invalid'">User name is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Password</mat-label>
+                      <input [type]="showPassword ? 'text' : 'password'" maxlength="12" minlength="8" matInput formControlName="Password" [ngClass]="{ 'is-invalid': submitted }"
+                        autocomplete="new-password">
+                        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                          {{showPassword?'visibility_off':'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngIf="'Password.invalid'">Password is required(Max 8 characters)</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field" [formGroup]="addReferralform">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Confirm Password</mat-label>
+                      <input [type]="showPassword2 ? 'text' : 'password'" maxlength="12" minlength="8" matInput formControlName="ConfirmPassword"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                        <mat-icon matSuffix (click)="togglePasswordVisibility2()">
+                          {{showPassword2?'visibility_off':'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngIf="'ConfirmPassword.invalid'">Confirm password is (Max 8 characters)</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+              </div>
+              <div class="btn-wrap">
+                <Button class="custom-btn prev" data-bs-toggle="pill"  (click)="nextPreviousButtonWorking('previous')" data-bs-target="#v-pills-one">
+                  <div class="icon-wrap">
+                    <img src="../../../../assets/images/left-arrow.svg" alt="">
+                  </div>
+                <p>Previous</p>  
+                </Button>
+                <!-- <Button class="custom-btn" *ngIf="UpdateButtonflag" (click)="sendInvitation()"> Send Invite </Button> -->
+                <Button class="custom-btn" (click)="saveReferral()"> Save & Send Invite</Button>
+                <!-- <Button class="custom-btn" *ngIf="UpdateButtonflag" (click)="UpdateReferral()"> Update </Button> -->
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

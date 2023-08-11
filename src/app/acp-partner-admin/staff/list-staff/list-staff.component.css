@@ -1,0 +1,38 @@
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    /*custom css */
+    display: flex;
+    position: absolute;
+    z-index: 100000;
+    margin-top: 14%;
+    margin-left: 30%;
+  }
+ ::ng-deep .cdk-overlay-pane{
+    max-width: 45vw !important;
+  }
+
+  ::ng-deep .cdk-global-overlay-wrapper{
+    justify-content: end !important;
+    overflow: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+

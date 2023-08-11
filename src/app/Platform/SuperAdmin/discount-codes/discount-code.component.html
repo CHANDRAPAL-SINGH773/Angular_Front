@@ -1,0 +1,109 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader>
+    <img src='../../../../../assets/images/loader.gif' alt=''>
+    Loading...
+</div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/discount-codes']" class="current" title="Subscription Plans">Discount Codes</a>
+            </li>
+        </ul>
+        <div class="right-btn-wrap">           
+            <a class="custom-btn rounded-btn m-0" (click)="addEditDiscountCode(0)" title="Add New Plan">Add New Discount Code</a>
+        </div>
+    </div>
+
+    <!-- table cards -->
+    <div class="custom-card">
+        <div class="heading-wrap">
+            <h1>Discount Codes</h1>
+        </div>
+        <div class="table-responsive">
+            <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+                <ng-container matColumnDef="codeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Code Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.CodeName}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="discountType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Discount Type</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.DiscountType}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="states">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>States</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.States}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="value">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Value</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.Value}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="starttime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Time</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.StartTime | date:'MM/dd/YYYY'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="endtime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>End Time</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.EndTime | date:'MM/dd/YYYY'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="limit">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Limit</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.Limit}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="taken">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Taken</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.Taken}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="remaning">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Remaning</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.Remaning}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.Status}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="active">
+                    <mat-header-cell *matHeaderCellDef> Active </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" [(ngModel)]="element.IsActive" id="{{element.DiscountId}}"
+                                type="checkbox" role="switch" checked (click)="ActiveDeactivePlan(element.DiscountId,element.IsActive)">
+                            <label class="custom-control-label" for="{{element.Id}}"></label>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="action-wrap">
+                            <a (click)="addEditDiscountCode(element.DiscountId)" >
+                                <img src="../../../../assets/images/edit-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="edit/view">
+                            </a>
+                            <a (click)="deleteUser(element.DiscountId)">
+                                <img src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="delete">
+                            </a>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                  </ng-container>
+                  <div>
+                      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                      </mat-footer-row>
+                </div>
+            </mat-table>
+                <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize" [pageSizeOptions]="pageSizeList"
+                [pageIndex]="pageIndex" (page)="pageChangeEvent($event)">
+              </mat-paginator>
+        </div>
+    </div>
+</div>
+
+
+

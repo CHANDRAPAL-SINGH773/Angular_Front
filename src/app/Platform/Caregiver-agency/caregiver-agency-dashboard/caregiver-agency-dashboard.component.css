@@ -1,0 +1,514 @@
+.common-dash-wrapper {
+    padding-top: 20px;
+}
+
+.common-dash-wrapper h4 {
+    font-weight: 500;
+    font-size: 18px;
+    color: #000000;
+}
+
+
+/* style start */
+
+.custom-card {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%;
+    margin-bottom: 0px;
+}
+
+.card-wrapper .col-md-3 {
+    margin-bottom: 20px;
+}
+
+.custom-card p {
+    font-weight: 500;
+    font-size: 16px;
+    color: #7C7B80;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.custom-card p b {
+    display: block;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.custom-card h1 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.custom-card .text-wrap {
+    padding-right: 10px;
+}
+
+.light-blue {
+    background: #F0F9FB;
+}
+
+.light-gray {
+    background: #F4F6FA;
+}
+
+.blue-gray {
+    background: #E9EEFF;
+}
+
+.pink-gray {
+    background: #FBF5FF;
+}
+
+/* rating start */
+.review-chart-wrapper {
+    padding: 10px 0 30px;
+}
+
+/* rating ends */
+/* table style */
+table {
+    margin: 0;
+    min-width: unset;
+    width: 100%;
+}
+
+table th {
+    font-weight: 400;
+    font-size: 16px;
+    color: #7D8089;
+    height: 50px;
+}
+
+table td {
+    height: 60px;
+}
+
+.table-card-wrapper .custom-card,
+.review-chart-wrapper .custom-card {
+    display: block;
+    padding: 0;
+}
+
+table .img-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+table .img-wrap img {
+    width: 100% !important;
+}
+
+.head-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+}
+
+.head-wrap h2 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+}
+
+.head-wrap a {
+    font-weight: 400;
+    font-size: 18px;
+    color: #0071BC;
+    text-decoration: none;
+}
+
+.head-wrap a:hover {
+    opacity: 0.6;
+}
+
+.table-card-wrapper {
+    padding-bottom: 20px;
+}
+
+/* table style ends */
+
+/* alert card start */
+.list-block {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #EBECEE;
+    padding-top: 15px;
+    height: 300px;
+    overflow: auto;
+}
+
+.list-block li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #EBECEE;
+    padding: 10px 20px;
+}
+
+.list-block .left-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.list-block .img-wrap {
+    width: 48px;
+    height: 48px;
+    background: #D9D9D9;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.list-block .img-wrap img {
+    width: 100%;
+}
+
+.list-block .text-wrap h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.list-block .text-wrap p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.date-wrap {
+    text-align: right;
+    font-weight: 400;
+    font-size: 12px;
+    color: #708099;
+    padding-top: 5px;
+}
+
+/* alert ends */
+
+/* apexchart-custom-tooltip style start */
+::ng-deep #column-chart .apexcharts-tooltip .arrow_box {
+    position: relative;
+    background: #2196f3;
+    border-color: #2196f3;
+    border-radius: 10px;
+}
+
+::ng-deep #column-chart .apexcharts-tooltip .arrow_box:before {
+    right: 98%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+::ng-deep #column-chart .apexcharts-tooltip .arrow_box:before {
+    border-color: rgba(0, 0, 0, 0);
+    border-right-color: #2196f3;
+    border-width: 6px;
+    margin-top: 0;
+}
+
+::ng-deep #column-chart .apexcharts-tooltip {
+    color: #fff;
+    overflow: visible !important;
+    border: 0;
+    background: transparent;
+}
+
+::ng-deep #column-chart .apexcharts-tooltip span {
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+::ng-deep #column-chart .apexcharts-bar-area:hover {
+    fill: #0071BC;
+}
+
+/* apexchart-custom-tooltip style ends */
+
+
+.form-field.page-top .mat-form-field {
+    width: 240px;
+}
+
+.top-field .mat-form-field {
+    width: 180px;
+}
+
+::ng-deep .top-field .mat-form-field .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+/* review-chart start */
+::ng-deep #review-rating-chart .arrow_box {
+    text-align: center;
+}
+
+::ng-deep #review-rating-chart .apexcharts-tooltip {
+    border: 0;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 32px rgba(31, 47, 70, 0.12);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+::ng-deep #review-rating-chart .arrow_box .star img {
+    margin: 0 2px;
+}
+
+::ng-deep #review-rating-chart .arrow_box span.rating-count {
+    background: #0071BC;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 13px;
+    color: #fff;
+    padding: 0px 6px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+/* end review chart */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .common-dash-wrapper h4 {
+        font-size: 16px;
+    }
+
+    .custom-card p {
+        font-size: 16px;
+    }
+
+    .custom-card h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .custom-card p b {
+        margin-bottom: 5px;
+    }
+
+    .custom-card .text-wrap p {
+        font-size: 14px;
+    }
+
+    .conut-text {
+        font-size: 16px;
+    }
+
+    .img-wrap img {
+        width: 50px;
+    }
+
+    .head-wrap h2 {
+        font-size: 20px;
+    }
+
+    .head-wrap {
+        padding: 15px 20px;
+    }
+
+    .head-wrap a {
+        font-size: 16px;
+    }
+
+    table th {
+        font-size: 14px;
+    }
+
+    .list-block li {
+        padding: 10px;
+    }
+
+    .list-block .text-wrap h4 {
+        font-size: 14px;
+    }
+
+    .top-field .mat-form-field {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .common-dash-wrapper h4 {
+        font-size: 15px;
+    }
+
+    .custom-card p {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .head-wrap h2 {
+        font-size: 18px;
+    }
+
+    .head-wrap a {
+        font-size: 14px;
+    }
+
+    .custom-btn img {
+        width: 20px;
+        margin-right: 6px;
+    }
+
+    .custom-card h1 {
+        font-size: 22px;
+    }
+
+    .card-wrapper .col-md-3 {
+        padding: 0 8px;
+    }
+
+    .card-wrapper .row:first-child {
+        margin: 0 -8px;
+    }
+
+    .custom-card {
+        padding: 12px;
+    }
+
+    .card-wrapper .col-md-3 {
+        margin-bottom: 15px;
+    }
+
+    .list-block .text-wrap h4 {
+        font-size: 12px;
+    }
+
+    .custom-card .list-block .text-wrap {
+        padding: 0;
+    }
+
+    .custom-card .text-wrap p {
+        font-size: 12px;
+    }
+
+    .date-wrap {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .list-block .img-wrap {
+        width: 40px;
+        height: 40px;
+        margin-right: 6px;
+    }
+
+    .list-block {
+        padding-top: 5px;
+    }
+
+    .review-chart-wrapper {
+        padding: 0 0 20px;
+    }
+
+    .review-chart-wrapper {
+        padding: 0 0 20px;
+    }
+
+    .top-field .mat-form-field {
+        width: 130px;
+    }
+
+    .col-md-3,
+    .col-12 {
+        padding: 0 8px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .custom-card h1 {
+        font-size: 18px;
+    }
+
+    .custom-card .text-wrap p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .custom-card p b {
+        margin-bottom: 0;
+    }
+
+    .img-wrap img {
+        width: 30px;
+    }
+
+    .custom-card {
+        padding: 10px;
+    }
+
+    .head-wrap h2 {
+        font-size: 16px;
+    }
+
+    .head-wrap a {
+        font-size: 12px;
+    }
+
+    .head-wrap {
+        padding: 10px;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+}
+
+@media screen and (max-width: 991px) {
+
+    .col-md-3,
+    .col-12 {
+        margin-bottom: 15px;
+    }
+
+    .review-chart-wrapper {
+        padding: 0;
+    }
+
+    .table-card-wrapper {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .custom-card {
+        margin-bottom: 20px;
+    }
+
+    .form-field.page-top .mat-form-field {
+        width: 160px;
+    }
+}

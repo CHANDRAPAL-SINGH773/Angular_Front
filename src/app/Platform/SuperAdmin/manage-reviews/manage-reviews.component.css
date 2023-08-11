@@ -1,0 +1,149 @@
+.mat-column-checkbox {
+    max-width: 80px;
+}
+
+.mat-column-message {
+    min-width: 600px;
+}
+
+.mat-table mat-row:nth-child(odd) mat-cell {
+    background: transparent;
+}
+
+table td,
+.mat-table .mat-cell {
+    height: auto;
+    min-height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* overflow: unset; */
+}
+
+.mat-column-subject a {
+    text-decoration: none;
+    color: #414453;
+}
+
+.mat-table .mat-header-cell {
+    border-top: 0;
+}
+
+/* action style */
+.action-wrap .custom-btn {
+    min-width: 102px;
+    padding: 4px 10px;
+    margin-bottom: 0 !important;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.action-wrap .custom-btn.green {
+    margin-right: 5px !important;
+    background: #4FB53C;
+}
+
+.action-wrap .custom-btn.red {
+    background: #BF5329;
+}
+
+.mat-table .action-wrap .custom-btn:hover {
+    filter: unset;
+    background: #000000;
+}
+
+.action-wrap .icon-circle mat-icon {
+    background: #FFFFFF;
+    border: 1.5px solid #ccc;
+    border-radius: 50%;
+    line-height: normal;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: auto;
+    height: auto;
+    padding: 1px;
+}
+
+.action-wrap .icon-circle {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.action-wrap .icon-circle.green mat-icon {
+    border-color: #4FB53C;
+    color: #4FB53C;
+}
+
+.action-wrap .icon-circle.green {
+    color: #4FB53C;
+}
+
+.action-wrap .icon-circle.red mat-icon {
+    border-color: #BF5329;
+    color: #BF5329;
+}
+
+.action-wrap .icon-circle.red {
+    color: #BF5329;
+}
+
+.action-wrap .icon-circle:hover {
+    filter: unset;
+    opacity: 0.6;
+}
+/* action style ends */
+.mat-table mat-header-cell.mat-column-Action, .mat-table mat-cell.mat-column-Action {
+    min-width: 235px;
+}
+.action-wrap {
+    display: block;
+}
+
+.action-wrap .inner-btn-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+
+/*responsive start */
+@media screen and (max-width: 1600px) {
+    .mat-column-message {
+        min-width: 550px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .mat-column-message {
+        min-width: 450px;
+    }
+
+    .mat-column-checkbox {
+        max-width: 60px;
+    }
+    .mat-table mat-header-cell.mat-column-Action, .mat-table mat-cell.mat-column-Action {
+        min-width: 220px;
+    }
+    
+    .action-wrap .custom-btn {
+        min-width: 90px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .mat-column-message {
+        min-width: 300px;
+    }
+
+    .mat-column-checkbox {
+        max-width: 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {}

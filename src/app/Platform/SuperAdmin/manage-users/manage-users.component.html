@@ -1,0 +1,107 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+      <ul class="custom-breadcrumbs">
+        <li><a [routerLink]="['/Dashboard']"  class="main-base" title="Dashboard">Dashboard</a></li>
+        <li><a  [routerLink]="['/Dashboard/ManageUsers']" class="current" title="Manage User">Manage User</a></li>
+      </ul>
+      <div class="right-btn-wrap">
+        <a class="custom-btn border-btn" title="Print" (click)="Print()"><img src="../../../../assets/images/Printer.svg" alt=""></a>
+        <button class="custom-btn" [disabled]="isDisabled" title="Export to excel" (click)="exportAsXLSX()" title="Export CSV">Export CSV</button>
+        <a  [routerLink]="['/Dashboard/add-edit-user/0/0']" class="custom-btn m-0" title="Add New User">Add New User</a>
+      </div>
+    </div>
+  
+    <!-- table cards -->
+    <div class="custom-card">
+      <div class="heading-wrap">
+        <h1>{{title}}</h1>
+        <form class="search-wrap" [formGroup]="userForm">
+          <input class="form-control me-2" type="search" formControlName="Search" (keydown)="GetUserList()" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+  
+      <div class="table-responsive">
+        <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">     
+          <ng-container matColumnDef="logo">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="img-">
+                <img src="../../../../assets/images/marry-baldwin-logo.svg" alt="">
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.EmpName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Email}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> User Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.UserName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.RoleName}} </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <div class="form-check form-switch">
+                <input class="form-check-input" title="Active / Deactive User" [(ngModel)]="element.IsActive" id="Status_{{element.UserId}}" type="checkbox" role="switch" (click)="ActiveDeactiveUser(element.UserId,element.IsActive)"  checked>   
+                <label class="custom-control-label" for="block_{{element.UserId}}"></label>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="block">
+            <mat-header-cell *matHeaderCellDef> Block </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="form-check form-switch">
+                <input class="form-check-input" title="Block User" [(ngModel)]="element.IsBlock" id="Block_{{element.UserId}}" (click)="BlockUnBlockUser(element.UserId,element.IsBlock)" type="checkbox" role="switch"  checked>
+                <label class="custom-control-label" for="block_{{element.UserId}}"></label>
+              </div>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="action-wrap">
+                <a [routerLink]="['/Dashboard/add-edit-user', element.UserId,0]">
+                  <img src="../../../../assets/images/edit-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Edit User">
+                </a>
+                &nbsp;
+                <a (click)="deleteUser(element.UserId)" *ngIf="element.IsDeleted != 1">
+                  <img src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Delete User">
+                </a>
+              </div>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+          </ng-container>
+          <div>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+              </mat-footer-row>
+        </div>
+        </mat-table>
+        <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize" 
+        [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+        </mat-paginator>
+      </div>
+
+    </div>
+  
+  </div>

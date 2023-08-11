@@ -1,0 +1,149 @@
+@import '../../../../assets/scss/variable.scss';
+
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    /*custom css */
+    display: flex;
+    position: absolute;
+    z-index: 100000;
+    margin-top: 14%;
+    margin-left: 30%;
+  }
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+    .dashboard {
+      padding: 0;
+        .top_bar{
+          padding: 10px 15px 0;
+          border-bottom: 1px solid rgba(19, 15, 38, 0.1);
+          .left_part{
+             display: flex;
+             flex-wrap: wrap;
+             align-items: flex-start;
+             gap: 0 15px;
+             .form_field_wrapper{
+                label{
+                  font-size: $font_small;
+                  font-weight: 500;
+                  color: $bodycolor;
+                }
+                .mat-form-field{
+                  .mat-form-field-wrapper{
+                      .mat-form-field-flex{
+                        background-color: #F4F5F3;
+                        box-shadow: none;
+                      }
+                  }
+                }
+             } 
+             .btn {
+                min-width: 110px;
+             }
+        }
+        }
+        .bottom_bar{
+          padding: 10px 15px;
+          .table_wrap {
+            .table_inner {
+              table {
+                tr{
+                  td{
+                    .form_field_wrapper{
+                      .mat-form-field{
+                         .mat-form-field-wrapper{
+                           padding-bottom: 0;
+                           .mat-form-field-flex{
+                            padding: 0 10px 0 10px;
+                              .mat-form-field-infix{
+                                width: 80px;
+                                border-top: 0.7825em solid rgba(0, 0, 0, 0);
+                                padding: 0 0 0.5em 0;
+                              }
+                           }
+                         }
+                      }
+                    }
+                  }
+                    .mat-column-status{
+                      padding-left: 20px;
+                      padding-right: 20px;
+                     }
+                }
+              }
+            }
+          }
+          .primary_btn{
+            justify-content: flex-start;
+            gap: 0 27px;
+            margin: 0 0 20px;
+             .btn {
+                font-size: $font_large;
+                font-weight: 400;
+                color: $bodycolor;
+                min-height: 55px;
+             }
+          }
+        }
+    }
+    @media only screen and (min-device-width: $medium_iphone_up) {
+      .dashboard .top_bar .left_part .btn{
+        margin-top: 15px;
+      }
+    }
+    
+    @media only screen and (max-device-width: $desktop) {
+      .dashboard .top_bar{
+        flex-direction: column;
+        padding: 10px 15px;
+      }
+    }
+    @media only screen and (max-device-width: $large_phone) {
+      .dashboard .top_bar .left_part .form_field_wrapper{
+        width: 48%;
+      }
+      .dashboard .top_bar .left_part .btn{
+        width: 48%;
+      }
+    }
+    @media only screen and (max-device-width: $medium_iphone) {
+      .dashboard .top_bar{
+        align-items: normal;
+      }
+      .dashboard .top_bar .left_part{
+        flex-direction: column;
+        width: 100%;
+        align-items: normal;
+      }
+      .dashboard_main_content .top_bar .right_part{
+        width: 100%;
+      }
+      .dashboard .top_bar .left_part .form_field_wrapper{
+        width: 100%;
+      }
+      .dashboard .top_bar .left_part .btn{
+        width: 100%;
+      }
+    }
+    @media only screen and (min-device-width: $desktop_pro_up) {
+      .viewcompany{
+        width: 700px;
+      }
+    }
+

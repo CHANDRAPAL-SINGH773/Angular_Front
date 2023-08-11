@@ -1,0 +1,215 @@
+@import "../../../../assets/scss/variable.scss";
+
+.sidebar_main {
+    .inner_sidebar {
+        .header_logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 15px 25px;
+        }
+        .menu_list {
+            ul {
+                &.menu_list_main {
+                    padding: 0;
+                    scrollbar-width: thin ;
+                    height: 83vh; 
+                    overflow-y: auto;
+                    display: block;
+                        &::-webkit-scrollbar{
+                            width: 3px; 
+                        }
+                        &::-webkit-scrollbar-thumb{
+                            background-color: #B5C8D8; 
+                            border-radius: 10px;
+                        }
+                    li {
+                        list-style: none;
+                        margin-bottom: 10px;
+                        position: relative;
+                        .nav-link {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            font-size: $font_medium;
+                            font-weight: 500;
+                            color: $bodyopacitycolor;
+                            padding: 12px 15px;
+                            border-radius: 13px;
+                            .menu_list_block {
+                                display: flex;
+                                align-items: center;
+                               .sidebar_icon{
+                                    width: 25px;
+                                    min-width: 25px;
+                                    height: 25px;
+                                    line-height: 25px;
+                                    text-align: center;
+                                    margin: 0 8px 0 0;
+                                    .icon_hover{
+                                        display: none;
+                                     }  
+                               }
+                            }
+                            &.active,&:hover {
+                                background-color: $bodyhovercolor;
+                                .menu_list_block{
+                                    color: $white_color;
+                                    .sidebar_icon{
+                                        .icon{
+                                            display: none;
+                                         }
+                                        .icon_hover{
+                                            display: inline-block;
+                                         }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    .offcanvas {
+        visibility: visible;
+      }
+      .offcanvas.offcanvas-start {
+          left: 235px;
+          width: 235px;
+          border-color: $sidebar_background;
+          background: $sidebar_background;
+      }
+      .offcanvas-header {
+        //   padding: 15px 0 0 0;
+        padding: 0;
+        justify-content: flex-end;
+      }
+      .offcanvas-header .close{
+        background-color: $bodyhovercolor;
+        border: none;
+        border-radius: unset;
+        opacity: 1;
+        margin: 0 -1px 0 0;
+        padding: 0;
+        height: 30px;
+        min-height: 30px;
+        width: 30px;
+        line-height: 30px;
+        .mat-icon{
+            color: $white_color;;
+            font-size: 20px;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+        }
+      }
+      .offcanvas-body {
+          overflow: hidden;
+          padding: 0;
+      }
+
+}
+
+// siedebar dropdown css
+.sidebar-dropdown{
+    &.dropmenu{
+        position: relative;
+        &::after {
+            content: "\e64b";
+            font-family: "themify-icons";
+            position: absolute;
+            right: 0;
+            height: 100%;
+            top: 9px;
+            right: 21px;
+        }
+        &.active {
+            &::after {
+                content: "\e648";
+                font-family: "themify-icons";
+                position: absolute;
+                right: 0;
+                height: 100%;
+                top: 9px;
+                right: 21px;
+            } 
+        }
+        .sidebar-submenu {
+            margin-left: 17px;
+            margin-top: 21px;
+            ul {
+                li {
+                    a {
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 19px;
+                        color: $bodyopacitycolor;
+                        text-decoration: none;
+                        display: inline-block;
+                        &.active {
+                            font-weight: 600;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:991px) {
+    .sidebar_main .offcanvas.offcanvas-start {
+        left: 0;
+    }
+    .sidebar_main .inner_sidebar .header_logo{
+        padding: 15px 15px 35px;
+    }
+    .sidebar_main .inner_sidebar .header_logo img{
+        max-width: 55%;
+    }
+ 
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(10deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(5deg);
+    }
+    70% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes sonar {
+    0% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}

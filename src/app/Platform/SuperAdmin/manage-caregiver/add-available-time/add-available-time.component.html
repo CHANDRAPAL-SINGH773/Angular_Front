@@ -1,0 +1,45 @@
+<div mat-dialog>
+  <div mat-dialog-title>
+     {{title}}
+    <div class="align">
+      <button type="button" class="btn-close" matTooltip="Close" (click)="dialogRef.close(false)"></button>
+    </div>
+  </div>
+  <mat-dialog-content>
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-field border-bottom">
+                <mat-checkbox>Available</mat-checkbox>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>From</mat-label>
+                  <input type="time" value="9:00 AM" matInput autocomplete="new-name" placeholder="9:00 AM">
+                  <mat-error *ngIf="'planName.invalid'">Field is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <mat-form-field appearance="fill">
+                  <mat-label>To</mat-label>
+                  <input type="time" value="6:00 PM" matInput autocomplete="new-name" placeholder="6:00 PM">
+                  <mat-error *ngIf="'planName.invalid'">Field is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="row">
+        <div class="modal-footer">
+          <button type="button" class="custom-btn gray-btn rounded-btn" (click)="dialogRef.close(false)">Cancel</button>
+          <button type="button" class="custom-btn rounded-btn">Save</button>
+          </div>
+    </div>
+</mat-dialog-actions>
+</div>

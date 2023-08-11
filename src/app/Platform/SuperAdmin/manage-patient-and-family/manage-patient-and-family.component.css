@@ -1,0 +1,10 @@
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+
+    .mat-table .mat-column-status,
+    .mat-column-block {
+        max-width: 60px;
+    }
+
+}

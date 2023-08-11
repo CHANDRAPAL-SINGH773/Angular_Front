@@ -1,0 +1,310 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+</div>
+<div class="common-dash-wrapper">
+    <div class="head-wrap p-0">
+        <h4> Dashboard </h4>
+        <div class="form-field page-top">
+            <form class="edit-profile-form" [formGroup]="agencyDashBoardForm">
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="OfficeId" placeholder="Select Office">
+                    <mat-option *ngFor="let list of OfficeList" [value]="list.Id">{{list.Label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </form>
+        </div>
+    </div>
+    <div class="card-wrapper">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="custom-card blue-gray">
+                    <div class="text-wrap">
+                        <h1>{{totalCaregiverSchedule}}</h1>
+                        <p> <span><b>Caregiver Scheduled</b></span> <span style="color:#FE3E4A;">{{totalVisitCancelled}}</span> Visit Cancelled </p>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="../../../../../assets/images/dash-schedular-icon.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="custom-card light-blue">
+                    <div class="text-wrap">
+                        <h1>{{totalOpenReferral}}</h1>
+                        <p> <span><b>Open Referrals</b></span> <span style="color:#FE3E4A;">{{totalonHold}}</span> On Hold
+                        </p>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="../../../../../assets/images/patient.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="custom-card light-gray">
+                    <div class="text-wrap">
+                        <h1>{{totalReferralInvite}}</h1>
+                        <p> <span><b>Referral Invite Received</b></span> <span style="color:#FE3E4A;">{{totalReferralVisitCancel}}</span> visits
+                            cancelled by Caregiver</p>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="../../../../../assets/images/caregiver.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="custom-card pink-gray">
+                    <div class="text-wrap">
+                        <h1>{{totalReferralAccepted}}</h1>
+                        <p> <span><b>Referral Accepted</b></span> <span style="color:#FE3E4A;">{{totalReferral_VisitCancel}}</span> visits cancelled
+                            by Caregiver</p>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="../../../../../assets/images/person-orange.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="review-chart-wrapper">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="custom-card">
+                    <div class="head-wrap" style=" border-bottom: 1px solid #F1F1FD;">
+                        <h2>Caregiver Ratings</h2>
+                    </div>
+                    <div id="review-rating-chart">
+                        <apx-chart [series]="ReferralChartOptions.series!" [chart]="ReferralChartOptions.chart!"
+                            [xaxis]="ReferralChartOptions.xaxis!" [stroke]="ReferralChartOptions.stroke!"
+                            [tooltip]="ReferralChartOptions.tooltip!" [dataLabels]="ReferralChartOptions.dataLabels!" [responsive]="ReferralChartOptions.responsive!"  [legend]="ReferralChartOptions.legend!">
+                        </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Alerts </h2>
+                    </div>
+                    <ul class="list-block">
+                        <li *ngFor=" let element of tab4Data">
+                            <div class="left-wrap">
+                                <div class="img-wrap">
+                                    <img src="../../../../../assets/images/marry-baldwin-logo.svg" alt="">
+                                </div>
+                                <div class="text-wrap">
+                                    <h4>{{element.Column2}}</h4>
+                                    <p>{{element.Column3}}</p>
+                                </div>
+                            </div>
+                            <div class="date-wrap">
+                               {{element.Column1 | date: 'dd MMM, yyyy'}}<br /> {{element.Column1 | date: 'hh:mm a'}}
+                            </div>
+                        </li>                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card-wrapper">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Open Shifts </h2>
+                        <a [routerLink]="['/Dashboard/Agency-Open-shift']" title="View All">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Shift No.</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor=" let element of tab4Data">
+                                    <td>
+                                        <div class="img-wrap">
+                                            <img src="../../../../../assets/images/marry-baldwin-logo.svg" alt="">
+                                        </div>
+                                    </td>
+                                    <td>{{element.Column1}}</td>
+                                    <td>{{element.Column3 | date: 'MM-dd-yyyy'}}</td>
+                                    <td>{{element.Column4}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Assigned Shifts</h2>
+                        <a [routerLink]="['/Dashboard/assigned-invited-shift']" title="View All">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Shift No.</th>
+                                    <th>Shift Date</th>
+                                    <th>Caregiver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor=" let element of tab5Data">
+                                    <td>
+                                        <div class="img-wrap">
+                                            <img src="../../../../../assets/images/marry-baldwin-logo.svg" alt="">
+                                        </div>
+                                    </td>
+                                    <td>{{element.Column1}}</td>
+                                    <td>{{element.Column3 | date: 'MM-dd-yyyy'}}</td>
+                                    <td><b>{{element.Column5}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="review-chart-wrapper">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Release Shifts </h2>
+                        <a [routerLink]="['/Dashboard/Agency-Open-shift']" title="View All">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Shift No.</th>
+                                    <th>Shift Type</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of tab6Data">
+                                    <td>{{element.Column2}}</td>
+                                    <td>{{element.Column7}}</td>
+                                    <td>{{element.Column3 | date:'dd MMM,yyyy'}}</td>
+                                    <td>{{element.Column3 | date:'dd MMM,yyyy'}}</td>
+                                    <td>{{element.Column4}}</td>
+                                    <td>{{element.Column5}} hrs.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="custom-card">
+                    <div class="head-wrap" style=" border-bottom: 1px solid #F1F1FD;">
+                        <h2>Do not send again </h2>
+                        <div class="form-field top-field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Option">
+                                    <mat-option value="">Monthly</mat-option>
+                                    <mat-option value="">Annually</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div id="column-chart">
+                        <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                            [xaxis]="chartOptions.xaxis!" [title]="chartOptions.title!"
+                            [dataLabels]="chartOptions.dataLabels!" [tooltip]="chartOptions.tooltip!" [responsive]="chartOptions.responsive!">
+                        </apx-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card-wrapper">
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Upcoming Shifts</h2>
+                        <a title="View All">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table diff-table">  
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Caregiver Name</th>
+                                    <th>Shift No</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </thead>            
+                            <tbody>
+                                <tr *ngFor="let element of tab7Data">
+                                    <td>
+                                        <div class="img-wrap">
+                                            <img src="../../../../../assets/images/marry-baldwin-logo.svg" alt="">
+                                        </div>
+                                    </td>
+                                    <td><b>{{element.Column5}}</b></td>
+                                    <td>{{element.Column1}}</td>
+                                    <td>{{element.Column3 | date:'dd MMM,yyyy'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="custom-card">
+                    <div class="head-wrap">
+                        <h2>Invites by Care Coordinate team</h2>
+                        <a title="View All">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Shift Type</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of tab8Data">
+                                    <td>{{element.Column1}}</td>
+                                    <td>{{element.Column7}}</td>
+                                    <td>{{element.Column3 | date:'dd MMM,yyyy'}}</td>
+                                    <td>{{element.Column3 | date:'dd MMM,yyyy'}}</td>
+                                    <td>{{element.Column4}}</td>
+                                    <td>{{element.Column5}} hrs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+@import '../../../../../assets/scss/variable.scss';
+
+@media only screen and (min-device-width: $desktop_pro_up) {
+    .uploaddoc{
+        width: 450px;
+        .uploaddoc_dialog{
+            form{
+                .upload_img{
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: 0 15px;
+                    .tbactionbtn{
+                        padding: 0;
+                        min-height: auto;
+                        width: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                        margin: 0 0 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}

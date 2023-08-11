@@ -1,0 +1,55 @@
+<div class="loader" *ngIf="loader"></div>
+
+<div class="document">
+  <div class="primary_btn">
+    <button class="btn btn-primary upload_btn" (click)="createModal()">
+      <i class="fa fa-plus" aria-hidden="true"></i> Upload Document
+    </button>
+  </div>
+  <div *ngIf="documentList!=null && documentList.length>0" class="row">
+    <div class="col-sm-6 col-lg-4" *ngFor="let doc of documentList">
+      <mat-card class="custom-card">
+        <mat-card-header>
+          <!-- <mat-card-title>
+            {{doc.description}}
+          </mat-card-title> -->
+          <mat-card-actions>
+            <button  class="btn btn-secondary" (click)="getUserDocument(doc)">
+              <i class="fa fa-download"></i>
+            </button>
+            <button class="btn btn-secondary" (click)="deleteUserDocument(doc)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </mat-card-actions>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+              <label>Document Title:</label>
+              <span>{{doc.description}}</span>
+            </p>
+            <p>
+              <label>Uploaded Date:</label>
+              <span>{{doc.createdOn |date:'MM/dd/yyyy'}}</span>
+            </p>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="documentList==null || documentList.length==0" >
+    <p>No Documents Found</p>
+  </div>
+
+</div>
+
+
+
+
+
+ 
+
+
+
+
+
+

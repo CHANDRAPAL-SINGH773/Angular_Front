@@ -1,0 +1,103 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+</div>
+
+<div class="common-page-wrapper">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/messaging']" class="current" title="Messaging">Messaging</a></li>
+        </ul>
+    </div>
+    <div class="msg-tab-row">
+        <div [className]="caregiveractive==true ? 'msg-tab active' : 'msg-tab'">
+            <a title="Caregivers" (click)="getActiveCaregivers()">Caregivers</a>
+            <div class="noti-count" *ngIf="caregiverCount!=0">{{caregiverCount}}</div>
+        </div>
+        <div *ngIf="userType!=2" [className]="clientactive==true ? 'msg-tab active' : 'msg-tab'">
+            <a title="Clients" (click)="getActiveClients()">Clients</a>
+            <div class="noti-count" *ngIf="clientCount!=0">{{clientCount}}</div>
+        </div>
+        <div [className]="agencyactive==true ? 'msg-tab active' : 'msg-tab'">
+            <a title="Agencies" (click)="getActiveAgencies()">Agencies</a>
+            <div class="noti-count" *ngIf="agencyCount!=0">{{agencyCount}}</div>
+        </div>
+        <div [className]="coordinatoractive==true ? 'msg-tab active' : 'msg-tab'">
+            <a title="Coordinator" (click)="getActiveCoordinator()">Admin</a>
+            <div class="noti-count" *ngIf="coordinatorCount!=0">{{coordinatorCount}}</div>
+        </div>
+    </div>
+
+    <div class="msg-card"  [ngClass]="showChatDetail ? 'show' : 'hide'">
+        <div class="left-wrap">
+            <div class="head">
+                Messages
+            </div>
+            <ul class="msg-list">
+                <li  (click)="openChatMobile(item.UserId,item.UserType,item.Name)" *ngFor=" let item of users">
+                    <div class="common-wrap" *ngIf="item.UserId!=userId">
+                        <div class="img-wrap">
+                            <img src="../../../../assets/images/dummy-profile-img.svg" alt="">
+                        </div>
+                        <div class="text-wrap">
+                            <h4>{{item.Name}}</h4>                           
+                        </div>
+                    </div>
+                    <div class="time-count-wrap">
+                        <!-- <div class="time">5:30 PM</div>
+                        <div class="msg-count">1</div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="right-wrap">
+            <div class="head">
+               {{selectedProfileName}}
+            </div>
+            <div class="msg-detail-wrap">
+                <div class="body-wrap">
+                    <div  *ngFor="let msg of threadMessages">
+                    <div class="msg-common received" *ngIf="msg.SenderId==userId">
+                        <div class="msg-text">
+                            {{msg.MessageText}}
+                        </div>
+                        <div class="msg-time">{{msg.createdOn | date:'hh:mm a'}}</div>
+                    </div>
+                    <div class="msg-common send" *ngIf="msg.ReceiverId==userId">
+                        <div class="msg-text">
+                            {{msg.MessageText}}
+                        </div>
+                        <div class="msg-time">
+                            {{msg.createdOn | date:'hh:mm a'}}
+                        </div>
+                    </div>
+                    <div class="msg-common received" *ngIf="msg.MessageFile!=null">
+                        <div class="msg-text">
+                            <div class="img-wrap">
+                                <img src="../../../../assets/images/pdf-big-icon.svg" alt="">
+                            </div>
+                            <p class="file-name">permission_letter.pdf</p>
+                        </div>
+                        <div class="msg-time">
+                            {{msg.createdOn | date:'hh:mm a'}}
+                        </div>
+                    </div>
+                 </div>
+                </div>
+                <div class="footer-wrap">
+                    <form class="search-wrap"  [formGroup]="messageform">
+                        <input class="form-control me-2" type="search" formControlName="messageText" placeholder="Type your message here..."
+                            aria-label="Search">
+                        <button class="custom-btn rounded-btn" (click)="SendMessage()" title="Send">Send</button>
+                        <a title="Attach Item" class="icon-wrap">
+                            <img src="../../../../assets/images/attached-icon.svg" alt="">
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+<div class="common-page-wrapper form-page">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/SendNewNotification']" class="current" title="Send New Notification">Send New
+          Notification</a></li>
+    </ul>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>Send Notification</h1>
+    </div>
+
+    <form class="edit-profile-form" [formGroup]="SendNewNotification">
+      <div class="form-wrapper">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label>Select From Template</mat-label>
+                <mat-select formControlName="SelectTemplate" [ngClass]="{ 'is-invalid': submitted  }">
+                  <mat-option *ngFor=" let list of templateList" [value]="list.TemplateId">{{list.TemplateName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="'SelectTemplate.invalid'">Template is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label>Select Receivers</mat-label>
+                <mat-select multiple formControlName="SelectReceiver" [ngClass]="{ 'is-invalid': submitted  }">
+                  <mat-option *ngFor="let option of planTypeList" value="{{option.Id}}">{{option.Name}} </mat-option>
+                </mat-select>
+                <mat-error *ngIf="'SelectReceiver.invalid'">Receivers is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input type="text" formControlName="Title" maxlength="50" matInput
+                  [ngClass]="{ 'is-invalid': submitted }">
+                <mat-error *ngIf="'Title.invalid'"> Title is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label> Note</mat-label>
+                <input type="text" maxlength="120" formControlName="Note" matInput
+                  [ngClass]="{ 'is-invalid': submitted }">
+                <mat-error *ngIf="'Note.invalid'">Note is required</mat-error>
+
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="btn-wrap">
+            <button type="button" class="custom-btn gray-btn" title="Cancel" style="margin-left: auto;"
+              [routerLink]="['/Dashboard/ManageNotification']">Cancel</button>
+            <button type="button" class="custom-btn" title="Save" (click)="SendNewNotifications()">Send
+              Notification</button>
+          </div>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+
+</div>

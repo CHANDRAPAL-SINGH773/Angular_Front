@@ -1,0 +1,120 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageCaregiver']" class="current" title="Manage Caregiver">Manage Caregiver</a>
+      </li>
+    </ul>
+    <div class="right-btn-wrap">
+      <a class="custom-btn border-btn" title="Print" (click)="Print()" ><img src="../../../../assets/images/Printer.svg" alt=""></a>
+      <button class="custom-btn" [disabled]="isDisabled" (click)="exportAsXLSX()" title="Export CSV">Export CSV</button>
+      <a [routerLink]="['/Dashboard/add-edit-caregiver/0/0']" class="custom-btn m-0" title="Export CSV">Add New Caregiver</a>
+    </div>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>{{title}}</h1>
+      <form class="search-wrap" [formGroup]="caregiverform">
+        <input class="form-control me-2" type="search" formControlName="Search" placeholder="Search" aria-label="Search" (keydown)="GetCareGiverList('searching')">
+      </form>
+    </div>
+
+    <div class="table-responsive">
+
+      <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+        
+        <ng-container matColumnDef="logo">
+          <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+          <div class="img-">
+            <img src="../../../../assets/images/marry-baldwin-logo.svg" alt="">
+          </div>
+        </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="caregiverName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Caregiver Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.FirstName}}{{element.LastName}}</mat-cell>
+         </ng-container>
+        <ng-container matColumnDef="userName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.UserName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="contactNo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ContactNo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Email}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Address</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Address}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rating">
+          <mat-header-cell *matHeaderCellDef mat-sort-header > Rating </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="rating-wrap">
+            <img src="../../../../assets/images/good-rating.png" *ngIf="element.TotalRating > 3" alt="">
+            <p *ngIf="element.TotalRating == null">Under Review</p>
+             <img src="../../../../assets/images/bad-rating.png" *ngIf="element.TotalRating < 3 && element.TotalRating != null" alt=""> 
+          </div> 
+        </mat-cell>
+        </ng-container>
+  
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">    
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Active / Deactive Caregiver" [(ngModel)]="element.IsActive" id="{{element.id}}"  (click)="changeCaregiverStatus(element.CaregiverId,element.IsActive)" type="checkbox" role="switch"  checked>
+            <label class="custom-control-label" for="{{element.CaregiverId}}"></label>
+          </div> 
+        </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="block">
+          <mat-header-cell *matHeaderCellDef> Block </mat-header-cell>
+          <mat-cell *matCellDef="let element">   
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Block Caregiver" [(ngModel)]="element.IsBlock" id="block_{{element.id}}" (click)="BlockUnblockCaregiver(element.CaregiverId,element.IsBlock)" type="checkbox" role="switch" checked>
+            <label class="custom-control-label" for="{{element.CaregiverId}}"></label>
+          </div> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="action-wrap">
+              <a [routerLink]="['/Dashboard/add-edit-caregiver', element.CaregiverId,0]">
+                <img src="../../../../assets/images/edit-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Edit Caregiver"></a>
+               <a (click)="deleteCaregiver(element.CaregiverId)"> <img src="../../../../assets/images/delete-icon.svg" data-toggle="tooltip" data-placement="right" title="Delete Caregiver" alt="icon"> </a>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+             <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+          </ng-container>
+          <div>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+              </mat-footer-row>
+        </div>
+        </mat-table>
+        <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize"
+        [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+      </mat-paginator>
+    </div>
+
+  </div>
+
+</div>

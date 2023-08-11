@@ -1,0 +1,53 @@
+<!-- <div class='custom-loader' *ngIf="loaderflag" id=loader>
+    <img src='../../../assets/images/loader.gif' alt=''><br />
+    Loading...
+</div> -->
+<div class="loader" *ngIf="loaderflag"></div>
+<div class="dashboard dashboard_main_content"  [ngClass]="{'loader-bg' : loaderflag}">
+    <div class="top_bar">
+        <div class="left_part part">
+
+            <div class="form_field_wrapper">
+                <mat-form-field appearance="fill">
+                    <input type="text" matInput name="name" placeholder="Enter Name" [(ngModel)]="companyNameInput">
+                </mat-form-field> 
+            </div>
+
+            <div class="form_field_wrapper">
+                <mat-form-field appearance="fill">
+                    <input type="text" matInput name="name" placeholder="Enter Email" [(ngModel)]="companyEmailInput">
+                </mat-form-field> 
+            </div>
+
+            <button class="btn btn-primary" (click)="CompleteRequestSearch()"><span>Search</span></button>
+            <button class="btn btn-primary" (click)="CompleteRequestClear()"><span>Clear</span></button>
+        </div>
+        <div class="right_part part">
+            <button class="btn btn-light" (click)="newBusinessPartner()">+ Add Business Partner</button>
+        </div>
+ 
+    </div>
+
+
+    <div class="bottom_bar">
+
+        <mat-tab-group #allTabs (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="Completed Request" >
+                <app-completed-request *ngIf="selectedIndex == 0"></app-completed-request>
+            </mat-tab>
+            <mat-tab label="Outgoing Request" >
+               <app-outgoing-request *ngIf="selectedIndex == 1"></app-outgoing-request>
+            </mat-tab>
+            <mat-tab label="Incoming Request" >
+              <app-incoming-request *ngIf="selectedIndex ==2"></app-incoming-request>
+              
+            </mat-tab>
+        </mat-tab-group>
+
+
+    </div>
+
+</div>
+
+
+

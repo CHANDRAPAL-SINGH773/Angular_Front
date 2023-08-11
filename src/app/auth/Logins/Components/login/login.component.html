@@ -1,0 +1,86 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+</div>
+
+
+
+<div class="login loginauth" [ngClass]="{'loader-bg' : loaderflag}">
+    <div class="login_inner">
+			<div class="part_wrapper">
+				<div class="left_part part">
+					<div class="leftpart_inner">
+						<!-- <div class="logo" [routerLink]="['/']">
+							<img [src]="login_logo" alt="Store logo">
+						</div> -->
+						<div class="middle_text">
+							 <h1>Welcome To Go green</h1>
+							  <div class="desc">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
+						</div>
+						<div class="bottom_part">
+							<img [src]="bottom_img" alt="bottom image">
+						</div>
+					</div>
+				</div>
+				<div class="right_part part">
+					<div class="rightpart_inner">
+						<div class="login_form">
+							<div class="login_form_inner">
+			
+	
+								<form class="login" #LoginApp="ngForm">
+									<div class="title_wrapper">
+										<h4 class="form_title">Login</h4>
+										<div class="form_desc">Lorem Ipsum is simply dummy printing and typesetting</div>
+									</div>
+									<P *ngIf="errorMsg" style="color: red;">Please enter valid username & password</P>
+	
+	
+									<div class="form_field_wrapper">
+										<label>User Name</label>
+										<mat-form-field appearance="fill">
+											<span class="field_icon" matPrefix>
+												<img src="../../../../../assets/images/login_user.svg" />
+											</span>
+											<input type="text" maxlength="50" id="username" matInput name="username"  #UserName="ngModel" ngModel text required>
+											<mat-error *ngIf="errorMsg">Please enter valid username.</mat-error>
+										</mat-form-field> 
+									</div>
+	
+									<div class="form_field_wrapper">
+										<label>Password</label>
+										<mat-form-field appearance="fill">
+											<span class="field_icon" matPrefix>
+												<img src="../../../../../assets/images/login_pass.svg" />
+											</span>
+											<input [type]="showPassword ? 'text' : 'password'" maxlength="20" minlength="8" matInput name="password" #Password="ngModel" ngModel required>
+											<mat-icon matSuffix (click)="togglePasswordVisibility()">
+												{{showPassword?'visibility_off':'visibility'}}
+											</mat-icon>
+											<mat-error *ngIf="errorMsg">Please enter valid password.</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="forgot_pass">
+										<a title="Forgot Password?"  [routerLink]="['/auth/forgot-password']"> Forgot Password? </a>
+									</div>
+									
+									<div class="form-btn">
+										<button type="submit" (click)="Login(LoginApp)" class="btn btn-primary">Login</button>
+									</div>
+								</form>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+    </div>
+</div>
+
+
+
+
+
+

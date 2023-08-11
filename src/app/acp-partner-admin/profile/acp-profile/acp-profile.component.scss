@@ -1,0 +1,134 @@
+@import '../../../../assets/scss/variable.scss';
+
+.acp_profile{
+	.top_bar{
+		margin: 0 0 30px;
+		align-items: flex-start;
+		flex-direction: row;
+		.part{
+			margin-top: 0;
+			&.left_part{
+				width: 50%;
+				display: flex;
+				align-items: flex-start;
+				.user_image_upload{
+					margin: 0 30px 0 0;
+					.user_upload_input{
+						width: 100px;
+						height: 100px;
+					}
+					.user_upload_block{
+						margin-left: -100px;
+						.user_upload_wrapper{
+							width: 100px;
+							height: 100px;
+							line-height: 100px;
+							.user_upload_icon {
+								img{
+									width: 100px;
+									height: 100px;
+									line-height: 100px;
+								}
+							}
+						}
+					}
+				}
+				.name{
+					margin: 0;
+					font-size: $font_large;
+				}
+			}
+			&.right_part{
+				width: 50%;
+				// margin: 0 20% 0 0;
+				.column {
+					display: flex;
+					margin: 0 -15px;
+					.col_item{
+						padding: 0 15px;
+						.company-details{
+							font-size: 16px;
+							font-family: $font_family_semibold;
+							font-weight: 600;
+							margin: 0 0 15px;
+							p{
+								font-size: 16px;
+								label{
+									font-size: 16px;
+									font-family: $font_family_semibold;
+									font-weight: 600;
+								}
+							}
+						}
+						p{
+							font-size: 16px;
+							font-family: $font_family_semibold;
+							font-weight: 600;
+							margin: 0 0 5px;
+							label{
+								margin: 0 10px 0 0;
+								font-size: 16px;
+								font-family: $font_family_semibold;
+								font-weight: 600;
+							}
+							&:last-child{
+								margin: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+	}
+
+	.acp_profile_tab{
+		.tab_content {
+			overflow: hidden;
+			form{
+				.field-row{
+					display: flex;
+					align-items: center;
+					flex-wrap: wrap;
+					margin: 0 -15px;
+					.form_field_wrapper{
+						width: 25%;
+						padding: 0 15px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-device-width: $tablet) {
+	.acp_profile .acp_profile_tab .tab_content form .field-row .form_field_wrapper{
+		width: 33.33%;
+	}
+}
+@media only screen and (max-device-width: $large_phone) {
+	.acp_profile .acp_profile_tab .tab_content form .field-row .form_field_wrapper{
+		width: 50%;
+	}
+}
+@media only screen and (max-device-width: $medium_iphone) {
+	.acp_profile .top_bar{
+		flex-direction: column;
+	}
+	.acp_profile .top_bar .left_part.part,
+	.acp_profile .top_bar .right_part.part {
+		width: 100%;
+	}
+	.acp_profile .top_bar .part.right_part {
+		margin-top: 20px;
+	}
+	.acp_profile .acp_profile_tab .tab_content form .field-row .form_field_wrapper{
+		width: 100%;
+	}
+}
+@media only screen and (max-device-width: $medium_phone) {
+	.acp_profile .top_bar .part.right_part .column{
+		flex-direction: column;
+	}
+}

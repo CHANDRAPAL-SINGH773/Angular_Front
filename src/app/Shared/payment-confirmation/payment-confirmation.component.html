@@ -1,0 +1,62 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+  
+<div class="common-page-wrapper">
+    <h4>Payment Confirmation</h4>
+   <div class="subscript-card">
+    <div class="payment-confirm">
+        <div class="payment-header">
+            <div class="icon-wrap">
+                <img src="../../../../assets/images/tick-icon.svg" alt="">
+            </div>
+            <div class="text-wrap">
+                <h4>Payment Confirmed</h4>
+                <p>Your one time payment has been conferemed, you will receive a new email with order number
+                    information </p>
+            </div>
+        </div>
+        <div class="payment-body">
+            <ul>
+                <li><b>Order Number:</b>{{orderNo}}</li>
+                <li><b>Date:</b> {{paymentDate}}</li>
+                <li class="border-bottom"><span>Product Details</span></li>
+                <li class="border-bottom"><span>Price</span></li>
+                <li>Monthly membership fee <br /> QTY: 1 </li>
+                <li>${{totalAmount | number: '1.2-2'}}</li>
+                <li class="table-wrap"></li>
+                <li class="table-wrap">
+                    <table>
+                        <tr>
+                            <td>Discount</td>
+                            <td>${{discountAmount | number: '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gross Payment</td>
+                            <td>${{amount | number: '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Taxes</td>
+                            <td>0.00</td>
+                        </tr>
+                        <tr>
+                            <td> <b>Payment Received</b> </td>
+                            <td> <b>${{totalAmount | number: '1.2-2'}}</b> </td>
+                        </tr>
+                    </table>
+                </li>
+                <li class="bill-address">
+                    <b>Bill To</b> <br />
+                   {{fullName}} <br />
+                    {{address}}
+                </li>
+                <li class="bill-address">
+                    <a href="mailto:useremail" title="useremail">{{useremail}}</a><br />
+                    <a href="tell:+phone" title="+phone">+{{phone}}</a>
+                </li>
+            </ul>
+        </div>
+    </div> 
+   </div>
+</div>

@@ -1,0 +1,120 @@
+<!-- <script src="../../../../../node_modules/dhtmlx-scheduler//codebase/dhtmlxscheduler.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://docs.dhtmlx.com/scheduler/codebase/dhtmlxscheduler_material.css"> -->
+<script src="https://docs.dhtmlx.com/scheduler/codebase/dhtmlxscheduler.js"></script>
+<script src="https://docs.dhtmlx.com/scheduler/codebase/ext/dhtmlxscheduler_tooltip.js"></script>
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+
+<div class="common-page-wrapper">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap mb-3">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard/CaregiverAgencyDashboard/0']" href="#" class="main-base" title="Dashboard">Dashboard</a></li>
+            <!-- <li><a [routerLink]="['/Dashboard/ManageUsers']" href="#" class="current" title="Manage User">Schedular</a> </li>-->
+            
+        </ul>
+    </div>
+
+    <div class="two-card-wrap">
+        <div class="scheduler-outer">
+          <div class="form-field page-top">
+            <mat-form-field appearance="outline">
+                <mat-select placeholder="Select Option">
+                    <mat-option value="">Option One</mat-option>
+                    <mat-option value="">Option Two</mat-option>
+                    <mat-option value="">Option Three</mat-option>
+                    <mat-option value="">Option Four</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+            <div #scheduler_here class="dhx_cal_container" style="width: 100%; height:100vh">
+                <div class="dhx_cal_navline">
+                    <div class="dhx_cal_prev_button">&nbsp;</div>
+                    <div class="dhx_cal_next_button">&nbsp;</div>
+                    <div class="dhx_cal_today_button"></div>                   
+                    <!-- <div class="dhx_cal_tab" id="month_tab" name="month_tab"></div> -->
+                    <div class="dhx_cal_date"></div>
+                    <!-- <div class="dhx_cal_tab" name="day_tab"></div> -->
+                    <!-- <div class="dhx_cal_tab" id="week_tab" name="week_tab"></div> -->                   
+                </div>
+                <div class="dhx_cal_header"></div>
+                <div class="dhx_cal_data"></div>
+            </div>
+        </div>
+        <div class="right-card">
+            <h1>{{curentDate}}</h1>
+            <ul>
+                <li *ngFor="let item of schedulerInfoList;index as i">
+                  {{item.ShiftTime}}
+                    <h4><a [routerLink]="['/Dashboard/add-edit-caregiver', item.CaregiverId,0]">
+                      {{item.Caregiver}}</a></h4>
+                    <p class="botborder">
+                        <img src="../../../../assets/images/location.png" alt=""><b> {{item.Location}}</b>
+                    </p>
+                    <p><a [routerLink]="['/Dashboard/add-edit-agency', item.AgencyId,0]">
+                      <img src="../../../../assets/images/clogo.png" alt=""> {{item.AgencyName}}
+                    </a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade show" id="addAvailableTime" >
+        <div class="modal-dialog modal-dialog-centered custom-dialog available-box">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Availability</h5>
+             <button type="button" class="btn-close" #closebutton aria-label="Close" (click)="onClose()">                  
+               </button> 
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="schedulerform">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-field border-bottom">
+                      <mat-checkbox formControlName="IsAvailable">Available</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-field">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Event</mat-label>
+                          <input type="text" value="" formControlName="EventText" matInput autocomplete="new-name" placeholder="Event Text" id="description">
+                          <mat-error *ngIf="'planName.invalid'">Field is required</mat-error>
+                        </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>From</mat-label>
+                        <input type="time" id="fromtime" formControlName="StartTime"  matInput autocomplete="new-name" placeholder="9:00 AM">
+                        <mat-error *ngIf="'planName.invalid'">Field is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field">
+                      <mat-form-field appearance="fill">
+                        <mat-label>To</mat-label>
+                        <input type="time" id="totime" formControlName="EndTime" matInput autocomplete="new-name" placeholder="6:00 PM">
+                        <mat-error *ngIf="'planName.invalid'">Field is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="custom-btn gray-btn rounded-btn" (click)="onClose()">Cancel</button>
+              <button type="button" class="custom-btn rounded-btn" (click)="save_form()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+  
+

@@ -1,0 +1,402 @@
+<div class="common-page-wrapper form-page">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManagePatientFamily']" class="current" title="Manage Patient Family">Manage
+          Patient </a></li>
+    </ul>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>Add New Patient</h1>
+    </div>
+
+    <div class="custom-form-wrapper">
+      <!-- profile image -->
+      <div class="profile-info-wrap">
+        <div class="edit-image">
+          <div class="circle">
+            <img id="blah" class="profile-pic" [src]="imageSrc || '../../../../../assets/images/profile-holder.png'"
+              alt="your image" />
+          </div>
+          <div class="upload-block">
+            <a (click)="resetFileUploader()" class="remove-wrap">
+              <img src="../../../../../assets/images/delete-red.svg" alt="">
+            </a>
+            <a class="upload-btn" title="Browse"> Browse
+              <input class="file-upload" type="file" #file name="file"
+                accept="image/png,image/gif,image/jpeg,.pdf,.doc,.docx" (change)="onAttachment($event)" />
+              <!-- <input type="text" class="form-control" formControlName="PatientfamilyLogo" style="display: none;">
+              <input type="text" class="form-control" formControlName="PatientId" style="display: none;">
+              <input type="text" class="form-control" formControlName="UserId" style="display: none;"> -->
+
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-info-wrap">
+
+        <mat-tab-group animationDuration="0ms">
+
+          <mat-tab label="Basic Info">
+            <form class="form-wrap edit-profile-form" [formGroup]="addPatientform">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Select Agency</mat-label>
+                      <mat-select matInput formControlName="AgencyName" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of AgencyList" [value]="list.Id">
+                          {{list.Label}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'AgencyName.invalid'">Agency is required</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Select Type</mat-label>
+                      <mat-select matInput formControlName="Type" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option value="Patient">Patient </mat-option>
+                        <mat-option value="Family">Family </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Type.invalid'">Type is required</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+                </div> -->
+                <div class="col-md-4" style="display: none;">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Shift Type</mat-label>
+                      <mat-select matInput formControlName="ShiftType" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option value="Long Term">Long Term </mat-option>
+                        <mat-option value="Short Term">Short Term </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'ShiftType.invalid'">Shift Type is required</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>First Name</mat-label>
+                      <input type="text" formControlName="FirstName" maxlength="20" matInput
+                        [ngClass]="{ 'is-invalid': submitted }">
+                      <mat-error *ngIf="'FirstName.invalid'"> first name is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label> Last Name</mat-label>
+                      <input type="text" maxlength="20" formControlName="LastName" matInput
+                        [ngClass]="{ 'is-invalid': submitted }">
+                      <mat-error *ngIf="'LastName.invalid'">Contact person last name is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Date of Birth</mat-label>
+                      <input type="date" (change)="CalculateAge()" matInput formControlName="DOB" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                    <mat-error *ngIf="'DOB.invalid'">DOB is required</mat-error>
+                  </mat-form-field>
+                  </div>
+                </div> -->
+
+                <div class="col-md-4">
+                  <div class="form-field date-calender">
+                    <mat-form-field appearance="fill">
+                      <mat-label>DOB </mat-label>
+                      <input matInput (dateChange)="CalculateAge()" [matDatepicker]="picker" formControlName="DOB" [max]="maxDate" >
+                      <mat-datepicker-toggle  matSuffix [for]="picker" ></mat-datepicker-toggle>
+                      <mat-datepicker  #picker></mat-datepicker>
+                      <mat-error *ngIf="'DOB.invalid'">DOB is required</mat-error>
+                  </mat-form-field>
+                 </div>
+              </div>
+
+                <div class="col-md-4" >
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Age</mat-label>
+                      <input readonly type="text"  matInput formControlName="Age" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                    <mat-error *ngIf="'Age.invalid'">Age is required</mat-error>
+                  </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label> Email</mat-label>
+                      <input (focusout)="checkIsValidEmail($event)" type="text" maxlength="50" formControlName="Email" required matInput
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name"
+                        ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
+                      <mat-error *ngIf="'Email.invalid'">Enter valid email address</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Phone Number</mat-label>
+                      <input mask="(000) 000-0000" formControlName="PhoneNumber" placeholder="xxx-xxx-xxxx" type="tel"
+                        matInput [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'PhoneNumber.invalid'">Phone number is required</mat-error>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Address</mat-label>
+                      <input required type="text" maxlength="70" formControlName="Address" matInput
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'Address.invalid'">Agency business address is required</mat-error>
+                    </mat-form-field>
+                    <!-- <div *ngIf="submitted " class="invalid-feedback">
+                          <div>Agency Business Address is required</div>
+                        </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Country</mat-label>
+                      <mat-select matInput formControlName="Country" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of countryList" [value]="list.Id">{{list.Label}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Country.invalid'">Country is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>State</mat-label>
+                      <mat-select matInput formControlName="State" [ngClass]="{ 'is-invalid': submitted  }"
+                        autocomplete="new-name">
+                        <mat-option *ngFor=" let list of stateList" [value]="list.Id">{{list.Label}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'State.invalid'">State is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>City</mat-label>
+                      <input type="text" matInput formControlName="City" maxlength="25"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'City.invalid'">City is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Zip</mat-label>
+                      <input type="text" maxlength="6" minlength="3" matInput formControlName="ZipCode"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'ZipCode.invalid'">ZipCode is required</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+               
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Diagnosis</mat-label>
+                      <mat-select matInput formControlName="Diagnosis" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of DiagnosisList" [value]="list.Id">{{list.Label}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Diagnosis.invalid'">Select diagnosis</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Stairs</mat-label>
+                      <mat-select matInput formControlName="Stairs" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option selected value=""> Please Select </mat-option>
+                        <mat-option value="Yes">Yes</mat-option>
+                        <mat-option value="No">No</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Stairs.invalid'">Select stairs</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Childrens at Home</mat-label>
+                      <mat-select matInput formControlName="ChildrenAtHome" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option selected value=""> Please Select </mat-option>
+                        <mat-option value="One">One</mat-option>
+                        <mat-option value="Two">Two</mat-option>
+                        <mat-option value="Three">Three</mat-option>
+                        <mat-option value="Multiple">Multiple</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'ChildrenAtHome.invalid'">Select children at home</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Pets</mat-label>
+                      <mat-select matInput formControlName="Pets" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option *ngFor=" let list of PetsList" [value]="list.Id">{{list.Label}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'Pets.invalid'">select Pets</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Insurance</mat-label>
+                      <input type="text" maxlength="20" matInput formControlName="Insurance"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'Insurance.invalid'">Enter insurance</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Parking On Site</mat-label>
+                      <mat-select matInput formControlName="ParkingOnSite" [ngClass]="{ 'is-invalid': submitted  }">
+                        <mat-option selected value=""> Please Select </mat-option>
+                        <mat-option value="Yes">Yes</mat-option>
+                        <mat-option value="Yes">No</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="'ParkingOnSite.invalid'">Enter Parking On Site</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>UserName</mat-label>
+                      <input type="text" maxlength="20" matInput formControlName="UserName"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                      <mat-error *ngIf="'UserName.invalid'">UserName is required</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Password</mat-label>
+                      <input [type]="showPassword ? 'text' : 'password'" maxlength="15" minlength="8" formControlName="Password" matInput
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                          {{showPassword?'visibility_off':'visibility'}}
+                        </mat-icon>
+                      <mat-error *ngIf="'Password.invalid'">Password is required(Min 8 character)</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <mat-form-field appearance="fill">
+                      <mat-label> Confirm Password</mat-label>
+                      <input [type]="showPassword2 ? 'text' : 'password'" maxlength="15" minlength="8" matInput formControlName="ConfirmPassword"
+                        [ngClass]="{ 'is-invalid': submitted  }" autocomplete="new-name">
+                        <mat-icon matSuffix (click)="togglePasswordVisibility2()">
+                          {{showPassword2?'visibility_off':'visibility'}}
+                        </mat-icon>
+                      <mat-error *ngIf="'ConfirmPassword.invalid'">Confirm Password is required</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+              </div>
+              <div class="btn-wrap">
+                <button type="button" class="custom-btn" *ngIf="addButtonflag" (click)="AddPatientFamilyDetails()"
+                  title="Save" style="margin-left: auto;">Save</button>
+                <button type="button" class="custom-btn" *ngIf="updateButtonflag" (click)="UpdatePatientFamilyDetails()"
+                  title="Save" style="margin-left: auto;">Update</button>
+              </div>
+            </form>
+          </mat-tab>
+                <!-- <a class="custom-btn rounded-btn" title="Add New Skill" data-bs-toggle="modal"
+                  data-bs-target="#addSkill" style="width: auto;  margin: 0 !important;">Add New Skill</a> -->
+          <!-- <mat-tab label="Skills" style="display: none;">
+            <div class="skil-wrap">
+              <div class="skill-head">
+                <h2>Skills</h2>
+
+              </div>
+          
+              <div class="list-wrap">
+                <ul>
+                  <li (click)="selectSkill(s.SkillId, i)" [class.selected]="s.isSelected" id="{{s.SkillId}}"
+                    *ngFor="let s of SkillList let i = index;">
+                    {{s.SkillName}} </li>
+                </ul>
+          
+                <div class="btn-wrap">
+                  <button type="button" class="custom-btn gray-btn" *ngIf="addButtonflag" (click)="AddPatientFamilySkill()" title="Save">Save</button>
+                  <button type="button" class="custom-btn" *ngIf="updateButtonflag" (click)="AddPatientFamilySkill()" title="Update">Update</button>
+                </div>
+              </div>
+            </div>
+          </mat-tab> -->
+
+        </mat-tab-group>
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

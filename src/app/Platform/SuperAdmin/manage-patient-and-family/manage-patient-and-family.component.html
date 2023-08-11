@@ -1,0 +1,126 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader>
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageAgencies']" class="current" title="Manage Agency">Manage Patient</a></li>
+    </ul>
+    <div class="right-btn-wrap">
+      <a class="custom-btn border-btn" title="Print" (click)="Print()"><img src="../../../../assets/images/Printer.svg" alt=""></a>
+      <button class="custom-btn" [disabled]="isDisabled" (click)="exportAsXLSX()" title="Export CSV">Export CSV</button>
+      <a [routerLink]="['/Dashboard/add-edit-PatientFamily/0/0']"  class="custom-btn m-0"  title="Export CSV">Add New Patient</a>
+    </div>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1>Manage Patient</h1>
+      <form class="search-wrap" [formGroup]="patientAndFamilyform">
+        <input class="form-control me-2" type="search" formControlName="Search" placeholder="Search" aria-label="Search" (keydown)="GetPatientFamilyList()">
+      </form>
+    </div>
+
+    <div class="table-responsive">
+      <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+        
+        <ng-container matColumnDef="logo">
+          <mat-header-cell *matHeaderCellDef >Logo</mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+          <div class="img-">
+            <img src="../../../../assets/images/marry-baldwin-logo.svg" alt="">
+          </div>
+        </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.PatientName}}</mat-cell>
+         </ng-container>
+        <!-- <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Type}}</mat-cell>
+        </ng-container> -->
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>UserName</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.UserName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="contactNo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Contact}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Location</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Location}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="agency">
+          <mat-header-cell *matHeaderCellDef mat-sort-header > Agency </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.AgencyName}} </mat-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="services" style="display: none;">
+            <mat-header-cell *matHeaderCellDef mat-sort-header > Services </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Services}} </mat-cell>
+          </ng-container> -->
+          <!-- <ng-container matColumnDef="shift">
+            <mat-header-cell *matHeaderCellDef mat-sort-header > Shift </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Shifts}} </mat-cell>
+          </ng-container> -->
+      <ng-container matColumnDef="DOB">
+            <mat-header-cell *matHeaderCellDef mat-sort-header > DOB </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.DOB | date}} </mat-cell>
+          </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">    
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Active / Deactive Patient" [(ngModel)]="element.IsActive" id="{{element.id}}" (click)="changePatientFamilyStatus(element.PatientId,element.IsActive)" type="checkbox" role="switch"  checked>
+            <label class="custom-control-label" for="{{element.AgencyId}}"></label>
+          </div> 
+        </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="block">
+          <mat-header-cell *matHeaderCellDef> Block </mat-header-cell>
+          <mat-cell *matCellDef="let element">   
+            <div class="form-check form-switch">
+            <input class="form-check-input" title="Block Patient" [(ngModel)]="element.IsBlock" id="block_{{element.PatientId}}" (click)="BlockUnblockPatientFamily(element.PatientId,element.IsBlock)" type="checkbox" role="switch" checked>
+            <label class="custom-control-label" for="{{element.AgencyId}}"></label>
+          </div> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="action-wrap">
+              <a [routerLink]="['/Dashboard/add-edit-PatientFamily', element.PatientId,0]">
+                <img src="../../../../assets/images/edit-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Edit Patient">
+              </a>
+              <a (click)="DeletePatientFamily(element.PatientId)">
+                <img  src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="Delete Patient">
+              </a>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+        </ng-container>
+        <div>
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+            </mat-footer-row>
+      </div>
+
+      </mat-table>
+      <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize"
+      [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+    </mat-paginator>
+
+    </div>
+  </div>
+</div>

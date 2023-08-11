@@ -1,0 +1,90 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader >
+	<img src='../../../../../assets/images/loader.gif' alt=''>
+	Loading...
+  </div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+    <!-- top breadcrumbs wrap -->
+    <div class="bread-btn-wrap">
+        <ul class="custom-breadcrumbs">
+            <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+            <li><a [routerLink]="['/Dashboard/subscription-plan']" class="current"
+                    title="Subscription Plans">Subscription Plans</a>
+            </li>
+        </ul>
+        <div class="right-btn-wrap">
+            <a class="custom-btn rounded-btn m-0" (click)="addEditPlanData(0)" title="Add New Plan">Add New Plan</a>
+        </div>
+    </div>
+
+    <!-- table cards -->
+    <div class="custom-card">
+        <div class="heading-wrap">
+            <h1>Subscription Plans</h1>
+        </div>
+        <div class="table-responsive">
+            <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+                <ng-container matColumnDef="planName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Plan Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.PlanName}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="planType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Plan Type</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.PlanType}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="state">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.State}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="monthlyplanprice">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Monthly Plan Price</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> ${{element.MonthlyPlan | number: '1.2-2'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="annualplanprice">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Annual Plan Price</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> ${{element.AnnualPlan | number: '1.2-2'}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="active">
+                    <mat-header-cell *matHeaderCellDef> Active </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" [(ngModel)]="element.IsActive" id="{{element.Id}}"
+                                type="checkbox" role="switch" checked (click)="ActiveDeactivePlan(element.Id,element.IsActive)">
+                            <label class="custom-control-label" for="{{element.Id}}"></label>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="action-wrap">
+                            <a (click)="addEditPlanData(element.Id)" >
+                                <img src="../../../../assets/images/edit-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="edit/view">
+                            </a>
+                            <a (click)="deleteUser(element.Id)">
+                                <img src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="delete">
+                            </a>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+                  </ng-container>
+                  <div>
+                      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+                      </mat-footer-row>
+                </div>
+            </mat-table>
+                <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize" 
+                [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)">
+              </mat-paginator>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,23 @@
+.rating-wrap img {
+    width: 30px;
+}
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+
+    .mat-table .mat-column-status,
+    .mat-column-block {
+        max-width: 60px;
+    }
+
+    .mat-table .mat-column-rating {
+        max-width: 65px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .rating-wrap img {
+        width: 26px;
+    }
+}

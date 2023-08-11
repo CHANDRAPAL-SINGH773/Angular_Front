@@ -1,0 +1,81 @@
+<div class='custom-loader' *ngIf="loaderflag" id=loader>
+  <img src='../../../../../assets/images/loader.gif' alt=''>
+  Loading...
+</div>
+<div class="common-page-wrapper" [ngClass]="{'loader-bg' : loaderflag}">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageNotification']" class="current" title="Manage Notification">Manage
+          Notification</a></li>
+    </ul>
+    <div class="right-btn-wrap">
+      <a [routerLink]="['/Dashboard/SendNewNotification']" class="custom-btn rounded-btn m-0"
+        title="Add New Notification">Send New Notification</a>
+    </div>
+  </div> 
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="table-responsive">
+      <mat-table class="table" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+        matSortDirection="asc">
+        <!-- <ng-container matColumnDef="checkbox" style="display: none;">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox></mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-checkbox></mat-checkbox>
+          </mat-cell>
+        </ng-container> -->
+        <!-- <ng-container matColumnDef="Check">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.PatientFamilyName}}</mat-cell>
+        </ng-container> -->
+        <ng-container matColumnDef="dateTime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.CreatedOn | date:'MMM dd,yyyy hh:mm a'}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Title}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="message">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Notification Message</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.NotificationMessage}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="receiver">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Receiver</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Receiver}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="action-wrap">
+              <a (click)="DeleteNotification(element.NotificationId)">
+                <img src="../../../../assets/images/delete-icon.svg" alt="icon" data-toggle="tooltip" data-placement="right" title="delete">
+              </a>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef> No records found.</mat-footer-cell>
+        </ng-container>
+        <div>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [hidden]="hide">
+          </mat-footer-row>
+        </div>
+
+      </mat-table>
+      <mat-paginator style-paginator [showTotalPages]="totalPages" [length]="recordcount" [pageSize]="pagesize"
+      [pageSizeOptions]="pageSizeList" (page)="pageChangeEvent($event)" >
+    </mat-paginator>
+
+    </div>
+  </div>
+
+</div>

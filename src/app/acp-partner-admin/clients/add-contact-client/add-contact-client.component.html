@@ -1,0 +1,53 @@
+<div class="addclient_dialog">
+    <div class="modal-header">
+        <h2 mat-dialog-title>{{FormHeading}}</h2>
+        <mat-icon class="close_btn"  mat-button mat-dialog-close (click)="closeDialog('close')">close</mat-icon>
+    </div>
+
+            <mat-dialog-content>
+                    <form [formGroup]="ContactClientForm">
+                        <div class="form_inner">
+                            <div class="form-field">
+                                <label>Enter Name</label>
+                                <mat-form-field appearance="fill">
+                                    <input type="text" matInput formControlName="ContactName" placeholder="Contact Name"
+                                            [ngClass]="{ 'is-invalid': submitted }" autocomplete="off" required />
+                                    <mat-error *ngIf="'address1.invalid'">Please enter Name</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-field">
+                                <label>Select Site (LOCATION) </label>
+                                <mat-form-field appearance="fill">
+                                    <mat-select formControlName="ClientSite" matInput
+                                            (valueChange)="setClientSiteID($event)" [ngClass]="{ 'is-invalid': submitted }"
+                                            autocomplete="off">
+                                        <mat-option *ngFor="let address of addressList" [value]="address">{{ address
+                                                }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="'clientSite.invalid'">Please select Address</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+            </mat-dialog-content>
+    
+                       
+                <!-- <div *ngIf="Mode != ''" class="modal-footer">
+                    <button type="button" class="btn cancel-btn" data-bs-dismiss="modal" id="closeModal"
+                        #addContactClientModal>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn save-btn" (click)="OnSubmitClick()">
+                        {{ Mode == "Edit" ? "Update" : "Add" }}
+                    </button>
+                </div> -->
+    
+                <mat-dialog-actions>
+                    <button mat-button mat-dialog-close class="btn btn-secondary" (click)="closeDialog('close')">Cancel</button>
+                    <button mat-button class="btn btn-primary" (click)="OnSubmitClick()" *ngIf="!mode"> {{ButtonHeading}}</button>
+                </mat-dialog-actions>
+                
+</div>
+        <!-- </div>
+    </div>
+    </div> -->

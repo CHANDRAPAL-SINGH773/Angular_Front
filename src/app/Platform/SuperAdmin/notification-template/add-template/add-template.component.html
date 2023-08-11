@@ -1,0 +1,72 @@
+<div class="common-page-wrapper form-page">
+  <!-- top breadcrumbs wrap -->
+  <div class="bread-btn-wrap">
+    <ul class="custom-breadcrumbs">
+      <li><a [routerLink]="['/Dashboard']" class="main-base" title="Dashboard">Dashboard</a></li>
+      <li><a [routerLink]="['/Dashboard/ManageNotificationTemplate']" title="Notification Templates">Notification Templates</a></li>
+      <li><a [routerLink]="['/Dashboard/AddNewTemplate',0,0]" class="current" title="Add New Notification">Add New Template</a></li>
+    </ul>
+  </div>
+
+  <!-- table cards -->
+  <div class="custom-card">
+    <div class="heading-wrap">
+      <h1 *ngIf="Addbuttonflag">Add New Template</h1>
+      <h1 *ngIf="UpdateButtonflag">Update Template</h1>
+    </div>
+
+    <form class="edit-profile-form" [formGroup]="AddNotificationTemplate">
+      <div class="form-wrapper">
+        <div class="col-md-6" style="display: none;">
+          <div class="form-field">
+              <input type="text" formControlName="TemplateId" maxlength="30" matInput
+                [ngClass]="{ 'is-invalid': submitted }">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label>Template Name</mat-label>
+                <input type="text" formControlName="TemplateName" maxlength="30" matInput
+                  [ngClass]="{ 'is-invalid': submitted }">
+                <mat-error *ngIf="'TemplateName.invalid'"> Template Name is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input type="text" formControlName="Title" (input)="checkUniqueTemplateValidation()" maxlength="90" matInput
+                  [ngClass]="{ 'is-invalid': submitted }">
+                <mat-error *ngIf="'Title.invalid'"> Title is required</mat-error>
+               
+              </mat-form-field>
+              <p *ngIf="uniqueTemplate" style="color: red; font-size:10px"> Template title should be unique</p>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-field">
+              <mat-form-field appearance="fill">
+                <mat-label> Message </mat-label>
+                <input type="text" maxlength="80" formControlName="Note" matInput
+                  [ngClass]="{ 'is-invalid': submitted }">
+                <mat-error *ngIf="'Note.invalid'">Note is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="btn-wrap">
+            <button type="button" class="custom-btn gray-btn"  title="Cancel" [routerLink]="['/Dashboard/ManageNotificationTemplate']" style="margin-left: auto;">Cancel</button>
+            <button type="button" class="custom-btn" *ngIf="Addbuttonflag" (click)="AddNewTemplate()" title="Save">Save</button>
+            <button type="button" class="custom-btn" *ngIf="UpdateButtonflag" (click)="UpdateTemplate()" title="Save">Update</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

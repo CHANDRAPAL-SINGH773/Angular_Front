@@ -1,0 +1,924 @@
+.common-page-wrapper {
+    padding-top: 20px;
+}
+
+.common-page-wrapper h4 {
+    font-weight: 500;
+    font-size: 18px;
+    color: #000000;
+}
+
+
+/* sub-plan-list page style start */
+.top-cards .custom-card {
+    padding: 40px 30px 20px;
+    color: #000;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.top-cards .col-md-4 {
+    margin-bottom: 30px;
+}
+
+.custom-card .plan-text {
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.top-cards .custom-card.cancel {
+    background: #0071BC;
+    color: #fff;
+}
+
+.custom-card.cancel span {
+    background: #fff;
+    color: #0071BC;
+}
+
+.plan-text p {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 10px 0;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.custom-card.cancel .custom-btn {
+    background: #FFFFFF;
+    color: #306EB7 !important;
+    border-color: #fff;
+    width: 186px;
+}
+
+.custom-card.cancel .custom-btn:hover {
+    background: #000023;
+    color: #fff !important;
+    border-color: #0071BC;
+}
+
+.custom-card span {
+    padding: 5px 8px; 
+    border-radius: 5px;
+    display: inline-block;
+    letter-spacing: 0.08em;
+}
+
+.top-cards .custom-card .plan-text h4 {
+    font-weight: 700;
+    font-size: 60px;
+    color: #0071BC;
+    line-height: 1;
+    display: block;
+    margin: 0;
+}
+
+.plan-text h4 sup {
+    font-weight: 400;
+    font-size: 20px;
+    top: -25px;
+}
+
+.top-cards .custom-card.cancel .plan-text h4 {
+    color: #fff;
+}
+
+.upgrade .plan-text h4 sup {
+    color: #000000;
+    opacity: 0.5;
+}
+
+.cancel .plan-text p {
+    color: #fff;
+}
+
+.custom-card.upgrade span {
+    background: #0071BC;
+    color: #fff;
+}
+
+.custom-card.upgrade .left {
+    color: #0071BC;
+}
+
+.custom-card.pay .left {
+    color: rgb(8 8 8 / 43%);
+}
+
+.custom-card.pay .plan-text p {
+    opacity: 1;
+    font-size: 22px;
+}
+.top-cards .custom-btn {
+    width: 160px;
+    text-align: center;
+}
+
+.sub-plan-list .mat-column-paymentdatetime {
+    flex-direction: column;
+    align-items: unset;
+    justify-content: center;
+}
+
+.sub-plan-list .mat-table .mat-column-paymentdatetime span {
+    font-size: 14px;
+    opacity: 0.5;
+    display: inline-block;
+    padding: 0;
+}
+
+.mat-table span.green {
+    color: #4FB53C;
+}
+
+.mat-table span.red {
+    color: #FF0000;
+}
+/* sub-plan-log-list style ends */
+
+.subscript-card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.sub-row-wrapper {
+    display: flex;
+    display: -ms-flexbox;
+}
+
+.subscript-card .sub-left {
+    flex: 0 0 auto;
+    width: 66.666%;
+    border-right: 1px solid #CBD1DD;
+    padding: 60px 0;
+}
+
+.subscript-card .sub-right {
+    flex: 0 0 auto;
+    width: 33.333%;
+    padding: 60px 25px;
+    background: #F9F9F9;
+}
+
+.subscript-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subscript-card .form-wrap {
+    border-top: 1px solid #CBD1DD;
+    padding: 30px;
+}
+
+.subscript-card .sub-left ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.top-invo-wrap {
+    padding: 0 30px 30px;
+}
+
+.common-page-wrapper .subscript-card .top-invo-wrap h4 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+}
+
+.subscript-card .sub-left ul li {
+    font-weight: 400;
+    font-size: 20px;
+    color: #061237;
+    line-height: 1.8;
+}
+
+.subscript-card .sub-left ul li a {
+    color: #061237;
+    text-decoration: none;
+}
+
+.btn-wrap .custom-btn {
+    width: 500px;
+}
+
+.btn-wrap {
+    text-align: center;
+    margin-top: 45px;
+    justify-content: center;
+}
+
+.common-page-wrapper .sub-right h4,
+.common-page-wrapper .sub-right ul li {
+    font-weight: 500;
+    font-size: 22px;
+    color: #A3ACBE;
+}
+
+.sub-right ul li {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.custom-btn {
+    width: auto;
+    margin: 0 !important;
+    border: 1px solid;
+}
+
+#promoItem {
+    border: 0;
+    width: 100%;
+}
+
+#promoItem .accordion-header {
+    margin: 0;
+    border-bottom: 1px solid #CBD1DD;
+    padding-bottom: 20px;
+    border-top: 1px solid #CBD1DD;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.accordion-collapse.show {
+    background: #F9F9F9;
+    margin-top: -1px;
+    padding-top: 10px;
+}
+
+#promoItem .accordion-item {
+    border: 0;
+    background: transparent;
+}
+
+#promoItem button.accordion-button {
+    width: 100%;
+    padding: 0;
+    font-weight: 500;
+    font-size: 22px;
+    color: #306EB7;
+    background: #F9F9F9;
+    box-shadow: none;
+}
+
+#promoItem button.accordion-button:focus {
+    box-shadow: none;
+}
+
+.sub-right table {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.sub-right table tr td {
+    background: transparent;
+    font-weight: 500;
+    font-size: 22px;
+    color: #A3ACBE;
+    height: auto;
+    padding: 20px 0;
+}
+
+.sub-right table tr td:last-child {
+    text-align: right;
+}
+
+.sub-right table tr.total-row {
+    border-top: 1px solid #CBD1DD;
+    border-bottom: 1px solid #CBD1DD;
+}
+
+.sub-right b {
+    color: #061237;
+}
+
+.promo-items {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #D9D9D9;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+.accordion-body p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #061237;
+    opacity: 0.5;
+}
+
+div#promoItem .accordion-body {
+    padding: 0;
+}
+
+.sub-right ul li.pay-amount {
+    display: block;
+}
+
+.sub-right ul li.pay-amount h2 {
+    font-weight: 700;
+    font-size: 40px;
+    color: #061237;
+}
+
+.sub-right ul li.pay-amount h2 span {
+    font-size: 22px;
+}
+
+.print {
+    padding: 5px 10px;
+}
+
+.promo-items .custom-btn {
+    padding: 6px 20px;
+}
+
+/* subscription ends */
+
+/* payment confirm style start */
+.payment-confirm {
+    width: 845px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.payment-header {
+    background: #0071BC;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.payment-header .text-wrap {
+    max-width: 550px;
+}
+
+.icon-wrap {
+    border: 6px solid #FFFFFF;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+}
+
+.icon-wrap img {
+    width: 38px;
+}
+
+.common-page-wrapper .payment-header h4 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.payment-header p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.payment-body {
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 0px 0px 10px 10px;
+    padding: 0 30px;
+}
+
+.payment-body ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.payment-body ul li {
+    width: 50%;
+    padding: 15px 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.payment-body ul li:nth-child(even) {
+    text-align: right;
+}
+
+.payment-body ul li span {
+    opacity: 0.5;
+    font-size: 18px;
+}
+
+.payment-body table {
+    margin-right: auto;
+    width: 100%;
+}
+
+.payment-body table tr td {
+    background: transparent;
+    height: auto;
+    padding: 8px 0;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.payment-body ul li.table-wrap {
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+.payment-body ul li.bill-address,
+.payment-body ul li.bill-address a {
+    font-size: 18px;
+    color: #061237;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+/* payment cofirm style ends */
+
+
+
+
+
+
+
+/* responsive start */
+@media screen and (max-width: 1600px) {
+    .common-page-wrapper h4 {
+        font-size: 16px;
+    }
+
+    /* log-list style start */
+    .custom-card .plan-text {
+        font-size: 17px;
+        margin-bottom: 30px;
+    }
+    
+    .plan-text p {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+    
+    .top-cards .custom-card .plan-text h4 {
+        font-size: 45px;
+    }
+    
+    .plan-text h4 sup {
+        font-size: 16px;
+        top: -20px;
+    }
+    
+    .custom-card.pay .plan-text p {
+        font-size: 19px;
+    }
+    /* log list style ends */
+
+    .common-page-wrapper .sub-right h4,
+    .common-page-wrapper .sub-right ul li {
+        font-size: 18px;
+    }
+
+    #promoItem button.accordion-button {
+        font-size: 18px;
+    }
+
+    .sub-right table tr td {
+        font-size: 18px;
+        padding: 15px 0;
+    }
+
+
+    .sub-right ul li.pay-amount h2 {
+        font-size: 35px;
+    }
+
+    .sub-right ul li.pay-amount h2 span {
+        font-size: 18px;
+    }
+
+    .sub-right ul li.pay-amount h4 {
+        margin-bottom: 8px;
+    }
+
+    .subscript-card .sub-left ul li {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .common-page-wrapper .subscript-card .top-invo-wrap h4 {
+        font-size: 18px;
+    }
+
+    .subscript-card .sub-left {
+        padding: 40px 0;
+    }
+
+    .subscript-card .sub-right {
+        padding: 40px 20px;
+    }
+
+    .top-invo-wrap {
+        padding: 0 20px 20px;
+    }
+
+    .accordion-body p {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .subscript-card .form-wrap {
+        padding: 20px;
+    }
+
+    .promo-items .custom-btn {
+        padding: 5px 15px;
+    }
+
+    /* payment confirm style start */
+    .payment-confirm {
+        width: 650px;
+    }
+
+    .icon-wrap {
+        width: 60px;
+        height: 60px;
+        margin-right: 30px;
+        border-width: 5px;
+    }
+
+    .payment-header .text-wrap {
+        max-width: 450px;
+    }
+
+    .payment-header p {
+        font-size: 16px;
+    }
+
+    .payment-header {
+        padding: 30px 0;
+    }
+
+    .payment-body ul li {
+        font-size: 18px;
+        padding: 10px 0;
+    }
+
+    .payment-body table tr td {
+        font-size: 18px;
+        padding: 5px 0;
+    }
+
+    .payment-body ul li.bill-address,
+    .payment-body ul li.bill-address a {
+        font-size: 16px;
+    }
+
+    .payment-body {
+        padding: 5px 20px 0;
+    }
+
+    .common-page-wrapper .payment-header h4 {
+        font-size: 22px;
+    }
+
+    .payment-body ul li span {
+        font-size: 16px;
+    }
+
+    /* payment confirm style ends */
+}
+
+@media screen and (max-width: 1400px) {
+
+    /* plan log list style start */
+    .custom-card.cancel .custom-btn {
+        width: 160px;
+    }
+    
+    .custom-card .plan-text {
+        font-size: 15px;
+    }
+    
+    .plan-text p {
+        font-size: 13px;
+        margin: 5px 0;
+    }
+    
+    .plan-text h4 sup {
+        font-size: 14px;
+        top: -12px;
+    }
+    
+    .top-cards .custom-card .plan-text h4 {
+        font-size: 35px;
+    }
+    
+    .top-cards .custom-card {
+        padding: 30px 20px 15px;
+    }
+    
+    .custom-card.pay .plan-text p {
+        font-size: 16px;
+    }
+    
+    .download-icon img {
+        width: 20px;
+    }
+    .sub-plan-list .mat-table .mat-column-paymentdatetime span {
+        font-size: 12px;
+    }
+
+    /* plan log list style ends */
+
+    #promoItem button.accordion-button {
+        font-size: 16px;
+    }
+
+    #promoItem .accordion-header {
+        padding: 10px 0;
+    }
+
+    .common-page-wrapper .sub-right h4,
+    .common-page-wrapper .sub-right ul li {
+        font-size: 16px;
+    }
+
+    .sub-right table tr td {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .sub-right ul li.pay-amount h2 {
+        font-size: 28px;
+    }
+
+    .sub-right ul li.pay-amount h4 {
+        margin: 2px 0;
+    }
+
+    .accordion-body p {
+        font-size: 13px;
+    }
+
+    .promo-items {
+        margin-bottom: 2px;
+        font-size: 16px;
+    }
+
+    .btn-wrap .custom-btn {
+        width: 500px;
+    }
+
+    .promo-items .custom-btn {
+        padding: 3px 15px;
+    }
+
+    /* payment-confirm style start */
+    .payment-confirm {
+        width: 550px;
+    }
+
+    .icon-wrap {
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+        border-width: 4px;
+    }
+
+    .common-page-wrapper .payment-header h4 {
+        font-size: 20px;
+    }
+
+    .payment-header p {
+        font-size: 14px;
+    }
+
+    .icon-wrap img {
+        width: 30px;
+    }
+
+    .payment-header .text-wrap {
+        max-width: 350px;
+    }
+
+    .payment-body ul li {
+        font-size: 15px;
+        padding: 8px 0;
+    }
+
+    .payment-body table tr td {
+        font-size: 15px;
+    }
+
+    .payment-body ul li.bill-address,
+    .payment-body ul li.bill-address a {
+        font-size: 14px;
+    }
+
+    .payment-body ul li span {
+        font-size: 14px;
+    }
+
+    /* payment confirm style ends */
+}
+
+@media screen and (max-width: 1200px) {
+    .btn-wrap .custom-btn {
+        width: 300px;
+    }
+
+    .btn-wrap {
+        margin-top: 30px;
+    }
+
+    /* plan-log-list start */
+    .custom-card .plan-text {
+        font-size: 13px;
+    }
+    
+    .custom-card span {
+        padding: 4px 6px;
+    }
+    
+    .plan-text h4 sup {
+        font-size: 12px;
+        top: -14px;
+    }
+    
+    .plan-text p {
+        font-size: 12px;
+    }
+    
+    .custom-card.pay .plan-text p {
+        font-size: 15px;
+        margin: 0;
+    }
+    
+    .top-cards .custom-card .plan-text h4 {
+        font-size: 30px;
+    }
+    
+    .top-cards .custom-btn {
+        width: 120px;
+    }
+    /* plan log list end */
+}
+
+@media screen and (max-width: 767px) {
+    .sub-row-wrapper {
+        display: block;
+    }
+
+    .subscript-card .sub-left {
+        width: 100%;
+        border-right: 0;
+    }
+
+    .subscript-card .sub-right {
+        width: 100%;
+    }
+
+    .btn-wrap .custom-btn {
+        width: 180px;
+    }
+
+    /* subscription start */
+    .subscript-card .sub-left ul {
+        display: block;
+    }
+
+    .subscript-card .sub-left ul li {
+        margin-bottom: 10px;
+    }
+
+    .top-invo-wrap {
+        padding: 0 20px 10px;
+    }
+
+    .common-page-wrapper .sub-right h4,
+    .common-page-wrapper .sub-right ul li {
+        font-size: 15px;
+    }
+
+    .sub-right table tr td {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+
+    #promoItem button.accordion-button {
+        font-size: 14px;
+    }
+
+    #promoItem .accordion-header {
+        margin-top: 10px;
+        padding: 2px 0;
+    }
+
+    .sub-right ul li.pay-amount h2 {
+        font-size: 24px;
+    }
+
+    .sub-right ul li.pay-amount h4 {
+        margin: 0;
+    }
+
+    .promo-items {
+        font-size: 14px;
+    }
+
+    /* subscription ends  */
+
+    /* payment confirm start */
+    .payment-confirm {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .icon-wrap {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 10px;
+    }
+
+    .payment-header {
+        display: block;
+        text-align: center;
+        padding: 15px 10px;
+    }
+
+    .icon-wrap img {
+        width: 25px;
+    }
+
+    .common-page-wrapper .payment-header h4 {
+        font-size: 18px;
+        margin: 0 0 6px;
+    }
+
+    .payment-header p {
+        font-size: 12px;
+    }
+
+    .payment-body {
+        padding: 5px 10px 0;
+    }
+
+    .payment-body ul li {
+        padding: 5px 0;
+        font-size: 14px;
+    }
+
+    .payment-body table tr td {
+        font-size: 14px;
+        padding: 2px 0;
+    }
+
+    .payment-body ul li.table-wrap {
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 0;
+    }
+
+    li.table-wrap:empty {
+        display: none;
+    }
+
+    .payment-body ul li.bill-address,
+    .payment-body ul li.bill-address a {
+        font-size: 13px;
+    }
+
+    /* payment confirm ends */
+
+    .common-page-wrapper h4 {
+        margin-bottom: 10px;
+    }
+    
+    .top-cards .col-md-4 {
+        margin-bottom: 15px;
+    }
+}
